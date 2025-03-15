@@ -104,20 +104,16 @@ class CategoriesPage extends StatelessWidget {
                                     if (_isanonymous(context)) {
                                       return;
                                     }
-                                    Future.delayed(
-                                      const Duration(seconds: 1),
-                                      () =>
-                                          AwesomeDialog(
-                                            // ignore: use_build_context_synchronously
-                                            context: context,
-                                            dialogType: DialogType.info,
-                                            title: 'welcome_message'.tr,
-                                            desc: 'ai_disclaimer'.tr,
-                                            btnOkText: 'ok'.tr,
-                                            btnOkOnPress: () {},
-                                          ).show(),
-                                    );
                                     Get.to(() => const AiBotPage());
+                                    AwesomeDialog(
+                                      // ignore: use_build_context_synchronously
+                                      context: context,
+                                      dialogType: DialogType.info,
+                                      title: 'welcome_message'.tr,
+                                      desc: 'ai_disclaimer'.tr,
+                                      btnOkText: 'ok'.tr,
+                                      btnOkOnPress: () {},
+                                    ).show();
                                   },
                                   MdiIcons.robot,
                                   'ai_bot'.tr,
