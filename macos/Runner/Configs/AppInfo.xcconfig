@@ -8,7 +8,7 @@
 PRODUCT_NAME = project
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.MoSalahDj.quranlife
+PRODUCT_BUNDLE_IDENTIFIER = com.MoSalahDJ.quran_life
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2025 com.MoSalahDj. All rights reserved.
