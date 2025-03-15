@@ -28,7 +28,7 @@ class CustomIndicator extends StatelessWidget {
               color: Colors.transparent,
               shape: CircleBorder(side: BorderSide(color: dotscolor)),
             ),
-            position: indposition!,
+            position: indposition!.toDouble(),
           ),
     );
   }
