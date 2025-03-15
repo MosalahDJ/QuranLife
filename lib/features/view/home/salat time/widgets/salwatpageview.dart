@@ -71,9 +71,7 @@ class Salwatpageview extends StatelessWidget {
                               child: Center(
                                 child: CircularProgressIndicator(
                                   color:
-                                      Get.isDarkMode
-                                          ? kmaincolor3dark
-                                          : kmaincolor,
+                                      Get.isDarkMode ? kmaincolor4 : kmaincolor,
                                   strokeAlign: -5,
                                   strokeWidth: 5,
                                 ),

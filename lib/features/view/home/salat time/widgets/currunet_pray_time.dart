@@ -108,7 +108,7 @@ class CurrentPrayTime extends StatelessWidget {
                                         child: CircularProgressIndicator(
                                           color:
                                               Get.isDarkMode
-                                                  ? kmaincolor3dark
+                                                  ? kmaincolor4
                                                   : kmaincolor,
                                         ),
                                       )
@@ -255,7 +255,7 @@ class CurrentPrayTime extends StatelessWidget {
                                     child: CircularProgressIndicator(
                                       color:
                                           Get.isDarkMode
-                                              ? kmaincolor3dark
+                                              ? kmaincolor4
                                               : kmaincolor,
                                       strokeAlign: -5,
                                     ),

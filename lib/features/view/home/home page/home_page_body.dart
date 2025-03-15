@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:project/core/Utils/constants.dart';
-
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/core/widgets/cusstom_indicator.dart';
 import 'package:project/core/widgets/gradient_background.dart';
