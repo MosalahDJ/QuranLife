@@ -44,7 +44,7 @@ class AyahWidget extends StatelessWidget {
   final AudioplayerController audioctrl = Get.put(AudioplayerController());
   final SavingController savectrl = Get.put(SavingController());
   final FavoriteController favoritectrl = Get.put(FavoriteController());
-  final StatisticsController statsController = Get.put(StatisticsController());
+  final StatisticsController statsController = Get.find();
 
   final Key visibilityKey = UniqueKey();
 

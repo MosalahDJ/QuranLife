@@ -29,7 +29,7 @@ class _StatisticsPageState extends State<StatisticsPage>
     )..forward();
   }
 
-  final StatisticsController favoritectrl = Get.put(StatisticsController());
+  final StatisticsController favoritectrl = Get.find();
 
   @override
   void dispose() {

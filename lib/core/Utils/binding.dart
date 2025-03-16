@@ -24,6 +24,7 @@ import 'package:project/features/controller/quraan%20controller/saving_controlle
 import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:project/features/controller/spalshview%20controller/splash_view_controller.dart';
+import 'package:project/features/controller/statistics%20controller/statistics_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Mybinding implements Bindings {
@@ -53,6 +54,7 @@ class Mybinding implements Bindings {
     Get.put<ThemeController>(ThemeController(), permanent: true);
     //home injection
     Get.put<MyHomeController>(MyHomeController());
+    Get.put<StatisticsController>(StatisticsController());
     //quraan injection
     Get.put<QuraanController>(QuraanController());
     Get.put<SavingController>(SavingController());
