@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/core/Utils/constants.dart';
 
@@ -61,7 +63,14 @@ class ComplainPage extends StatelessWidget {
                         _buildContactOption(
                           title: 'direct_message'.tr,
                           icon: Icons.message_rounded,
-                          onTap: () => Get.to(() => const MessagingPage()),
+                          onTap: () {
+                            () {
+                              if (_isanonymous(context)) {
+                                return;
+                              }
+                              Get.to(() => const MessagingPage());
+                            };
+                          },
                         ),
                         _buildContactOption(
                           title: 'telegram'.tr,
@@ -147,6 +156,21 @@ class ComplainPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _isanonymous(context) {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null || currentUser.isAnonymous) {
+      AwesomeDialog(
+        context: context,
+        title: 'anonymous_user'.tr,
+        desc: 'guest_login_warning'.tr,
+        dialogType: DialogType.error,
+      ).show();
+      return true;
+    }
+    return false;
   }
 
   Widget _buildContactOption({
