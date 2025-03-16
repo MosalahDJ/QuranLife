@@ -33,8 +33,10 @@ class LocationController extends GetxController {
       // check if location services are enabled.
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        Get.snackbar("permission denied",
-            "we can't find your location without enabling Location services,turn it on or try later");
+        Get.snackbar(
+          "location_service_disabled_title".tr,
+          "location_service_disabled_message".tr
+        );
       }
 
       // check if location permission are enabled.
@@ -42,15 +44,19 @@ class LocationController extends GetxController {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          Get.snackbar("permission denied",
-              "we can't find your location without permission, try later");
+          Get.snackbar(
+            "location_permission_denied_title".tr,
+            "location_permission_denied_message".tr
+          );
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
         // Permissions are denied forever, handle appropriately.
-        Get.snackbar("permission denied forever!!",
-            "we can't find your location without permission");
+        Get.snackbar(
+          "location_permission_denied_forever_title".tr,
+          "location_permission_denied_forever_message".tr
+        );
       }
 
       if (permission == LocationPermission.whileInUse) {
@@ -70,9 +76,11 @@ class LocationController extends GetxController {
       //street
       await prefs.setString("street", placemarks[0].administrativeArea!);
       update();
-    } on LocationServiceDisabledException catch (e) {
-      Get.snackbar("$e",
-          "Location services are required for getting your position to calculate prayer times");
+    } on LocationServiceDisabledException {
+      Get.snackbar(
+        "location_service_error_title".tr,
+        "location_service_error_message".tr
+      );
     } catch (e) {
       print(e);
     } finally {}
