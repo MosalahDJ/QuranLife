@@ -12,9 +12,10 @@ class LocationController extends GetxController {
   onInit() async {
     super.onInit();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    location = prefs.getString("city") == null
-        ? "Get Location"
-        : prefs.getString("city")!;
+    location =
+        prefs.getString("city") == null
+            ? "Get Location"
+            : prefs.getString("city")!;
     sublocation =
         prefs.getString("street") == null ? "" : prefs.getString("street")!;
   }
@@ -35,7 +36,7 @@ class LocationController extends GetxController {
       if (!serviceEnabled) {
         Get.snackbar(
           "location_service_disabled_title".tr,
-          "location_service_disabled_message".tr
+          "location_service_disabled_message".tr,
         );
       }
 
@@ -46,7 +47,7 @@ class LocationController extends GetxController {
         if (permission == LocationPermission.denied) {
           Get.snackbar(
             "location_permission_denied_title".tr,
-            "location_permission_denied_message".tr
+            "location_permission_denied_message".tr,
           );
         }
       }
@@ -55,7 +56,7 @@ class LocationController extends GetxController {
         // Permissions are denied forever, handle appropriately.
         Get.snackbar(
           "location_permission_denied_forever_title".tr,
-          "location_permission_denied_forever_message".tr
+          "location_permission_denied_forever_message".tr,
         );
       }
 
@@ -69,8 +70,10 @@ class LocationController extends GetxController {
 
       //we use this func from geocoding for getting place informations from
       //coordenates
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(latitude, longtude);
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        latitude,
+        longtude,
+      );
       //city
       await prefs.setString("city", placemarks[0].locality!);
       //street
@@ -79,7 +82,7 @@ class LocationController extends GetxController {
     } on LocationServiceDisabledException {
       Get.snackbar(
         "location_service_error_title".tr,
-        "location_service_error_message".tr
+        "location_service_error_message".tr,
       );
     } catch (e) {
       print(e);
