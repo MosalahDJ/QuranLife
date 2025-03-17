@@ -219,12 +219,6 @@ class CurrentPrayTime extends StatelessWidget {
                       await fpfctrl.fetchPrayerTimes();
                       prayerctrl.determineCurrentPrayer();
                       timespagectrl.pagecontroller();
-                      prayerctrl.currentPrayer.value == "-"
-                          ? Get.snackbar(
-                            "connection_failed".tr,
-                            "check_internet".tr,
-                          )
-                          : null;
                       initialctrl.isLoading(false);
                     },
                     btnCancelOnPress: () {},

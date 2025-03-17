@@ -14,7 +14,7 @@ class LocationController extends GetxController {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     location =
         prefs.getString("city") == null
-            ? "Get Location"
+            ? "get_location".tr
             : prefs.getString("city")!;
     sublocation =
         prefs.getString("street") == null ? "" : prefs.getString("street")!;
