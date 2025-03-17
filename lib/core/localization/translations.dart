@@ -53,6 +53,15 @@ class Messages extends Translations {
       "check_internet_connection": "Please check your internet connection",
       "verify_new_email_sent": "Verification link sent to new email",
       "success": "Success",
+      "location_service_disabled_title": "Location Service Disabled",
+    "location_service_disabled_message": "Please enable location services to use this feature.",
+    "location_permission_denied_title": "Location Permission Denied",
+    "location_permission_denied_message": "Please grant location permission to use this feature.",
+    "location_permission_denied_forever_title": "Location Permission Denied Forever",
+    "location_permission_denied_forever_message": "Location permissions are permanently denied. Please enable them from app settings.",
+    "location_service_error_title": "Location Service Error",
+    "location_service_error_message": "An error occurred while accessing location services.",
+    "get_location": "Get Location",
 
       // Registration
       'create_account': 'Create Your Account',
@@ -512,6 +521,15 @@ class Messages extends Translations {
       "verify_new_email_sent":
           "تم إرسال رابط التحقق إلى البريد الإلكتروني الجديد",
       "success": "نجاح",
+      "location_service_disabled_title": "خدمة الموقع معطلة",
+    "location_service_disabled_message": "يرجى تمكين خدمات الموقع لاستخدام هذه الميزة.",
+    "location_permission_denied_title": "تم رفض إذن الموقع",
+    "location_permission_denied_message": "يرجى منح إذن الموقع لاستخدام هذه الميزة.",
+    "location_permission_denied_forever_title": "تم رفض إذن الموقع بشكل دائم",
+    "location_permission_denied_forever_message": "تم رفض إذن الموقع بشكل دائم. يرجى تمكينه من إعدادات التطبيق.",
+    "location_service_error_title": "خطأ في خدمة الموقع",
+    "location_service_error_message": "حدث خطأ أثناء الوصول إلى خدمات الموقع.",
+    "get_location": "الحصول على الموقع",
 
       // Sign Up Page
       'create_account': 'إنشاء حسابك',
@@ -969,6 +987,15 @@ class Messages extends Translations {
       "check_internet_connection": "Veuillez vérifier votre connexion Internet",
       "verify_new_email_sent": "Lien de vérification envoyé au nouvel email",
       "success": "Succès",
+      "location_service_disabled_title": "Service de localisation désactivé",
+    "location_service_disabled_message": "Veuillez activer les services de localisation pour utiliser cette fonctionnalité.",
+    "location_permission_denied_title": "Permission de localisation refusée",
+    "location_permission_denied_message": "Veuillez accorder la permission de localisation pour utiliser cette fonctionnalité.",
+    "location_permission_denied_forever_title": "Permission de localisation refusée définitivement",
+    "location_permission_denied_forever_message": "Les permissions de localisation sont refusées définitivement. Veuillez les activer depuis les paramètres de l'application.",
+    "location_service_error_title": "Erreur du service de localisation",
+    "location_service_error_message": "Une erreur s'est produite lors de l'accès aux services de localisation.",
+    "get_location": "Obtenir la localisation",
 
       // Sign Up Page
       'create_account': 'Créez votre compte',
