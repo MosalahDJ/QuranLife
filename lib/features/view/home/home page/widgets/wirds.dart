@@ -168,10 +168,11 @@ class WirdCard extends StatelessWidget {
                                       context,
                                     ).textTheme.bodySmall?.copyWith(
                                       height: 1.6,
-                                      color:
-                                          Get.isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.color
+                                          ?.withValues(alpha: 0.87),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                       fontFamily: fontfamily3 ?? "Cairo",
