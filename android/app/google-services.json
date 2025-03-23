@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "667982982906-mmgv0jo0pfftk5503213murd0fvuod92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MoSalahDJ.quran_life",
+            "certificate_hash": "3f2c1c4d4c50be831b3bc6f8baee568af6071321"
+          }
+        },
+        {
           "client_id": "667982982906-ah9dn1j63i3io9i6il3r889v13sihtpu.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +45,6 @@
             {
               "client_id": "667982982906-053ns9m2ua3qv8h2noq5434123sas0j7.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "667982982906-oltcs7pdtq5ean5p5fhjutk7e2krl880.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.quranlife"
-              }
             }
           ]
         }
