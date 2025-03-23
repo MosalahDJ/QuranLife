@@ -14,24 +14,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "667982982906-6on6su77k1sd9ef62fb8204tloopd062.apps.googleusercontent.com",
+          "client_id": "667982982906-0gigghkn52qelj8k1d8sgkmlp7tfaobj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.MoSalahDJ.quran_life",
-            "certificate_hash": "fcd6401928a2523a71f98789af4c6a90b6d4951a"
+            "certificate_hash": "d965b1f33a40433aba460b82aac8f1fe7a779797"
           }
-        },
-        {
-          "client_id": "667982982906-mmgv0jo0pfftk5503213murd0fvuod92.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.MoSalahDJ.quran_life",
-            "certificate_hash": "3f2c1c4d4c50be831b3bc6f8baee568af6071321"
-          }
-        },
-        {
-          "client_id": "667982982906-ah9dn1j63i3io9i6il3r889v13sihtpu.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -41,12 +29,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "667982982906-053ns9m2ua3qv8h2noq5434123sas0j7.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
