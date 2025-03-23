@@ -98,8 +98,8 @@ class GoogleLogInController extends GetxController {
     } on FirebaseAuthException catch (e) {
       AwesomeDialog(
         context: context,
-        title: "Authentication Error",
-        body: Text(e.message ?? "Authentication failed"),
+        title: "Authentication Error".tr,
+        body: Text(e.message ?? "Authentication failed".tr),
         dialogType: DialogType.error,
       ).show();
     } catch (e) {
@@ -114,7 +114,7 @@ class GoogleLogInController extends GetxController {
         AwesomeDialog(
           context: context,
           title: "Error".tr,
-          body: Text("google_signin_error".tr),
+          body: Text("${"google_signin_error".tr} \n$e"),
           dialogType: DialogType.error,
         ).show();
       }
