@@ -17,6 +17,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/services.dart';
 
 // messaging background handler
+
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
