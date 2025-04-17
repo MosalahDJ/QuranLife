@@ -43,7 +43,6 @@ class CurrentPrayTime extends StatelessWidget {
   final FloatingAnimationController fltanimtion = Get.find();
 
   //note: donte forget tof size err here aadd third size
-  //note
   @override
   Widget build(BuildContext context) {
     return SizedBox(
