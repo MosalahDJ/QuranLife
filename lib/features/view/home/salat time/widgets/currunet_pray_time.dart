@@ -42,7 +42,6 @@ class CurrentPrayTime extends StatelessWidget {
   final LanguageController langctrl = Get.find();
   final FloatingAnimationController fltanimtion = Get.find();
 
-  //note: donte forget tof size err here aadd third size
   @override
   Widget build(BuildContext context) {
     return SizedBox(
