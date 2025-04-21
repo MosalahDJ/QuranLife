@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 //note: don't forget to fix the logical error in the _gettingresponse function
-// and the _addDateToResponse function. The current implementation may not work as expected.
 
 DateTime mycurrentdate = DateTime.now();
 
