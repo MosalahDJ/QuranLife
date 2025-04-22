@@ -12,10 +12,11 @@ import 'package:http/http.dart' as http;
 //note: don't forget to fix the logical error in the _gettingresponse function
 // and the _addDateToResponse function. The current implementation may not work as expected.
 
-int currentyear = DateTime.now().year;
+DateTime mycurrentdate = DateTime.now();
 
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
+  late DateTime endDate;
 
   @override
   void onInit() {
@@ -36,35 +37,58 @@ class GetResponseBody extends GetxController {
 
   Future<void> _checkAndRefresh() async {
     if (await _isAfterRefreshingDate()) {
-      await _gettingresponse();
+      _updateDates();
+      await _gettingresponse(mycurrentdate, endDate);
       // Notify FetchPrayerFromDate to reload data
       Get.find<FetchPrayerFromDate>().loadPrayerData();
     }
   }
 
+  void _updateDates() {
+    mycurrentdate = DateTime.now();
+    endDate = mycurrentdate.add(const Duration(days: 30));
+  }
 
   late SharedPreferences prefs;
+  String newRB = "";
+  String responsebody = "";
+
+  //these two func maded for add every date as key to his response
+  String _addDateToResponse(String date, String newrb) {
+    String result = '"$date":$newrb,';
+    return result;
+  }
+
+  String _addDateToResponseWhitoutcomma(String date, String newrb) {
+    String result = '"$date":$newrb';
+    return result;
+  }
+
+  //this func maded for making date string as same as date in the url and make sure it's dynamic
+  String _formatDate(DateTime date) {
+    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  }
+
   //I use this func for parsing String date when i get it from SHPF
-  // DateTime _parseDate(String date) {
-  //   try {
-  //     var parts = date.trim().split('-');
-  //     if (parts.length != 3) {
-  //       throw FormatException('Invalid time format: $date');
-  //     }
-  //     return DateTime(
-  //       int.parse(parts[0].trim()),
-  //       int.parse(parts[1].trim()),
-  //       int.parse(parts[2].trim()),
-  //     );
-  //   } catch (e) {
-  //     print('Error parsing time: $date - Error: $e');
-  //     // Return a default time in case of error
-  //     return DateTime.now();
-  //   }
-  // }
+  DateTime _parseDate(String date) {
+    try {
+      var parts = date.trim().split('-');
+      if (parts.length != 3) {
+        throw FormatException('Invalid time format: $date');
+      }
+      return DateTime(
+        int.parse(parts[0].trim()),
+        int.parse(parts[1].trim()),
+        int.parse(parts[2].trim()),
+      );
+    } catch (e) {
+      print('Error parsing time: $date - Error: $e');
+      // Return a default time in case of error
+      return DateTime.now();
+    }
+  }
 
   //I use this func for defining end date and refreshing date
-  //here i must change refreshing date to the last day in the year or after
   Future<void> _defineRefreshingDate() async {
     try {
       prefs = await SharedPreferences.getInstance();
@@ -106,6 +130,21 @@ class GetResponseBody extends GetxController {
 
       if (prefs.getString("responsebody")!.length < 36000) return true;
 
+      Map<String, dynamic> data = jsonDecode(prefs.getString("responsebody")!);
+      List<String> dates = data.keys.toList();
+      if (dates.isEmpty) return true;
+
+      dates.sort();
+      DateTime oldestStoredDate = _parseDate(dates.first);
+      DateTime latestStoredDate = _parseDate(dates.last);
+      DateTime currentDate = DateTime.now();
+
+      // Check if current date is within our stored date range
+      if (currentDate.isBefore(oldestStoredDate) ||
+          currentDate.isAfter(latestStoredDate)) {
+        return true;
+      }
+
       return false; // Don't refresh if we have valid data
     } catch (e) {
       print('Error checking data validity: $e');
@@ -140,25 +179,51 @@ class GetResponseBody extends GetxController {
   //I use this func on demende
   demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
-    await _gettingresponse();
+    await _gettingresponse(mycurrentdate, endDate);
   }
 
-  Future<void> _gettingresponse() async {
+  Future<void> _gettingresponse(
+    DateTime mycurrentdate,
+    DateTime endDate,
+  ) async {
     await locationctrl.determinePosition();
+    //day before last day
+    DateTime dayBeforEndDate = endDate.subtract(const Duration(days: 1));
     try {
+      String tempResponseBody = "";
+
+      while (mycurrentdate.isBefore(endDate)) {
+        //I add this var for passing it as date in url
+        String formattedDate = _formatDate(mycurrentdate);
+
         //getting response
         var response = await http.get(
           Uri.parse(
-            "https://api.aladhan.com/v1/calendar/$currentyear?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19&school=0&timezonestring=Africa/Algiers&tune=0,0,0,0,0,0,0,0,0&midnightMode=0&latitudeAdjustmentMethod=2&calendarMethod=HJCoSA&iso8601=false",
+            "https://api.aladhan.com/v1/timings/$formattedDate?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19",
           ),
         );
         //if succes store responsebody in cash
-        //here I must change shared prefrensses with sqflite
-        response.statusCode == 200?await prefs.setString("responsebody", "{$response}"):null;
-        // Update the refreshing date
-        await _defineRefreshingDate();
-        // Notify FetchPrayerFromDate to reload data instead of restarting
-        Get.find<FetchPrayerFromDate>().loadPrayerData();
+        if (response.statusCode == 200) {
+          //check if we are in dayBeforEndDate for passing data corectly without
+          //comma in last of responsebody
+          newRB =
+              mycurrentdate == dayBeforEndDate
+                  ? _addDateToResponseWhitoutcomma(formattedDate, response.body)
+                  : _addDateToResponse(formattedDate, response.body);
+          tempResponseBody += newRB;
+        }
+        // shift to the next day
+        mycurrentdate = mycurrentdate.add(const Duration(days: 1));
+      }
+
+      // Save all data at once
+      await prefs.setString("responsebody", "{$tempResponseBody}");
+
+      // Update the refreshing date
+      await _defineRefreshingDate();
+
+      // Notify FetchPrayerFromDate to reload data instead of restarting
+      Get.find<FetchPrayerFromDate>().loadPrayerData();
     } catch (e) {
       print('There was an error: $e');
     }
