@@ -106,21 +106,6 @@ class GetResponseBody extends GetxController {
 
       if (prefs.getString("responsebody")!.length < 36000) return true;
 
-      Map<String, dynamic> data = jsonDecode(prefs.getString("responsebody")!);
-      List<String> dates = data.keys.toList();
-      if (dates.isEmpty) return true;
-
-      dates.sort();
-      DateTime oldestStoredDate = _parseDate(dates.first);
-      DateTime latestStoredDate = _parseDate(dates.last);
-      DateTime currentDate = DateTime.now();
-
-      // Check if current date is within our stored date range
-      if (currentDate.isBefore(oldestStoredDate) ||
-          currentDate.isAfter(latestStoredDate)) {
-        return true;
-      }
-
       return false; // Don't refresh if we have valid data
     } catch (e) {
       print('Error checking data validity: $e');
