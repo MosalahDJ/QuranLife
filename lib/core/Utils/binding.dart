@@ -18,6 +18,7 @@ import 'package:project/features/controller/prayer%20times%20controller/deterimi
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
+import 'package:project/features/controller/prayer%20times%20controller/newresponsebody.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:project/features/controller/quraan%20controller/saving_controller.dart';
@@ -32,6 +33,7 @@ class Mybinding implements Bindings {
   void dependencies() async {
     //splashview injection
     Get.put<LocationController>(LocationController(), permanent: true);
+    Get.put<NewResponseBody>(NewResponseBody());
     Get.put<GetResponseBody>(GetResponseBody());
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
     Get.put<DeterminePrayersController>(
