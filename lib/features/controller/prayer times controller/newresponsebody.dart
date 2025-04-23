@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -47,6 +49,8 @@ class NewResponseBody extends GetxController {
       if (response.statusCode == 200) {
         // Store the complete response
         await prefs.setString("yearlyResponseBody", response.body);
+
+        log(prefs.getString("yearlyResponseBody")!);
 
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
