@@ -11,7 +11,6 @@ import 'package:project/core/widgets/cusstom_indicator.dart';
 import 'package:project/core/widgets/gradient_background.dart';
 import 'package:project/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/controller/prayer%20times%20controller/newresponsebody.dart';
 import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
@@ -27,7 +26,6 @@ class HomePageBody extends StatelessWidget {
   HomePageBody({super.key});
   final MyHomeController homectrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
-  final NewResponseBody newresponsectrl = Get.find();
   final LanguageController langctrl = Get.find();
   final FadeAnimationController fadectrl = Get.find();
   final double _sectionSpacing = 24.0;
@@ -67,14 +65,7 @@ class HomePageBody extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                newresponsectrl.demandNewResponse();
-              },
-              icon: Icon(Icons.download),
-            ),
-          ],
+          
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           title: ShimmerText(

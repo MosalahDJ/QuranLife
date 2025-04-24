@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -15,13 +14,7 @@ class NewResponseBody extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initileresponse();
-  }
-
-  Future<bool> initileresponse() async {
-    prefs = await SharedPreferences.getInstance();
-    await _gettingYearlyResponse();
-    return true;
+    _gettingYearlyResponse();
   }
 
   Future<void> _gettingYearlyResponse() async {
@@ -60,10 +53,5 @@ class NewResponseBody extends GetxController {
     } catch (e) {
       print('There was an error: $e');
     }
-  }
-
-  // Method to manually trigger a new response
-  Future<void> demandNewResponse() async {
-    await _gettingYearlyResponse();
   }
 }

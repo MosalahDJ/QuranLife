@@ -2,20 +2,24 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqlDb {
-  static Database? _qurandb;
-  Future<Database?> get qurandb async {
-    if (_qurandb != null) return _qurandb;
-    _qurandb = await initialDb();
-    return _qurandb;
+  static Database? _prayerTimesDb;
+  Future<Database?> get prayerTimesDb async {
+    if (_prayerTimesDb != null) return _prayerTimesDb;
+    _prayerTimesDb = await initialDb();
+    return _prayerTimesDb;
   }
 
   initialDb() async {
     String databasepath = await getDatabasesPath();
-    String path = join(databasepath, 'quran.db');
+    String path = join(databasepath, 'prayerTimes.db');
     // Create a database with the specified name and open it
-    Database qurandb = await openDatabase(path,
-        onCreate: _oncreate, version: 1, onUpgrade: _onupgrade);
-    return qurandb;
+    Database prayerTimesDb = await openDatabase(
+      path,
+      onCreate: _oncreate,
+      version: 1,
+      onUpgrade: _onupgrade,
+    );
+    return prayerTimesDb;
   }
 
   _onupgrade(Database db, int oldversion, int newversion) async {
@@ -32,25 +36,27 @@ class SqlDb {
     // When creating the db, create the table
     Batch batch = db.batch();
     batch.execute('''
-          CREATE TABLE quran (
+          CREATE TABLE prayer_times (
           "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-          "surah" TEXT,
-          "ayah" TEXT,
-          "translation" TEXT,
-          "audio" TEXT,
+          "date" TEXT NOT NULL,
+          "fajr" TEXT NOT NULL,
+          "sunrise" TEXT NOT NULL,
+          "dhuhr" TEXT NOT NULL,
+          "asr" TEXT NOT NULL,
+          "maghrib" TEXT NOT NULL,
+          "isha" TEXT NOT NULL,
+          "latitude" REAL,
+          "longitude" REAL,
+          "timezone" TEXT
           )''');
-    // batch.execute('''
-    //       CREATE TABLE duaa (
-    //       "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    //       "duaa" TEXT,
-    //       "translation" TEXT,
-    //       )''');
+
+    await batch.commit();
     // ignore: avoid_print
     print("-----------------created-----------------");
   }
 
   readdata(String sql) async {
-    final Database? mydb = await qurandb;
+    final Database? mydb = await prayerTimesDb;
     final List<Map<String, dynamic>> maps = await mydb!.rawQuery(sql);
     return List.generate(maps.length, (i) {
       return maps[i];
@@ -58,19 +64,19 @@ class SqlDb {
   }
 
   insertdata(String sql) async {
-    final Database? mydb = await qurandb;
+    final Database? mydb = await prayerTimesDb;
     int response = await mydb!.rawInsert(sql);
     return response;
   }
 
   updatedata(String sql) async {
-    final Database? mydb = await qurandb;
+    final Database? mydb = await prayerTimesDb;
     int response = await mydb!.rawUpdate(sql);
     return response;
   }
 
   deletedata(String sql) async {
-    final Database? mydb = await qurandb;
+    final Database? mydb = await prayerTimesDb;
     int response = await mydb!.rawDelete(sql);
     return response;
   }
