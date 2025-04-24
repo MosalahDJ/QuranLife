@@ -39,15 +39,10 @@ class SqlDb {
           CREATE TABLE prayer_times (
           "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
           "date" TEXT NOT NULL,
-          "fajr" TEXT NOT NULL,
-          "sunrise" TEXT NOT NULL,
-          "dhuhr" TEXT NOT NULL,
-          "asr" TEXT NOT NULL,
-          "maghrib" TEXT NOT NULL,
-          "isha" TEXT NOT NULL,
+          "response_data" TEXT NOT NULL,
           "latitude" REAL,
           "longitude" REAL,
-          "timezone" TEXT
+          "last_updated" TEXT
           )''');
 
     await batch.commit();
