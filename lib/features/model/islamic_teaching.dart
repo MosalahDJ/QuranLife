@@ -11,18 +11,19 @@ class IslamicTeachingModel {
   String? sourcear;
   String? sourcefr;
 
-  IslamicTeachingModel(
-      {this.id,
-      this.step,
-      this.titleen,
-      this.titlear,
-      this.titlefr,
-      this.descriptionen,
-      this.descriptionar,
-      this.descriptionfr,
-      this.sourceen,
-      this.sourcear,
-      this.sourcefr});
+  IslamicTeachingModel({
+    this.id,
+    this.step,
+    this.titleen,
+    this.titlear,
+    this.titlefr,
+    this.descriptionen,
+    this.descriptionar,
+    this.descriptionfr,
+    this.sourceen,
+    this.sourcear,
+    this.sourcefr,
+  });
 
   IslamicTeachingModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
