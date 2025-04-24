@@ -8,6 +8,11 @@ import 'package:http/http.dart' as http;
 class NewResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
   late SharedPreferences prefs;
+  @override
+  onInit() async {
+    super.onInit();
+    await getCalendarData();
+  }
 
   Future<void> getCalendarData() async {
     try {
