@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -33,6 +35,7 @@ class NewResponseBody extends GetxController {
       } else {
         print('Failed to fetch calendar data: ${response.statusCode}');
       }
+      log('Response body: ${response.body}');
     } catch (e) {
       print('Error fetching calendar data: $e');
     }
