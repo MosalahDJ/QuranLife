@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 late SharedPreferences prefs;
 Map<String, dynamic> prayerData = {};
 
+//replace  this controller with new one more readable and understandable 
+
 class FetchPrayerFromDate extends GetxController {
   @override
   void onInit() {
