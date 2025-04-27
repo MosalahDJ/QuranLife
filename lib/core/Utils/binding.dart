@@ -18,7 +18,7 @@ import 'package:project/features/controller/prayer%20times%20controller/deterimi
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/newresponsebody.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newresponsebody.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:project/features/controller/quraan%20controller/saving_controller.dart';

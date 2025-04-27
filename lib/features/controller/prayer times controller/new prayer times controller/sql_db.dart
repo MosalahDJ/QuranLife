@@ -38,10 +38,7 @@ class SqlDb {
     batch.execute('''
           CREATE TABLE prayer_times (
           "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-          "date" TEXT NOT NULL,
           "response_data" TEXT NOT NULL,
-          "latitude" REAL,
-          "longitude" REAL,
           "last_updated" TEXT
           )''');
 
