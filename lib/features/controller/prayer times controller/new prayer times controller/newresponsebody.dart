@@ -27,8 +27,10 @@ class NewResponseBody extends GetxController {
       );
 
       if (response.statusCode == 200) {
+        // Escape single quotes in the response body by replacing ' with ''
+        final escapedJson = response.body.replaceAll("'", "''");
         sqldb.insertdata(
-          "INSERT INTO prayer_times (response_data, last_updated) VALUES ('${response.body}', '${DateTime.now().toIso8601String()}')",
+          "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
         log(response.body.toString());
         // Notify FetchPrayerFromDate to reload data
