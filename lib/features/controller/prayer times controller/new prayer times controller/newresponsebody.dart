@@ -2,12 +2,12 @@
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/sql_db.dart';
 
 class NewResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
-  late SharedPreferences prefs;
+  SqlDb sqldb = SqlDb(); 
   @override
   onInit() async {
     super.onInit();
@@ -25,9 +25,7 @@ class NewResponseBody extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        prefs = await SharedPreferences.getInstance();
-        await prefs.setString("responsebody", response.body);
-
+        sqldb.insertdata("INSERT INTO prayer_times (response_data, last_updated) VALUES ('${response.body}', '${DateTime.now().toIso8601String()}')");
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {

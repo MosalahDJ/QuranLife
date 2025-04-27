@@ -21,6 +21,7 @@ import 'package:project/features/view/home/categories/categories_pages/statistic
 import 'package:project/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:project/features/view/home/home%20page/widgets/salawat_pageview.dart';
 import 'package:project/features/view/home/home%20page/widgets/wirds.dart';
+import 'package:project/features/view/testpage.dart';
 
 class HomePageBody extends StatelessWidget {
   HomePageBody({super.key});
@@ -65,7 +66,17 @@ class HomePageBody extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.to(Testpage());
+              },
+              icon: Icon(
+                Icons.telegram,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+          ],
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           title: ShimmerText(
