@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -7,7 +9,7 @@ import 'package:project/features/controller/prayer%20times%20controller/new%20pr
 
 class NewResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
-  SqlDb sqldb = SqlDb(); 
+  SqlDb sqldb = SqlDb();
   @override
   onInit() async {
     super.onInit();
@@ -25,7 +27,10 @@ class NewResponseBody extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        sqldb.insertdata("INSERT INTO prayer_times (response_data, last_updated) VALUES ('${response.body}', '${DateTime.now().toIso8601String()}')");
+        sqldb.insertdata(
+          "INSERT INTO prayer_times (response_data, last_updated) VALUES ('${response.body}', '${DateTime.now().toIso8601String()}')",
+        );
+        log(response.body.toString());
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newresponsebody.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/sql_db.dart';
 
 class Testpage extends StatefulWidget {
@@ -10,6 +12,7 @@ class Testpage extends StatefulWidget {
 
 class _TestpageState extends State<Testpage> {
   SqlDb sqldb = SqlDb();
+  final NewResponseBody rbctrl = Get.find();
 
   String data = "";
 
@@ -27,8 +30,19 @@ class _TestpageState extends State<Testpage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                sqldb.readdata("SELECT * FROM prayer_times").then((value) {
+              onPressed: () async {
+                await rbctrl.getCalendarData();
+                setState(() {});
+              },
+              child: Text("get data"),
+            ),
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () async {
+                await sqldb.readdata("SELECT * FROM prayer_times").then((
+                  value,
+                ) {
                   data = value.toString();
                 });
                 setState(() {});
