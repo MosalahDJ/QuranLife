@@ -73,3 +73,11 @@ class SqlDb {
     return response;
   }
 }
+
+
+/*
+the first thing I must get the data from the new response body controller 
+then I must store it in sqf lite (I need some revesion of this course)
+then I need to use the old controller for handling interaction with th String data
+
+*/
