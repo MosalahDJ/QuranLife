@@ -32,15 +32,22 @@ class NewResponseBody extends GetxController {
         sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
-        log(response.body.toString());
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
         print('Failed to fetch calendar data: ${response.statusCode}');
       }
-      // log(prefs.getString("responsebody").toString());
     } catch (e) {
       print('Error fetching calendar data: $e');
     }
   }
 }
+
+
+/*
+1 location ctrl
+2 get response ctrl
+3 fetch prayer from date ctrl
+4 determine prayer ctrl
+5 times page ctrl
+*/
