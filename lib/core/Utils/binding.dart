@@ -18,6 +18,7 @@ import 'package:project/features/controller/prayer%20times%20controller/deterimi
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/new_fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newresponsebody.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
@@ -36,6 +37,7 @@ class Mybinding implements Bindings {
     Get.put<NewResponseBody>(NewResponseBody());
     Get.put<GetResponseBody>(GetResponseBody());
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
+    Get.put<NewFetchPrayerFromDate>(NewFetchPrayerFromDate(), permanent: true);
     Get.put<DeterminePrayersController>(
       DeterminePrayersController(),
       permanent: true,

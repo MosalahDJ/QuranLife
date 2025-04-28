@@ -1,10 +1,13 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/sql_db.dart';
 
-late SharedPreferences prefs;
+// late SharedPreferences prefs;
+SqlDb sqldb = SqlDb();
+
 Map<String, dynamic> prayerData = {};
 
 class NewFetchPrayerFromDate extends GetxController {
@@ -20,10 +23,36 @@ class NewFetchPrayerFromDate extends GetxController {
 
   Future<void> loadPrayerData() async {
     try {
-      prefs = await SharedPreferences.getInstance();
-      if (prefs.getString("responsebody") != null) {
-        Map<String, dynamic> newData = jsonDecode(
-          prefs.getString("responsebody")!,
+      // prefs = await SharedPreferences.getInstance();
+
+      if (await sqldb.readdata(
+            "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
+          ) !=
+          null) {
+        String data = await sqldb.readdata(
+          "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
+        );
+
+        data.replaceAll("''", "'");
+        Map<String, dynamic> newData = jsonDecode(data);
+        print(
+          "____________________________________________________________________",
+        );
+        print(
+          "____________________________________________________________________",
+        );
+        print(
+          "____________________________________________________________________",
+        );
+        log(newData.toString());
+        print(
+          "____________________________________________________________________",
+        );
+        print(
+          "____________________________________________________________________",
+        );
+        print(
+          "____________________________________________________________________",
         );
 
         // Check if we have data for current date
@@ -84,3 +113,7 @@ class NewFetchPrayerFromDate extends GetxController {
     }
   }
 }
+
+
+
+//خصني نشوف  الجيسون كيفاش يجي و السترينغ كيفاش يجي و نهز الاختلافات لي بيناتهم 
