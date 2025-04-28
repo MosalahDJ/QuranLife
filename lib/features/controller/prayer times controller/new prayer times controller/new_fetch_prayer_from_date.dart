@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/sql_db.dart';
