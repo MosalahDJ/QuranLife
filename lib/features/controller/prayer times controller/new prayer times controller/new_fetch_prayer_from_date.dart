@@ -33,7 +33,6 @@ class NewFetchPrayerFromDate extends GetxController {
           "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
         );
 
-        data.replaceAll("''", "'");
         Map<String, dynamic> newData = jsonDecode(data);
         // print(
         //   "____________________________________________________________________",
