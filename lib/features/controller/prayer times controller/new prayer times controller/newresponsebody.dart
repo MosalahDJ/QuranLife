@@ -56,4 +56,3 @@ class NewResponseBody extends GetxController {
 5 times page ctrl
 */
 
-// this project need to some bugs fixing
