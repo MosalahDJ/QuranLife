@@ -55,5 +55,3 @@ class NewResponseBody extends GetxController {
 4 determine prayer ctrl
 5 times page ctrl
 */
-
-// this project need to some bugs fixing
