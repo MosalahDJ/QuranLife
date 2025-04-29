@@ -58,3 +58,4 @@ class NewResponseBody extends GetxController {
 
 // this project need to some bugs fixing
 // 1. location controller need to be fixed
+// 2. get response body need to be fixed
