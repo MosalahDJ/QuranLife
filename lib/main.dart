@@ -84,5 +84,3 @@ class QuranLifeApp extends StatelessWidget {
     );
   }
 }
-
-//I have some problems here in first lunch
