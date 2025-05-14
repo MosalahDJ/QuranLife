@@ -2,7 +2,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/sql_db.dart';
+import 'package:project/features/model/sql_db.dart';
 
 // late SharedPreferences prefs;
 SqlDb sqldb = SqlDb();
