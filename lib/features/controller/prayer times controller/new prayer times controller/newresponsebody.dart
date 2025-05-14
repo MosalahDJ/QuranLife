@@ -47,7 +47,6 @@ class NewResponseBody extends GetxController {
   }
 }
 
-
 /*
 1 location ctrl
 2 get response ctrl
