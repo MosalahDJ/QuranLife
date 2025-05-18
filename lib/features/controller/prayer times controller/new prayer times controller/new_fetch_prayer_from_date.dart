@@ -21,14 +21,18 @@ class NewFetchPrayerFromDate extends GetxController {
   final dataUpdateTrigger = 0.obs;
 
   Future<void> loadPrayerData() async {
-    var prayerData = await sqldb.readdata(
+    List<Map<String, dynamic>>? prayerData = await sqldb.readdata(
       "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
     );
-    prayerData = prayerData.replaceAll("@@@", "'");
     try {
       if (prayerData != null) {
+        String prayerDataStr = prayerData[0]['data'].toString().replaceAll(
+          "@@@",
+          "'",
+        );
+        Map<String, dynamic> newData = jsonDecode(prayerDataStr);
         log(prayerData.toString());
-        Map<String, dynamic> newData = jsonDecode(prayerData);
+
         // Check if we have data for current date
         String currentDateStr = _formatDate(DateTime.now());
         if (!newData.containsKey(currentDateStr)) {
@@ -37,7 +41,7 @@ class NewFetchPrayerFromDate extends GetxController {
           return;
         }
 
-        prayerData = newData;
+        // prayerData = newData;
         await fetchPrayerTimes();
         update(); // Notify UI of changes
       }
@@ -87,7 +91,3 @@ class NewFetchPrayerFromDate extends GetxController {
     }
   }
 }
-
-
-
-//خصني نشوف  الجيسون كيفاش يجي و السترينغ كيفاش يجي و نهز الاختلافات لي بيناتهم 
