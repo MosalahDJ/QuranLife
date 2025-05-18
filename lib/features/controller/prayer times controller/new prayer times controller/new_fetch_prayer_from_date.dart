@@ -23,7 +23,6 @@ class NewFetchPrayerFromDate extends GetxController {
     var prayerData = await sqldb.readdata(
       "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
     );
-    log(prayerData.toString());
     try {
       if (prayerData != null) {
         Map<String, dynamic> newData = jsonDecode(prayerData);
