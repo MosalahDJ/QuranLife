@@ -32,10 +32,7 @@ class NewResponseBody extends GetxController {
         await sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
-        List<Map<String, dynamic>> newdata = await sqldb.readdata(
-          "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
-        );
-        log(newdata.toString());
+        
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+// import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/sql_db.dart';
@@ -23,8 +24,10 @@ class NewFetchPrayerFromDate extends GetxController {
     var prayerData = await sqldb.readdata(
       "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
     );
+    prayerData = prayerData.replaceAll("@@@", "'");
     try {
       if (prayerData != null) {
+        log(prayerData.toString());
         Map<String, dynamic> newData = jsonDecode(prayerData);
         // Check if we have data for current date
         String currentDateStr = _formatDate(DateTime.now());
