@@ -32,7 +32,6 @@ class NewFetchPrayerFromDate extends GetxController {
         );
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
         log(prayerData.toString());
-
         // Check if we have data for current date
         String currentDateStr = _formatDate(DateTime.now());
         if (!newData.containsKey(currentDateStr)) {
