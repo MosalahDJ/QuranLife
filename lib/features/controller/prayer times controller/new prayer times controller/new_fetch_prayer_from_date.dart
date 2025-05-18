@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/sql_db.dart';
 
-// late SharedPreferences prefs;
 SqlDb sqldb = SqlDb();
 
 Map<String, dynamic> prayerData = {};
@@ -22,7 +20,6 @@ class NewFetchPrayerFromDate extends GetxController {
 
   Future<void> loadPrayerData() async {
     try {
-      // prefs = await SharedPreferences.getInstance();
 
       if (await sqldb.readdata(
             "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
@@ -33,26 +30,6 @@ class NewFetchPrayerFromDate extends GetxController {
         );
 
         Map<String, dynamic> newData = jsonDecode(data);
-        // print(
-        //   "____________________________________________________________________",
-        // );
-        // print(
-        //   "____________________________________________________________________",
-        // );
-        // print(
-        //   "____________________________________________________________________",
-        // );
-        // log(newData.toString());
-        // print(
-        //   "____________________________________________________________________",
-        // );
-        // print(
-        //   "____________________________________________________________________",
-        // );
-        // print(
-        //   "____________________________________________________________________",
-        // );
-
         // Check if we have data for current date
         String currentDateStr = _formatDate(DateTime.now());
         if (!newData.containsKey(currentDateStr)) {
