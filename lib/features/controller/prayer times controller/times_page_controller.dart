@@ -26,7 +26,7 @@ class TimesPageController extends GetxController {
   //I use it in splashviewController
   void getcurrentpage() {
     final dates = fpfctrl.prayersdayskeys;
-    late int value = 0;
+    int value = 0;
     for (int index = 0; index < dates.length; index++) {
       if (formatDateString(dates[index]) == formatDate(DateTime.now())) {
         value = index;
