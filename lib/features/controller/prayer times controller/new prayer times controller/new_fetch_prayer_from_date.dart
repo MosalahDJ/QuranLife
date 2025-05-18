@@ -90,3 +90,5 @@ class NewFetchPrayerFromDate extends GetxController {
     }
   }
 }
+
+// make a road map for the solution and us ai for doing it
