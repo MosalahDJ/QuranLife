@@ -31,7 +31,6 @@ class NewFetchPrayerFromDate extends GetxController {
           "'",
         );
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        log(prayerData.toString());
         // Check if we have data for current date
         String currentDateStr = _formatDate(DateTime.now());
         if (!newData.containsKey(currentDateStr)) {
@@ -41,6 +40,11 @@ class NewFetchPrayerFromDate extends GetxController {
         }
 
         prayerData = [newData];
+        
+        log("_______________________________________________________________");
+        log(prayerData.toString());
+        log("_______________________________________________________________");
+
         await fetchPrayerTimes();
         update(); // Notify UI of changes
       }
