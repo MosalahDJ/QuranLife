@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-// import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/prayer_times_model%20.dart';
@@ -20,7 +18,6 @@ class NewFetchPrayerFromDate extends GetxController {
   }
 
   final dataUpdateTrigger = 0.obs;
-
   PrayerTimesData? prayerTimesData;
 
   Future<void> loadPrayerData() async {
@@ -38,7 +35,7 @@ class NewFetchPrayerFromDate extends GetxController {
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
-          
+
           // Check if we have data for current date
           var currentDayData = prayerTimesData?.getDayData(DateTime.now());
           if (currentDayData == null) {
@@ -54,6 +51,25 @@ class NewFetchPrayerFromDate extends GetxController {
       print('Error loading prayer data: $e');
       print('Stack trace: $stack');
     }
+  }
+
+  // String _formatDate(DateTime date) {
+  //   return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  // }
+
+  final GetResponseBody responsectrl = Get.find();
+
+  RxMap prayersdays = <String, Map<String, String>>{}.obs;
+  DateTime currentDate = DateTime.now();
+  List prayersdayskeys = [];
+
+  // func for getting akey from list of keys
+  String? getDateByIndex(int index) {
+    final dates = prayersdayskeys;
+    if (index >= 0 && index < dates.length) {
+      return dates[index];
+    }
+    return null;
   }
 
   Future<void> fetchPrayerTimes() async {
@@ -78,51 +94,6 @@ class NewFetchPrayerFromDate extends GetxController {
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
       print('Stack trace: $stack');
-    }
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-  }
-
-  final GetResponseBody responsectrl = Get.find();
-
-  RxMap prayersdays = <String, Map<String, String>>{}.obs;
-  DateTime currentDate = DateTime.now();
-  List prayersdayskeys = [];
-
-  // func for getting akey from list of keys
-  String? getDateByIndex(int index) {
-    final dates = prayersdayskeys;
-    if (index >= 0 && index < dates.length) {
-      return dates[index];
-    }
-    return null;
-  }
-
-  Future<void> fetchPrayerTimes() async {
-    try {
-      prayersdayskeys = prayerData.keys.toList();
-      for (int i = 0; i < prayersdayskeys.length; i++) {
-        // Get the month's data array
-        var monthData = prayerData[prayersdayskeys[i]];
-        // Get timings from the first day of the month
-        var timings = monthData[0]['timings'];
-
-        Map<String, String> dailyPrayers = {
-          'Fajr': timings['Fajr'],
-          'Sunrise': timings['Sunrise'],
-          'Dhuhr': timings['Dhuhr'],
-          'Asr': timings['Asr'],
-          'Maghrib': timings['Maghrib'],
-          'Isha': timings['Isha'],
-        };
-        //Add every value to his key on prayersdays map
-        prayersdays[prayersdayskeys[i]] = dailyPrayers;
-      }
-    } catch (e) {
-      print('Error in fetchPrayerTimes: $e');
-      print('Prayer Data structure: $prayerData');
     }
   }
 }
