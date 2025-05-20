@@ -21,12 +21,12 @@ class NewFetchPrayerFromDate extends GetxController {
   final dataUpdateTrigger = 0.obs;
 
   Future<void> loadPrayerData() async {
-    List<Map<String, dynamic>>? prayerData = await sqldb.readdata(
+    List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
       "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
     );
     try {
-      if (prayerData != null) {
-        String prayerDataStr = prayerData[0]['data'].toString().replaceAll(
+      if (sqlData != null && sqlData.isNotEmpty) {
+        String prayerDataStr = sqlData[0]['data'].toString().replaceAll(
           "@@@",
           "'",
         );
@@ -39,13 +39,14 @@ class NewFetchPrayerFromDate extends GetxController {
           return;
         }
 
-        prayerData = [newData];
+        prayerData = newData; // Assign to global prayerData
         await fetchPrayerTimes();
         update(); // Notify UI of changes
+
+        log("_______________________________________________________________");
+        log("Prayer Data: ${prayerData.toString()}");
+        log("_______________________________________________________________");
       }
-      log("_______________________________________________________________");
-      log(prayerData.toString());
-      log("_______________________________________________________________");
     } catch (e) {
       print('Error loading prayer data: $e');
     }
