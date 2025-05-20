@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
@@ -28,27 +27,23 @@ class NewFetchPrayerFromDate extends GetxController {
 
       if (sqlData != null && sqlData.isNotEmpty) {
         // Access the response_data field instead of data
-        String prayerDataStr = sqlData[0]['response_data'].toString().replaceAll(
-          "@@@",
-          "'",
-        );
-        
-        // Add debug print to see the raw string
-        print("Raw prayer data string: $prayerDataStr");
-        
+        String prayerDataStr = sqlData[0]['response_data']
+            .toString()
+            .replaceAll("@@@", "'");
+
         // Parse the JSON string
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        
+
         // Access the data field from the parsed JSON
         if (newData.containsKey('data')) {
           prayerData = newData['data'];
-          
+
           String currentDateStr = _formatDate(DateTime.now());
           if (!prayerData.containsKey(currentDateStr)) {
             await responsectrl.initileresponse();
             return;
           }
-          
+
           await fetchPrayerTimes();
           update();
         } else {
@@ -88,6 +83,15 @@ class NewFetchPrayerFromDate extends GetxController {
       for (int i = 0; i < prayersdayskeys.length; i++) {
         // storing prayertimes in this map
         var timings = prayerData[prayersdayskeys[i]]['data']['timings'];
+        
+        // Print only for the first day (i == 0)
+        if (i == 0) {
+          print("________________________________________________________");
+          print("Fajr time: ${timings['Fajr']}"); // Added more descriptive print
+          print("Full timings: $timings"); // Print all timings to debug
+          print("________________________________________________________");
+        }
+        
         Map<String, String> dailyPrayers = {
           'Fajr': timings['Fajr'],
           'Sunrise': timings['Sunrise'],
@@ -100,7 +104,8 @@ class NewFetchPrayerFromDate extends GetxController {
         prayersdays[prayersdayskeys[i]] = dailyPrayers;
       }
     } catch (e) {
-      print('there was an error: $e');
+      print('Error in fetchPrayerTimes: $e');
+      print('Prayer Data: $prayerData'); // Debug print to see the data structure
     }
   }
 }
