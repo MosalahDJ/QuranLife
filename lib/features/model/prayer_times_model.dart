@@ -10,7 +10,9 @@ class PrayerTimesData {
     
     json.forEach((month, monthData) {
       if (monthData is List) {
-        data[month] = monthData.map((day) => DayData.fromJson(day)).toList();
+        // Convert month to string if it's an integer
+        String monthKey = month.toString();
+        data[monthKey] = monthData.map((day) => DayData.fromJson(day)).toList();
       }
     });
 
@@ -153,7 +155,7 @@ class DateInfo {
   factory DateInfo.fromJson(Map<String, dynamic> json) {
     return DateInfo(
       readable: json['readable'],
-      timestamp: json['timestamp'],
+      timestamp: int.tryParse(json['timestamp'].toString()) ?? 0, // Safely parse to int
       gregorian: GregorianDate.fromJson(json['gregorian']),
       hijri: HijriDate.fromJson(json['hijri']),
     );
@@ -165,7 +167,7 @@ class GregorianDate {
   final String format;
   final String day;
   final Map<String, String> weekday;
-  final Map<String, dynamic> month;
+  final Map<String, dynamic> month; // month can be {number: 1, en: January} or similar
   final String year;
 
   GregorianDate({
@@ -183,7 +185,7 @@ class GregorianDate {
       format: json['format'],
       day: json['day'].toString(),
       weekday: Map<String, String>.from(json['weekday']),
-      month: json['month'],
+      month: json['month'] is Map ? Map<String, dynamic>.from(json['month']) : {'number': 0, 'en': 'Unknown'}, // Ensure month is a map
       year: json['year'].toString(),
     );
   }
@@ -194,7 +196,7 @@ class HijriDate {
   final String format;
   final String day;
   final Map<String, String> weekday;
-  final Map<String, dynamic> month;
+  final Map<String, dynamic> month; // month can be {number: 7, en: Rajab, ar: رَجَب, days: 30} or similar
   final String year;
   final List<String> holidays;
 
@@ -214,7 +216,7 @@ class HijriDate {
       format: json['format'],
       day: json['day'].toString(),
       weekday: Map<String, String>.from(json['weekday']),
-      month: json['month'],
+      month: json['month'] is Map ? Map<String, dynamic>.from(json['month']) : {'number': 0, 'en': 'Unknown', 'ar': '', 'days': 0}, // Ensure month is a map
       year: json['year'].toString(),
       holidays: List<String>.from(json['holidays'] ?? []),
     );
@@ -236,10 +238,10 @@ class Meta {
 
   factory Meta.fromJson(Map<String, dynamic> json) {
     return Meta(
-      latitude: json['latitude'],
-      longitude: json['longitude'],
+      latitude: double.tryParse(json['latitude'].toString()) ?? 0.0, // Safely parse to double
+      longitude: double.tryParse(json['longitude'].toString()) ?? 0.0, // Safely parse to double
       timezone: json['timezone'],
-      method: json['method'],
+      method: json['method'] is Map ? Map<String, dynamic>.from(json['method']) : {},
     );
   }
 }
