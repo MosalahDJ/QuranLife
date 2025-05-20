@@ -60,7 +60,8 @@ class NewFetchPrayerFromDate extends GetxController {
 
   final GetResponseBody responsectrl = Get.find();
 
-  RxMap prayersdays = <String, Map<String, String>>{}.obs;
+  RxMap<String, Map<String, Map<String, String>>> prayersdays = 
+      <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
   List prayersdayskeys = [];
 
@@ -76,30 +77,53 @@ class NewFetchPrayerFromDate extends GetxController {
   Future<void> fetchPrayerTimes() async {
     try {
       if (prayerTimesData == null) {
-        print('prayerTimesData is null');
+        print('prayerTimesData is null in fetchPrayerTimes');
         return;
       }
 
-      prayerTimesData?.monthlyData.forEach((month, days) {
-        if (days.isNotEmpty) {
-          var firstDay = days.first;
+      // Clear previous data
+      prayersdays.clear();
+
+      prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
+        // monthKey is already a String (e.g., "1", "2")
+        Map<String, Map<String, String>> daysInMonthMap = {};
+
+        for (var dayData in monthDaysData) {
+          // Extract day number from dayData.date.gregorian.day (it's a String)
+          String dayKey = dayData.date.gregorian.day;
+
           Map<String, String> dailyPrayers = {
-            'Fajr': firstDay.timings.fajr,
-            'Sunrise': firstDay.timings.sunrise,
-            'Dhuhr': firstDay.timings.dhuhr,
-            'Asr': firstDay.timings.asr,
-            'Maghrib': firstDay.timings.maghrib,
-            'Isha': firstDay.timings.isha,
+            'Fajr': dayData.timings.fajr,
+            'Sunrise': dayData.timings.sunrise,
+            'Dhuhr': dayData.timings.dhuhr,
+            'Asr': dayData.timings.asr,
+            'Sunset': dayData.timings.sunset, // Assuming Sunset is available, if not use Maghrib
+            'Maghrib': dayData.timings.maghrib,
+            'Isha': dayData.timings.isha,
+            // Add other prayers if needed
+            'Imsak': dayData.timings.imsak,
+            'Midnight': dayData.timings.midnight,
+            'Firstthird': dayData.timings.firstthird,
+            'Lastthird': dayData.timings.lastthird,
           };
-
-          prayersdays[month] = dailyPrayers;
-        } else {
-          print('No days available for month $month');
+          daysInMonthMap[dayKey] = dailyPrayers;
         }
-        log(prayersdays.toString());
-      });
 
-      update();
+        if (daysInMonthMap.isNotEmpty) {
+          prayersdays[monthKey] = daysInMonthMap;
+        } else {
+          print('No days available for month $monthKey');
+        }
+      });
+      
+      // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
+      prayersdayskeys = prayersdays.keys.toList();
+      // Sort month keys if necessary, e.g., numerically
+      prayersdayskeys.sort((a, b) => int.parse(a).compareTo(int.parse(b)));
+
+      log('Updated prayersdays structure: ${prayersdays.toString()}');
+
+      update(); // Notify GetX listeners
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
       print('Stack trace: $stack');
