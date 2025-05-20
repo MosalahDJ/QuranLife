@@ -40,14 +40,12 @@ class NewFetchPrayerFromDate extends GetxController {
         }
 
         prayerData = [newData];
-        
-        log("_______________________________________________________________");
-        log(prayerData.toString());
-        log("_______________________________________________________________");
-
         await fetchPrayerTimes();
         update(); // Notify UI of changes
       }
+      log("_______________________________________________________________");
+      log(prayerData.toString());
+      log("_______________________________________________________________");
     } catch (e) {
       print('Error loading prayer data: $e');
     }
