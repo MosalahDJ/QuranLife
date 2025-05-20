@@ -21,38 +21,45 @@ class NewFetchPrayerFromDate extends GetxController {
   final dataUpdateTrigger = 0.obs;
 
   Future<void> loadPrayerData() async {
-    print("Starting loadPrayerData"); // Debug print 1
-    List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
-      "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
-    );
-    print("SQL Data received: $sqlData"); // Debug print 2
-    
     try {
+      List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
+        "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
+      );
+
       if (sqlData != null && sqlData.isNotEmpty) {
-        print("Processing SQL data"); // Debug print 3
-        String prayerDataStr = sqlData[0]['data'].toString().replaceAll(
+        // Access the response_data field instead of data
+        String prayerDataStr = sqlData[0]['response_data'].toString().replaceAll(
           "@@@",
           "'",
         );
-        Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        print("Decoded data: $newData"); // Debug print 4
         
-        String currentDateStr = _formatDate(DateTime.now());
-        if (!newData.containsKey(currentDateStr)) {
-          print("Current date not found, refreshing"); // Debug print 5
-          await responsectrl.initileresponse();
-          return;
+        // Add debug print to see the raw string
+        print("Raw prayer data string: $prayerDataStr");
+        
+        // Parse the JSON string
+        Map<String, dynamic> newData = jsonDecode(prayerDataStr);
+        
+        // Access the data field from the parsed JSON
+        if (newData.containsKey('data')) {
+          prayerData = newData['data'];
+          
+          String currentDateStr = _formatDate(DateTime.now());
+          if (!prayerData.containsKey(currentDateStr)) {
+            await responsectrl.initileresponse();
+            return;
+          }
+          
+          await fetchPrayerTimes();
+          update();
+        } else {
+          print("No 'data' field found in the parsed JSON");
         }
-
-        prayerData = newData;
-        print("Global prayerData updated: $prayerData"); // Debug print 6
-        await fetchPrayerTimes();
-        update();
       } else {
-        print("No SQL data found"); // Debug print 7
+        print("No SQL data found");
       }
     } catch (e) {
       print('Error loading prayer data: $e');
+      print('Stack trace: ${StackTrace.current}');
     }
   }
 
