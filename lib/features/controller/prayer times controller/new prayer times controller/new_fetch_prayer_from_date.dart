@@ -81,14 +81,14 @@ class NewFetchPrayerFromDate extends GetxController {
     try {
       prayersdayskeys = prayerData.keys.toList();
       for (int i = 0; i < prayersdayskeys.length; i++) {
-        // storing prayertimes in this map
-        var timings = prayerData[prayersdayskeys[i]]['data']['timings'];
+        // The correct way to access timings
+        var timings = prayerData[prayersdayskeys[i]]['timings'];
         
-        // Print only for the first day (i == 0)
         if (i == 0) {
           print("________________________________________________________");
-          print("Fajr time: ${timings['Fajr']}"); // Added more descriptive print
-          print("Full timings: $timings"); // Print all timings to debug
+          print("Debug - prayerData structure: ${prayerData[prayersdayskeys[0]]}");
+          print("Debug - timings: $timings");
+          print("Debug - Fajr time: ${timings['Fajr']}");
           print("________________________________________________________");
         }
         
@@ -105,7 +105,7 @@ class NewFetchPrayerFromDate extends GetxController {
       }
     } catch (e) {
       print('Error in fetchPrayerTimes: $e');
-      print('Prayer Data: $prayerData'); // Debug print to see the data structure
+      print('Current prayerData: $prayerData');
     }
   }
 }
