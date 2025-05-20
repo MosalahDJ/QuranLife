@@ -75,11 +75,23 @@ class NewFetchPrayerFromDate extends GetxController {
 
   Future<void> fetchPrayerTimes() async {
     try {
-      if (prayerTimesData == null) return;
+      if (prayerTimesData == null) {
+        print('prayerTimesData is null');
+        return;
+      }
+
+      print('Starting fetchPrayerTimes');
+      print('Monthly data keys: ${prayerTimesData?.monthlyData.keys.toList()}');
 
       prayerTimesData?.monthlyData.forEach((month, days) {
+        print('Processing month: $month');
+        print('Number of days in month: ${days.length}');
+
         if (days.isNotEmpty) {
+          print('First day data available: ${days.first.date.readable}');
           var firstDay = days.first;
+          print('First day timings: ${firstDay.timings.fajr}, ${firstDay.timings.dhuhr}, ${firstDay.timings.asr}');
+
           Map<String, String> dailyPrayers = {
             'Fajr': firstDay.timings.fajr,
             'Sunrise': firstDay.timings.sunrise,
@@ -88,10 +100,16 @@ class NewFetchPrayerFromDate extends GetxController {
             'Maghrib': firstDay.timings.maghrib,
             'Isha': firstDay.timings.isha,
           };
+
+          print('Daily prayers map created: $dailyPrayers');
           prayersdays[month] = dailyPrayers;
+          print('Added to prayersdays for month $month');
+        } else {
+          print('No days available for month $month');
         }
-        log(prayersdays.toString());
       });
+
+      print('Final prayersdays map: ${prayersdays.toString()}');
       update();
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
