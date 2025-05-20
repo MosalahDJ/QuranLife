@@ -21,31 +21,35 @@ class NewFetchPrayerFromDate extends GetxController {
   final dataUpdateTrigger = 0.obs;
 
   Future<void> loadPrayerData() async {
+    print("Starting loadPrayerData"); // Debug print 1
     List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
       "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
     );
+    print("SQL Data received: $sqlData"); // Debug print 2
+    
     try {
       if (sqlData != null && sqlData.isNotEmpty) {
+        print("Processing SQL data"); // Debug print 3
         String prayerDataStr = sqlData[0]['data'].toString().replaceAll(
           "@@@",
           "'",
         );
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        // Check if we have data for current date
+        print("Decoded data: $newData"); // Debug print 4
+        
         String currentDateStr = _formatDate(DateTime.now());
         if (!newData.containsKey(currentDateStr)) {
-          // If we don't have data for current date, trigger refresh
+          print("Current date not found, refreshing"); // Debug print 5
           await responsectrl.initileresponse();
           return;
         }
 
-        prayerData = newData; // Assign to global prayerData
+        prayerData = newData;
+        print("Global prayerData updated: $prayerData"); // Debug print 6
         await fetchPrayerTimes();
-        update(); // Notify UI of changes
-
-        log("_______________________________________________________________");
-        log("Prayer Data: ${prayerData.toString()}");
-        log("_______________________________________________________________");
+        update();
+      } else {
+        print("No SQL data found"); // Debug print 7
       }
     } catch (e) {
       print('Error loading prayer data: $e');
