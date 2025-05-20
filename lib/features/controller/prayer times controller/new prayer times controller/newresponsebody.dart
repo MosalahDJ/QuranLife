@@ -33,7 +33,7 @@ class NewResponseBody extends GetxController {
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
         var mydata = await sqldb.readdata(
-          "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
+          " SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
         );
         log(mydata.toString());
         // Notify FetchPrayerFromDate to reload data
