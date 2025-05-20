@@ -93,10 +93,10 @@ class NewFetchPrayerFromDate extends GetxController {
           };
 
           prayersdays[month] = dailyPrayers;
-          log(prayersdays.toString());
         } else {
           print('No days available for month $month');
         }
+        log(prayersdays.toString());
       });
 
       update();
