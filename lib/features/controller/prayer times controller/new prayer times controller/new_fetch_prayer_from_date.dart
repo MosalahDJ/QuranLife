@@ -40,7 +40,7 @@ class NewFetchPrayerFromDate extends GetxController {
           return;
         }
 
-        // prayerData = newData;
+        prayerData = [newData];
         await fetchPrayerTimes();
         update(); // Notify UI of changes
       }

@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -30,7 +32,10 @@ class NewResponseBody extends GetxController {
         await sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
-        
+        var mydata = await sqldb.readdata(
+          "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
+        );
+        log(mydata.toString());
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
