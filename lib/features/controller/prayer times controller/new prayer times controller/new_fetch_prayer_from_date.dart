@@ -83,15 +83,18 @@ class NewFetchPrayerFromDate extends GetxController {
       for (int i = 0; i < prayersdayskeys.length; i++) {
         // The correct way to access timings
         var timings = prayerData[prayersdayskeys[i]]['timings'];
-        
+        print(timings);
+
         if (i == 0) {
           print("________________________________________________________");
-          print("Debug - prayerData structure: ${prayerData[prayersdayskeys[0]]}");
+          print(
+            "Debug - prayerData structure: ${prayerData[prayersdayskeys[0]]}",
+          );
           print("Debug - timings: $timings");
           print("Debug - Fajr time: ${timings['Fajr']}");
           print("________________________________________________________");
         }
-        
+
         Map<String, String> dailyPrayers = {
           'Fajr': timings['Fajr'],
           'Sunrise': timings['Sunrise'],
