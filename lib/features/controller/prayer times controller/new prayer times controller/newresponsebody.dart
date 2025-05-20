@@ -35,7 +35,10 @@ class NewResponseBody extends GetxController {
         var mydata = await sqldb.readdata(
           " SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
         );
+        log("_______________________________________________________________");
         log(mydata.toString());
+        log("_______________________________________________________________");
+
         // Notify FetchPrayerFromDate to reload data
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
