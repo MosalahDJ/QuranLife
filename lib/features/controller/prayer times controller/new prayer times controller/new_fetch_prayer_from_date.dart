@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/prayer_times_model.dart';
@@ -80,7 +81,6 @@ class NewFetchPrayerFromDate extends GetxController {
       }
 
       prayerTimesData?.monthlyData.forEach((month, days) {
-
         if (days.isNotEmpty) {
           var firstDay = days.first;
           Map<String, String> dailyPrayers = {
@@ -93,12 +93,12 @@ class NewFetchPrayerFromDate extends GetxController {
           };
 
           prayersdays[month] = dailyPrayers;
+          log(prayersdays.toString());
         } else {
           print('No days available for month $month');
         }
       });
 
-      print('Final prayersdays map: ${prayersdays.toString()}');
       update();
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');

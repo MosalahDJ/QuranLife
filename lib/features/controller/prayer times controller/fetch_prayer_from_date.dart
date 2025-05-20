@@ -76,6 +76,7 @@ class FetchPrayerFromDate extends GetxController {
           'Maghrib': timings['Maghrib'],
           'Isha': timings['Isha'],
         };
+        // log(dailyPrayers.toString());
         //Add every value to his key on prayersdays map
         prayersdays[prayersdayskeys[i]] = dailyPrayers;
       }
