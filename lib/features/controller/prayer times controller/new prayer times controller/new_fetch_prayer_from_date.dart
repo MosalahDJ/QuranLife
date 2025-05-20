@@ -37,6 +37,7 @@ class NewFetchPrayerFromDate extends GetxController {
         // Access the data field from the parsed JSON
         if (newData.containsKey('data')) {
           prayerData = newData['data'];
+          print(prayerData);
 
           String currentDateStr = _formatDate(DateTime.now());
           if (!prayerData.containsKey(currentDateStr)) {
@@ -81,20 +82,16 @@ class NewFetchPrayerFromDate extends GetxController {
     try {
       prayersdayskeys = prayerData.keys.toList();
       for (int i = 0; i < prayersdayskeys.length; i++) {
-        // The correct way to access timings
-        var timings = prayerData[prayersdayskeys[i]]['timings'];
-        print(timings);
-
+        // Access the first element of the array to get timings
+        var timings = prayerData[prayersdayskeys[i]][0]['timings'];
+        
         if (i == 0) {
           print("________________________________________________________");
-          print(
-            "Debug - prayerData structure: ${prayerData[prayersdayskeys[0]]}",
-          );
           print("Debug - timings: $timings");
           print("Debug - Fajr time: ${timings['Fajr']}");
           print("________________________________________________________");
         }
-
+        
         Map<String, String> dailyPrayers = {
           'Fajr': timings['Fajr'],
           'Sunrise': timings['Sunrise'],
@@ -108,7 +105,7 @@ class NewFetchPrayerFromDate extends GetxController {
       }
     } catch (e) {
       print('Error in fetchPrayerTimes: $e');
-      print('Current prayerData: $prayerData');
+      print('Current prayerData structure: $prayerData');
     }
   }
 }
