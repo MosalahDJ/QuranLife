@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
+import 'package:project/features/model/prayer_times_model%20.dart';
 import 'package:project/features/model/sql_db.dart';
 
 SqlDb sqldb = SqlDb();
@@ -19,6 +21,8 @@ class NewFetchPrayerFromDate extends GetxController {
 
   final dataUpdateTrigger = 0.obs;
 
+  PrayerTimesData? prayerTimesData;
+
   Future<void> loadPrayerData() async {
     try {
       List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
@@ -26,36 +30,54 @@ class NewFetchPrayerFromDate extends GetxController {
       );
 
       if (sqlData != null && sqlData.isNotEmpty) {
-        // Access the response_data field instead of data
         String prayerDataStr = sqlData[0]['response_data']
             .toString()
             .replaceAll("@@@", "'");
 
-        // Parse the JSON string
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
 
-        // Access the data field from the parsed JSON
         if (newData.containsKey('data')) {
-          prayerData = newData['data'];
-          print(prayerData);
-
-          String currentDateStr = _formatDate(DateTime.now());
-          if (!prayerData.containsKey(currentDateStr)) {
+          prayerTimesData = PrayerTimesData.fromJson(newData['data']);
+          
+          // Check if we have data for current date
+          var currentDayData = prayerTimesData?.getDayData(DateTime.now());
+          if (currentDayData == null) {
             await responsectrl.initileresponse();
             return;
           }
 
           await fetchPrayerTimes();
           update();
-        } else {
-          print("No 'data' field found in the parsed JSON");
         }
-      } else {
-        print("No SQL data found");
       }
-    } catch (e) {
+    } catch (e, stack) {
       print('Error loading prayer data: $e');
-      print('Stack trace: ${StackTrace.current}');
+      print('Stack trace: $stack');
+    }
+  }
+
+  Future<void> fetchPrayerTimes() async {
+    try {
+      if (prayerTimesData == null) return;
+
+      prayerTimesData?.monthlyData.forEach((month, days) {
+        if (days.isNotEmpty) {
+          var firstDay = days.first;
+          Map<String, String> dailyPrayers = {
+            'Fajr': firstDay.timings.fajr,
+            'Sunrise': firstDay.timings.sunrise,
+            'Dhuhr': firstDay.timings.dhuhr,
+            'Asr': firstDay.timings.asr,
+            'Maghrib': firstDay.timings.maghrib,
+            'Isha': firstDay.timings.isha,
+          };
+          prayersdays[month] = dailyPrayers;
+        }
+      });
+      update();
+    } catch (e, stack) {
+      print('Error in fetchPrayerTimes: $e');
+      print('Stack trace: $stack');
     }
   }
 
@@ -84,19 +106,9 @@ class NewFetchPrayerFromDate extends GetxController {
       for (int i = 0; i < prayersdayskeys.length; i++) {
         // Get the month's data array
         var monthData = prayerData[prayersdayskeys[i]];
-        
-        if (i == 0) {
-          print("________________________________________________________");
-          print("Month key: ${prayersdayskeys[i]}");
-          print("Month data: $monthData");
-          print("First day timings: ${monthData[0]['timings']}");
-          print("Fajr time: ${monthData[0]['timings']['Fajr']}");
-          print("________________________________________________________");
-        }
-        
         // Get timings from the first day of the month
         var timings = monthData[0]['timings'];
-        
+
         Map<String, String> dailyPrayers = {
           'Fajr': timings['Fajr'],
           'Sunrise': timings['Sunrise'],
