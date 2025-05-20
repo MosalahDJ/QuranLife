@@ -22,7 +22,7 @@ class NewFetchPrayerFromDate extends GetxController {
 
   Future<void> loadPrayerData() async {
     List<Map<String, dynamic>>? prayerData = await sqldb.readdata(
-      "SELECT * FROM prayer_times WHERE last_updated = (SELECT MAX(last_updated) FROM prayer_times)",
+      "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
     );
     try {
       if (prayerData != null) {
