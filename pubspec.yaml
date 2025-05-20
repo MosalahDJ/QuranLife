@@ -60,7 +60,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   hijri: ^3.0.0
   http: ^1.2.2
-  intl: ^0.20.2
+  intl: 0.19.0
   islamic_hijri_calendar: ^0.0.4
   material_design_icons_flutter: ^7.0.7296
   path: ^1.9.0
