@@ -112,10 +112,10 @@ class NewFetchPrayerFromDate extends GetxController {
         }
       });
       
-      // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
-      prayersdayskeys = prayersdays.keys.toList();
-      // Sort month keys if necessary, e.g., numerically
-      prayersdayskeys.sort((a, b) => int.parse(a).compareTo(int.parse(b)));
+      // // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
+      // prayersdayskeys = prayersdays.keys.toList();
+      // // Sort month keys if necessary, e.g., numerically
+      // prayersdayskeys.sort((a, b) => int.parse(a).compareTo(int.parse(b)));
 
       log('Updated prayersdays structure: ${prayersdays.toString()}');
 
