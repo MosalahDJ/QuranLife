@@ -113,17 +113,6 @@ class NewFetchPrayerFromDate extends GetxController {
           print('No days available for month $monthKey');
         }
       });
-
-      // // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
-      // prayersdayskeys = prayersdays.keys.toList();
-      // // Sort month keys if necessary, e.g., numerically
-      // prayersdayskeys.sort((a, b) => int.parse(a).compareTo(int.parse(b)));
-
-      log('Updated prayersdays structure: ${prayersdays.toString()}');
-      print("_______________________________________________________________");
-      print(DateTime.now().subtract(Duration(days: 16)).day);
-      print("_______________________________________________________________");
-
       update(); // Notify GetX listeners
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
