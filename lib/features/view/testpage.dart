@@ -12,7 +12,6 @@ class Testpage extends StatefulWidget {
 
 class _TestpageState extends State<Testpage> {
   SqlDb sqldb = SqlDb();
-  final NewResponseBody rbctrl = Get.find();
 
   String data = "";
 
@@ -31,7 +30,6 @@ class _TestpageState extends State<Testpage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                await rbctrl.getCalendarData();
                 setState(() {});
               },
               child: Text("get data"),
