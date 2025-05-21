@@ -22,7 +22,6 @@ class NewFetchPrayerFromDate extends GetxController {
   PrayerTimesData? prayerTimesData;
   final GetResponseBody responsectrl = Get.find();
 
-
   Future<void> loadPrayerData() async {
     try {
       List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
@@ -56,7 +55,7 @@ class NewFetchPrayerFromDate extends GetxController {
     }
   }
 
-  RxMap<String, Map<String, Map<String, String>>> prayersdays = 
+  RxMap<String, Map<String, Map<String, String>>> prayersdays =
       <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
   List prayersdayskeys = [];
@@ -93,7 +92,10 @@ class NewFetchPrayerFromDate extends GetxController {
             'Sunrise': dayData.timings.sunrise,
             'Dhuhr': dayData.timings.dhuhr,
             'Asr': dayData.timings.asr,
-            'Sunset': dayData.timings.sunset, // Assuming Sunset is available, if not use Maghrib
+            'Sunset':
+                dayData
+                    .timings
+                    .sunset, // Assuming Sunset is available, if not use Maghrib
             'Maghrib': dayData.timings.maghrib,
             'Isha': dayData.timings.isha,
             // Add other prayers if needed
@@ -111,13 +113,16 @@ class NewFetchPrayerFromDate extends GetxController {
           print('No days available for month $monthKey');
         }
       });
-      
+
       // // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
       // prayersdayskeys = prayersdays.keys.toList();
       // // Sort month keys if necessary, e.g., numerically
       // prayersdayskeys.sort((a, b) => int.parse(a).compareTo(int.parse(b)));
 
       log('Updated prayersdays structure: ${prayersdays.toString()}');
+      print("_______________________________________________________________");
+      print(DateTime.now().day);
+      print("_______________________________________________________________");
 
       update(); // Notify GetX listeners
     } catch (e, stack) {

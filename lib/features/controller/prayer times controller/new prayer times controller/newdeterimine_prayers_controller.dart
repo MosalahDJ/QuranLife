@@ -109,28 +109,26 @@ class NewdeteriminePrayersController extends GetxController {
       //and we use parse time for ensure it DateTime is not String
 
       var prayers = [
-        ['Fajr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Fajr']!)],
+        ['Fajr', _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Fajr']!),],
         [
           'Sunrise',
-          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Sunrise']!),
+          _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Sunrise']!),
         ],
-        ['Dhuhr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Dhuhr']!)],
-        ['Asr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Asr']!)],
+        ['Dhuhr', _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Dhuhr']!)],
+        ['Asr', _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Asr']!)],
         [
           'Maghrib',
-          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Maghrib']!),
+          _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Maghrib']!)
         ],
-        ['Isha', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!)],
+        ['Isha', _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Isha']!)],
       ];
 
       // Add next day's Fajr to prayers list
       var nextDayFajr = _parsenextdayfajr(
-        fpfctrl.prayersdays[_formatDate(
-          now.add(const Duration(days: 1)),
-        )]['Fajr']!,
+        fpfctrl.prayersdays["${now.month}"]!["${now.add(const Duration(days: 1)).day}"]!['Fajr']!,
       );
 
-      //loop of prayers list for checking current and next prayer and time intile next
+      //loop of prayers list for checking current and next prayer and time untile next
       //we use "as datetime" and "as string" here beacause these data is requerd to be dynamic
       //in prayer's list and it requred to be String or Date time here
       for (int i = 0; i < prayers.length - 1; i++) {
@@ -148,7 +146,8 @@ class NewdeteriminePrayersController extends GetxController {
       // If we're after Isha
 
       if (now.isAfter(
-        _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!),
+        _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Isha']!),
+        // _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!),
       )) {
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
@@ -159,7 +158,7 @@ class NewdeteriminePrayersController extends GetxController {
       //if we are before Fajr
 
       if (now.isBefore(
-        _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Fajr']!),
+        _parseTime(fpfctrl.prayersdays["${now.month}"]!["${now.day}"]!['Fajr']!),
       )) {
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
