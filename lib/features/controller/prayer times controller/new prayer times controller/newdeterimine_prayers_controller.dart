@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/new_fetch_prayer_from_date.dart';
 
-class NewdeteriminePrayersController extends GetxController {
+class DeterminePrayersController extends GetxController {
   @override
   void onInit() {
     super.onInit();

@@ -14,7 +14,6 @@ import 'package:project/features/controller/fetching%20data%20controller/islamic
 import 'package:project/features/controller/fetching%20data%20controller/omra_controller.dart';
 import 'package:project/features/controller/fetching%20data%20controller/wudu_controller.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -44,10 +43,10 @@ class Mybinding implements Bindings {
       DeterminePrayersController(),
       permanent: true,
     );
-    Get.put<NewdeteriminePrayersController>(
-      NewdeteriminePrayersController(),
-      permanent: true,
-    );
+    // Get.put<NewdeteriminePrayersController>(
+    //   NewdeteriminePrayersController(),
+    //   permanent: true,
+    // );
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<NewtimesPageController>(NewtimesPageController(), permanent: true);
     Get.put<AnonymouslysignIn>(AnonymouslysignIn());
