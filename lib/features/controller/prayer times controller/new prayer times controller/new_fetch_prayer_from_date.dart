@@ -121,7 +121,7 @@ class NewFetchPrayerFromDate extends GetxController {
 
       log('Updated prayersdays structure: ${prayersdays.toString()}');
       print("_______________________________________________________________");
-      print(DateTime.now().day);
+      print(DateTime.now().subtract(Duration(days: 16)).day);
       print("_______________________________________________________________");
 
       update(); // Notify GetX listeners
