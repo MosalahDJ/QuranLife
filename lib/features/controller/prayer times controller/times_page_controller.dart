@@ -25,16 +25,22 @@ class TimesPageController extends GetxController {
   //i use this func for selecting currentpage with current day
   //I use it in splashviewController
   void getcurrentpage() {
-    final dates = fpfctrl.prayersdayskeys;
-    int value = 0;
-    for (int index = 0; index < dates.length; index++) {
-      if (formatDateString(dates[index]) == formatDate(DateTime.now())) {
-        value = index;
-        currentday = value;
-        currentPage = value.obs;
-      } else {
-        continue;
-      }
+    if (fpfctrl.firstResponseDate == null) return;
+    
+    final now = DateTime.now();
+    final firstDate = fpfctrl.firstResponseDate!;
+    
+    // Calculate the difference in days
+    final difference = now.difference(firstDate).inDays;
+    
+    // Check if current date is within our data range
+    if (difference >= 0 && difference < fpfctrl.prayersdayskeys.length) {
+      currentday = difference;
+      currentPage = difference.obs;
+    } else {
+      // If current date is outside our range, default to first day
+      currentday = 0;
+      currentPage = 0.obs;
     }
   }
 

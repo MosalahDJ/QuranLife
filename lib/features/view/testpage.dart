@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newresponsebody.dart';
+import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/sql_db.dart';
 
 class Testpage extends StatefulWidget {

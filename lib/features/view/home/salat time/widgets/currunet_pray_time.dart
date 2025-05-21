@@ -8,7 +8,7 @@ import 'package:project/features/controller/floating_animation_controllers/float
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newdeterimine_prayers_controller.dart';
+import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/controller/spalshview%20controller/splash_view_controller.dart';
