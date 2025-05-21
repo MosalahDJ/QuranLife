@@ -107,9 +107,8 @@ class NewdeteriminePrayersController extends GetxController {
           _parseTime(fpfctrl.prayersdays["${now.month}"]![day]![salat]!),
         ];
       }
-      //we use this list for store iside it list's of prayer name and prayer time
-      //and we use parse time for ensure it DateTime is not String
 
+      //we use this list for store iside it list's of prayer name and prayer time
       var prayers = [
         salatday('Fajr'),
         salatday('Sunrise'),
