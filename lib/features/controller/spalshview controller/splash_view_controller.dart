@@ -76,13 +76,11 @@ class SplashViewController extends GetxController
     ).animate(animationcontroller!);
     animationcontroller?.repeat(reverse: true);
     isLoading(true);
-    // TODO: I must add a new function to new response body for this check
     bool wasDataRefreshed = await responsectrl.initileresponse();
     // Only fetch prayer times if we didn't just refresh the data
     if (!wasDataRefreshed) {
       await fpfctrl.loadPrayerData();
     }
-
     prayerctrl.determineCurrentPrayer();
     timespagectrl.pagecontroller();
     timespagectrl.getcurrentpage();

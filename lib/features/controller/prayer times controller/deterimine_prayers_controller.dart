@@ -177,4 +177,3 @@ class DeterminePrayersController extends GetxController {
     super.onClose();
   }
 }
-  
