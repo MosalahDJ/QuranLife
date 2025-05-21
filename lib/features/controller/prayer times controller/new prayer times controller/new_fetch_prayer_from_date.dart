@@ -20,6 +20,8 @@ class NewFetchPrayerFromDate extends GetxController {
 
   final dataUpdateTrigger = 0.obs;
   PrayerTimesData? prayerTimesData;
+  final GetResponseBody responsectrl = Get.find();
+
 
   Future<void> loadPrayerData() async {
     try {
@@ -53,12 +55,6 @@ class NewFetchPrayerFromDate extends GetxController {
       print('Stack trace: $stack');
     }
   }
-
-  // String _formatDate(DateTime date) {
-  //   return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-  // }
-
-  final GetResponseBody responsectrl = Get.find();
 
   RxMap<String, Map<String, Map<String, String>>> prayersdays = 
       <String, Map<String, Map<String, String>>>{}.obs;
