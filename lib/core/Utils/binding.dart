@@ -17,10 +17,7 @@ import 'package:project/features/controller/home%20controller/myhomecontroller.d
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:project/features/controller/quraan%20controller/saving_controller.dart';
@@ -35,20 +32,13 @@ class Mybinding implements Bindings {
   void dependencies() async {
     //splashview injection
     Get.put<LocationController>(LocationController(), permanent: true);
-    Get.put<NewResponseBody>(NewResponseBody());
     Get.put<GetResponseBody>(GetResponseBody());
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
-    Get.put<NewFetchPrayerFromDate>(NewFetchPrayerFromDate(), permanent: true);
     Get.put<DeterminePrayersController>(
       DeterminePrayersController(),
       permanent: true,
     );
-    // Get.put<NewdeteriminePrayersController>(
-    //   NewdeteriminePrayersController(),
-    //   permanent: true,
-    // );
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
-    Get.put<NewtimesPageController>(NewtimesPageController(), permanent: true);
     Get.put<AnonymouslysignIn>(AnonymouslysignIn());
     Get.put<SplashViewController>(SplashViewController());
     // LanguageController
