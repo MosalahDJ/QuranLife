@@ -21,6 +21,7 @@ import 'package:project/features/controller/prayer%20times%20controller/location
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/new_fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newdeterimine_prayers_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newresponsebody.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newtimes_page_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:project/features/controller/quraan%20controller/saving_controller.dart';
@@ -48,6 +49,7 @@ class Mybinding implements Bindings {
       permanent: true,
     );
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
+    Get.put<NewtimesPageController>(NewtimesPageController(), permanent: true);
     Get.put<AnonymouslysignIn>(AnonymouslysignIn());
     Get.put<SplashViewController>(SplashViewController());
     // LanguageController

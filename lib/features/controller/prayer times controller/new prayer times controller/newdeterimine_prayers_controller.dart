@@ -177,3 +177,4 @@ class NewdeteriminePrayersController extends GetxController {
     super.onClose();
   }
 }
+  

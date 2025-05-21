@@ -1,4 +1,5 @@
 import 'dart:convert';
+// import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/prayer_times_model.dart';
@@ -57,16 +58,20 @@ class NewFetchPrayerFromDate extends GetxController {
   RxMap<String, Map<String, Map<String, String>>> prayersdays =
       <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
-  List prayersdayskeys = [];
+  // List prayersdayskeys = [];
 
   // func for getting akey from list of keys
-  String? getDateByIndex(int index) {
-    final dates = prayersdayskeys;
-    if (index >= 0 && index < dates.length) {
-      return dates[index];
-    }
-    return null;
-  }
+  // String? getDateByIndex(int index) {
+  //   final dates = prayersdayskeys;
+  //   if (index >= 0 && index < dates.length) {
+  //     return dates[index];
+  //   }
+  //   return null;
+  // }
+
+  DateTime? firstResponseDate; // Add this at class level
+  List prayersdayskeys = [];
+
 
   Future<void> fetchPrayerTimes() async {
     try {
@@ -75,6 +80,9 @@ class NewFetchPrayerFromDate extends GetxController {
         return;
       }
 
+      // Store the first day's date from the response
+      firstResponseDate = DateTime.parse(prayerTimesData!.monthlyData.values.first.first.date.gregorian.date);
+      
       // Clear previous data
       prayersdays.clear();
 
@@ -112,6 +120,8 @@ class NewFetchPrayerFromDate extends GetxController {
           print('No days available for month $monthKey');
         }
       });
+      // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
+      prayersdayskeys = prayersdays.keys.toList();
       update(); // Notify GetX listeners
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
