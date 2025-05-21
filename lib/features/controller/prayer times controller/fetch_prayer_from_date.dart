@@ -58,20 +58,20 @@ class FetchPrayerFromDate extends GetxController {
   RxMap<String, Map<String, Map<String, String>>> prayersdays =
       <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
-  // List prayersdayskeys = [];
 
   // func for getting akey from list of keys
-  // String? getDateByIndex(int index) {
-  //   final dates = prayersdayskeys;
-  //   if (index >= 0 && index < dates.length) {
-  //     return dates[index];
-  //   }
-  //   return null;
-  // }
+  String? getDateByIndex(int index) {
+    if (firstResponseDate == null) return null;
+
+    // Calculate the date for the given index
+    final date = firstResponseDate!.add(Duration(days: index));
+
+    // Format the date in the same format as before (YYYY-MM-DD)
+    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  }
 
   DateTime? firstResponseDate; // Add this at class level
   List prayersdayskeys = [];
-
 
   Future<void> fetchPrayerTimes() async {
     try {
@@ -81,8 +81,10 @@ class FetchPrayerFromDate extends GetxController {
       }
 
       // Store the first day's date from the response
-      firstResponseDate = DateTime.parse(prayerTimesData!.monthlyData.values.first.first.date.gregorian.date);
-      
+      firstResponseDate = DateTime.parse(
+        prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+      );
+
       // Clear previous data
       prayersdays.clear();
 
