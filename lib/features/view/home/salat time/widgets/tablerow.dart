@@ -4,7 +4,7 @@ import 'package:project/core/Utils/constants.dart';
 
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
+import 'package:project/features/controller/prayer%20times%20controller/new%20prayer%20times%20controller/newdeterimine_prayers_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 
 final DeterminePrayersController prayerctrl = Get.find();
