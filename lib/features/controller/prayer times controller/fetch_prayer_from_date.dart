@@ -24,28 +24,85 @@ class FetchPrayerFromDate extends GetxController {
 
   Future<void> loadPrayerData() async {
     try {
+      print('=== loadPrayerData Start ===');
       List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
         "SELECT * FROM prayer_times ORDER BY last_updated DESC LIMIT 1 ",
       );
+      print('SQL Data retrieved: ${sqlData?.length ?? 0} records');
 
       if (sqlData != null && sqlData.isNotEmpty) {
         String prayerDataStr = sqlData[0]['response_data']
             .toString()
             .replaceAll("@@@", "'");
+        print('Prayer data string length: ${prayerDataStr.length}');
 
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
+        print('JSON decoded successfully');
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
-          await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
+          print('PrayerTimesData object created');
+          await fetchPrayerTimes();
         } else {
-          print('No data key in prayer times response');
+          print('No data key found in JSON');
         }
       } else {
         print('No prayer times data found in database');
       }
     } catch (e, stack) {
       print('Error loading prayer data: $e');
+      print('Stack trace: $stack');
+    }
+  }
+
+  Future<void> fetchPrayerTimes() async {
+    try {
+      print('=== fetchPrayerTimes Start ===');
+      if (prayerTimesData == null) {
+        print('prayerTimesData is null in fetchPrayerTimes');
+        return;
+      }
+
+      print('Monthly Data count: ${prayerTimesData!.monthlyData.length}');
+      if (prayerTimesData!.monthlyData.isNotEmpty) {
+        firstResponseDate = DateTime.parse(
+          prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+        );
+        print('First response date: $firstResponseDate');
+
+        prayersdays.clear();
+        print('Cleared previous prayer days');
+
+        prayerTimesData!.monthlyData.forEach((monthKey, monthDaysData) {
+          print('Processing month: $monthKey');
+          Map<String, Map<String, String>> daysInMonthMap = {};
+
+          for (var dayData in monthDaysData) {
+            String dayKey = dayData.date.gregorian.day.padLeft(2, '0');
+            print('Processing day: $dayKey in month: $monthKey');
+
+            Map<String, String> dailyPrayers = {
+              'Fajr': dayData.timings.fajr,
+              'Sunrise': dayData.timings.sunrise,
+              'Dhuhr': dayData.timings.dhuhr,
+              'Asr': dayData.timings.asr,
+              'Maghrib': dayData.timings.maghrib,
+              'Isha': dayData.timings.isha,
+            };
+            daysInMonthMap[dayKey] = dailyPrayers;
+          }
+
+          String paddedMonthKey = monthKey.padLeft(2, '0');
+          prayersdays[paddedMonthKey] = daysInMonthMap;
+          print(
+            'Completed month: $paddedMonthKey with ${daysInMonthMap.length} days',
+          );
+        });
+
+        print('Final prayersdays map size: ${prayersdays.length}');
+      }
+    } catch (e, stack) {
+      print('Error in fetchPrayerTimes: $e');
       print('Stack trace: $stack');
     }
   }
@@ -68,66 +125,66 @@ class FetchPrayerFromDate extends GetxController {
   DateTime? firstResponseDate; // Add this at class level
   List prayersdayskeys = [];
 
-  Future<void> fetchPrayerTimes() async {
-    try {
-      if (prayerTimesData == null) {
-        print('prayerTimesData is null in fetchPrayerTimes');
-        return;
-      }
+  // Future<void> fetchPrayerTimes() async {
+  //   try {
+  //     if (prayerTimesData == null) {
+  //       print('prayerTimesData is null in fetchPrayerTimes');
+  //       return;
+  //     }
 
-      // Store the first day's date from the response
-      if (prayerTimesData!.monthlyData.isNotEmpty) {
-        firstResponseDate = DateTime.parse(
-          prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
-        );
+  //     // Store the first day's date from the response
+  //     if (prayerTimesData!.monthlyData.isNotEmpty) {
+  //       firstResponseDate = DateTime.parse(
+  //         prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+  //       );
 
-        // Clear previous data
-        prayersdays.clear();
+  //       // Clear previous data
+  //       prayersdays.clear();
 
-        prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
-          Map<String, Map<String, String>> daysInMonthMap = {};
+  //       prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
+  //         Map<String, Map<String, String>> daysInMonthMap = {};
 
-          for (var dayData in monthDaysData) {
-            // Extract day number from dayData.date.gregorian.day (it's a String)
-            String dayKey = dayData.date.gregorian.day;
+  //         for (var dayData in monthDaysData) {
+  //           // Extract day number from dayData.date.gregorian.day (it's a String)
+  //           String dayKey = dayData.date.gregorian.day;
 
-            Map<String, String> dailyPrayers = {
-              'Fajr': dayData.timings.fajr,
-              'Sunrise': dayData.timings.sunrise,
-              'Dhuhr': dayData.timings.dhuhr,
-              'Asr': dayData.timings.asr,
-              'Sunset':
-                  dayData
-                      .timings
-                      .sunset, // Assuming Sunset is available, if not use Maghrib
-              'Maghrib': dayData.timings.maghrib,
-              'Isha': dayData.timings.isha,
-              // Add other prayers if needed
-              'Imsak': dayData.timings.imsak,
-              'Midnight': dayData.timings.midnight,
-              'Firstthird': dayData.timings.firstthird,
-              'Lastthird': dayData.timings.lastthird,
-            };
-            daysInMonthMap[dayKey] = dailyPrayers;
-          }
+  //           Map<String, String> dailyPrayers = {
+  //             'Fajr': dayData.timings.fajr,
+  //             'Sunrise': dayData.timings.sunrise,
+  //             'Dhuhr': dayData.timings.dhuhr,
+  //             'Asr': dayData.timings.asr,
+  //             'Sunset':
+  //                 dayData
+  //                     .timings
+  //                     .sunset, // Assuming Sunset is available, if not use Maghrib
+  //             'Maghrib': dayData.timings.maghrib,
+  //             'Isha': dayData.timings.isha,
+  //             // Add other prayers if needed
+  //             'Imsak': dayData.timings.imsak,
+  //             'Midnight': dayData.timings.midnight,
+  //             'Firstthird': dayData.timings.firstthird,
+  //             'Lastthird': dayData.timings.lastthird,
+  //           };
+  //           daysInMonthMap[dayKey] = dailyPrayers;
+  //         }
 
-          if (daysInMonthMap.isNotEmpty) {
-            prayersdays[monthKey] = daysInMonthMap;
-          } else {
-            print('No days available for month $monthKey');
-          }
-        });
-        // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
-        prayersdayskeys = prayersdays.keys.toList();
-        update(); // Notify GetX listeners
-      } else {
-        print('monthlyData is empty in fetchPrayerTimes');
-      }
-    } catch (e, stack) {
-      print('Error in fetchPrayerTimes: $e');
-      print('Stack trace: $stack');
-    }
-  }
+  //         if (daysInMonthMap.isNotEmpty) {
+  //           prayersdays[monthKey] = daysInMonthMap;
+  //         } else {
+  //           print('No days available for month $monthKey');
+  //         }
+  //       });
+  //       // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
+  //       prayersdayskeys = prayersdays.keys.toList();
+  //       update(); // Notify GetX listeners
+  //     } else {
+  //       print('monthlyData is empty in fetchPrayerTimes');
+  //     }
+  //   } catch (e, stack) {
+  //     print('Error in fetchPrayerTimes: $e');
+  //     print('Stack trace: $stack');
+  //   }
+  // }
 }
 
 // make a road map for the solution and us ai for doing it

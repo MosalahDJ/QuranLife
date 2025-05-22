@@ -152,7 +152,9 @@ class GetResponseBody extends GetxController {
 
   Future<void> _getCalendarData() async {
     try {
+      print('=== _getCalendarData Start ===');
       await locationctrl.determinePosition();
+      print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
 
       final response = await http.get(
         Uri.parse(
@@ -160,17 +162,20 @@ class GetResponseBody extends GetxController {
         ),
       );
 
+      print('API Response Status: ${response.statusCode}');
       if (response.statusCode == 200) {
         final escapedJson = response.body.replaceAll("'", "@@@");
+        print('Data received and escaped');
         await sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
+        print('Data inserted into SQL database');
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
         print('Failed to fetch calendar data: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error fetching calendar data: $e');
+      print('Error in _getCalendarData: $e');
     }
   }
 }
