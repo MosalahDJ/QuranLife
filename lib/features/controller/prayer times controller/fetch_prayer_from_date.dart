@@ -78,7 +78,7 @@ class FetchPrayerFromDate extends GetxController {
     try {
       // TODO: the problem is here
       log("_______________________________________________________");
-      log(prayerTimesData!.monthlyData.entries.toString());
+      log(prayerTimesData!.monthlyData.values.first[10].timings.isha);
       log("_______________________________________________________");
       if (prayerTimesData == null) {
         print('prayerTimesData is null in fetchPrayerTimes');
@@ -89,6 +89,8 @@ class FetchPrayerFromDate extends GetxController {
       firstResponseDate = DateTime.parse(
         prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
       );
+
+      
 
       // Clear previous data
       prayersdays.clear();
