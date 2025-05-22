@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
@@ -115,6 +116,9 @@ class FetchPrayerFromDate extends GetxController {
           };
           daysInMonthMap[dayKey] = dailyPrayers;
         }
+        log("_______________________________________________________");
+          log("$daysInMonthMap");
+          log("_______________________________________________________");
 
         if (daysInMonthMap.isNotEmpty) {
           prayersdays[monthKey] = daysInMonthMap;
