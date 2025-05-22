@@ -37,17 +37,12 @@ class FetchPrayerFromDate extends GetxController {
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
-
-          // Check if we have data for current date
-          var currentDayData = prayerTimesData?.getDayData(DateTime.now());
-          if (currentDayData == null) {
-            await responsectrl.initileresponse();
-            return;
-          }
-
-          await fetchPrayerTimes();
-          update();
+          await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
+        } else {
+          print('No data key in prayer times response');
         }
+      } else {
+        print('No prayer times data found in database');
       }
     } catch (e, stack) {
       print('Error loading prayer data: $e');
