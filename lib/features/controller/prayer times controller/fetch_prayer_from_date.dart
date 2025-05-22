@@ -115,10 +115,11 @@ class FetchPrayerFromDate extends GetxController {
             'Lastthird': dayData.timings.lastthird,
           };
           daysInMonthMap[dayKey] = dailyPrayers;
-        }
+          
         log("_______________________________________________________");
         log("$daysInMonthMap");
         log("_______________________________________________________");
+        }
 
         if (daysInMonthMap.isNotEmpty) {
           prayersdays[monthKey] = daysInMonthMap;
