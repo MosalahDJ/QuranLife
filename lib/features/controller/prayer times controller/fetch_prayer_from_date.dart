@@ -117,8 +117,8 @@ class FetchPrayerFromDate extends GetxController {
           daysInMonthMap[dayKey] = dailyPrayers;
         }
         log("_______________________________________________________");
-          log("$daysInMonthMap");
-          log("_______________________________________________________");
+        log("$daysInMonthMap");
+        log("_______________________________________________________");
 
         if (daysInMonthMap.isNotEmpty) {
           prayersdays[monthKey] = daysInMonthMap;
