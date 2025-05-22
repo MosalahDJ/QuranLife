@@ -1,8 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -133,9 +131,10 @@ class GetResponseBody extends GetxController {
       Get.snackbar(
         "downloading_data".tr,
         "please_be_patient".tr,
-        colorText: Get.isDarkMode
-            ? const Color(0xFFFFFFFF)
-            : const Color.fromARGB(255, 0, 0, 0),
+        colorText:
+            Get.isDarkMode
+                ? const Color(0xFFFFFFFF)
+                : const Color.fromARGB(255, 0, 0, 0),
         duration: const Duration(seconds: 15),
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         padding: const EdgeInsets.all(20),
