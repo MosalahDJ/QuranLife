@@ -76,6 +76,9 @@ class FetchPrayerFromDate extends GetxController {
 
   Future<void> fetchPrayerTimes() async {
     try {
+      log("_______________________________________________________");
+       log("${prayerTimesData!.monthlyData.values.first.reactive.value?.first.date.gregorian.date}");
+      log("_______________________________________________________");
       if (prayerTimesData == null) {
         print('prayerTimesData is null in fetchPrayerTimes');
         return;
@@ -115,10 +118,6 @@ class FetchPrayerFromDate extends GetxController {
             'Lastthird': dayData.timings.lastthird,
           };
           daysInMonthMap[dayKey] = dailyPrayers;
-          
-        log("_______________________________________________________");
-        log("$daysInMonthMap");
-        log("_______________________________________________________");
         }
 
         if (daysInMonthMap.isNotEmpty) {
