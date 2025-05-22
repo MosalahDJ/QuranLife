@@ -77,7 +77,7 @@ class FetchPrayerFromDate extends GetxController {
   Future<void> fetchPrayerTimes() async {
     try {
       log("_______________________________________________________");
-       log("${prayerTimesData!.monthlyData.values.first.reactive.value?.first.date.gregorian.date}");
+      log(prayerTimesData.toString());
       log("_______________________________________________________");
       if (prayerTimesData == null) {
         print('prayerTimesData is null in fetchPrayerTimes');
