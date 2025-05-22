@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
@@ -76,62 +75,59 @@ class FetchPrayerFromDate extends GetxController {
 
   Future<void> fetchPrayerTimes() async {
     try {
-      // TODO: the problem is here
-      log("_______________________________________________________");
-      log(prayerTimesData!.monthlyData.values.first[10].timings.isha);
-      log("_______________________________________________________");
       if (prayerTimesData == null) {
         print('prayerTimesData is null in fetchPrayerTimes');
         return;
       }
 
       // Store the first day's date from the response
-      firstResponseDate = DateTime.parse(
-        prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
-      );
+      if (prayerTimesData!.monthlyData.isNotEmpty) {
+        firstResponseDate = DateTime.parse(
+          prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+        );
 
-      
+        // Clear previous data
+        prayersdays.clear();
 
-      // Clear previous data
-      prayersdays.clear();
+        prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
+          Map<String, Map<String, String>> daysInMonthMap = {};
 
-      prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
-        // monthKey is already a String (e.g., "1", "2")
-        Map<String, Map<String, String>> daysInMonthMap = {};
+          for (var dayData in monthDaysData) {
+            // Extract day number from dayData.date.gregorian.day (it's a String)
+            String dayKey = dayData.date.gregorian.day;
 
-        for (var dayData in monthDaysData) {
-          // Extract day number from dayData.date.gregorian.day (it's a String)
-          String dayKey = dayData.date.gregorian.day;
+            Map<String, String> dailyPrayers = {
+              'Fajr': dayData.timings.fajr,
+              'Sunrise': dayData.timings.sunrise,
+              'Dhuhr': dayData.timings.dhuhr,
+              'Asr': dayData.timings.asr,
+              'Sunset':
+                  dayData
+                      .timings
+                      .sunset, // Assuming Sunset is available, if not use Maghrib
+              'Maghrib': dayData.timings.maghrib,
+              'Isha': dayData.timings.isha,
+              // Add other prayers if needed
+              'Imsak': dayData.timings.imsak,
+              'Midnight': dayData.timings.midnight,
+              'Firstthird': dayData.timings.firstthird,
+              'Lastthird': dayData.timings.lastthird,
+            };
+            daysInMonthMap[dayKey] = dailyPrayers;
+          }
 
-          Map<String, String> dailyPrayers = {
-            'Fajr': dayData.timings.fajr,
-            'Sunrise': dayData.timings.sunrise,
-            'Dhuhr': dayData.timings.dhuhr,
-            'Asr': dayData.timings.asr,
-            'Sunset':
-                dayData
-                    .timings
-                    .sunset, // Assuming Sunset is available, if not use Maghrib
-            'Maghrib': dayData.timings.maghrib,
-            'Isha': dayData.timings.isha,
-            // Add other prayers if needed
-            'Imsak': dayData.timings.imsak,
-            'Midnight': dayData.timings.midnight,
-            'Firstthird': dayData.timings.firstthird,
-            'Lastthird': dayData.timings.lastthird,
-          };
-          daysInMonthMap[dayKey] = dailyPrayers;
-        }
-
-        if (daysInMonthMap.isNotEmpty) {
-          prayersdays[monthKey] = daysInMonthMap;
-        } else {
-          print('No days available for month $monthKey');
-        }
-      });
-      // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
-      prayersdayskeys = prayersdays.keys.toList();
-      update(); // Notify GetX listeners
+          if (daysInMonthMap.isNotEmpty) {
+            prayersdays[monthKey] = daysInMonthMap;
+          } else {
+            print('No days available for month $monthKey');
+          }
+        });
+        // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
+        prayersdayskeys = prayersdays.keys.toList();
+        update(); // Notify GetX listeners
+      } else {
+        print('monthlyData is empty in fetchPrayerTimes');
+      }
     } catch (e, stack) {
       print('Error in fetchPrayerTimes: $e');
       print('Stack trace: $stack');
