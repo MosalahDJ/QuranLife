@@ -80,6 +80,12 @@ class FetchPrayerFromDate extends GetxController {
         firstResponseDate = DateTime.parse(
           prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
         );
+        print("________________________________________________");
+        print(firstResponseDate);
+        print(
+          prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+        );
+        print("________________________________________________");
 
         // Clear previous data
         prayersdays.clear();
