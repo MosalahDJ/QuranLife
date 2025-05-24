@@ -99,33 +99,33 @@ class DeterminePrayersController extends GetxController {
   //determining current prayer time
   void determineCurrentPrayer() {
     try {
-      // print('=== determineCurrentPrayer Start ===');
+      print('=== determineCurrentPrayer Start ===');
       var now = DateTime.now();
       String day = now.day.toString().padLeft(2, '0');
-      String month = now.month.toString().padLeft(2, '0');
-      // print('Current date: ${now.year}-$month-$day');
-      
-      // print('Checking prayersdays map: ${fpfctrl.prayersdays.length} months');
-      // print('Available months: ${fpfctrl.prayersdays.keys.join(', ')}');
-      
+      String month = now.month.toString();
+      print('Current date: ${now.year}-$month-$day');
+
+      print('Checking prayersdays map: ${fpfctrl.prayersdays.length} months');
+      print('Available months: ${fpfctrl.prayersdays.keys.join(', ')}');
+
       if (!fpfctrl.prayersdays.containsKey(month)) {
-        // print('Month $month not found in prayersdays');
+        print('Month $month not found in prayersdays');
         throw Exception('Month $month not found in prayer times data');
       }
-      
+
       var monthData = fpfctrl.prayersdays[month]!;
-      // print('Days in month $month: ${monthData.keys.join(', ')}');
-      
+      print('Days in month $month: ${monthData.keys.join(', ')}');
+
       if (!monthData.containsKey(day)) {
-        // print('Day $day not found in month $month');
+        print('Day $day not found in month $month');
         throw Exception('Day $day not found in prayer times data');
       }
-      
+
       List salatday(String salat) {
-        // print('Getting prayer time for $salat on $day-$month');
+        print('Getting prayer time for $salat on $day-$month');
         var prayerTime = fpfctrl.prayersdays[month]![day]![salat];
-        // print('$salat time: $prayerTime');
-        return [salat, _parseTime(prayerTime!)];  // The null check happens here
+        print('$salat time: $prayerTime');
+        return [salat, _parseTime(prayerTime!)]; // The null check happens here
       }
 
       //we use this list for store iside it list's of prayer name and prayer time
