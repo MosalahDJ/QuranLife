@@ -112,7 +112,7 @@ class GetResponseBody extends GetxController {
       final currentDate = DateTime.now();
 
       // Check if data is older than 30 days
-      if (currentDate.difference(lastUpdated).inDays > 30) {
+      if (currentDate.difference(lastUpdated).inDays > 360) {
         return true;
       }
 
