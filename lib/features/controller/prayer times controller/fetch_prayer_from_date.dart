@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-// import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/model/prayer_times_model.dart';
