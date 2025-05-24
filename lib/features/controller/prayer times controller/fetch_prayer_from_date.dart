@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
@@ -98,14 +99,9 @@ class FetchPrayerFromDate extends GetxController {
         firstResponseDate = _parseTime(
           prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
         );
-        print("________________________________________________");
-        print(
-          "response date :${prayerTimesData!.monthlyData.values.first.first.date.gregorian.date}",
-        );
-        print("parssed date :${firstResponseDate}");
-        print("________________________________________________");
 
         // Clear previous data
+
         prayersdays.clear();
 
         prayerTimesData?.monthlyData.forEach((monthKey, monthDaysData) {
