@@ -137,6 +137,7 @@ class FetchPrayerFromDate extends GetxController {
         });
         // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
         prayersdayskeys = prayersdays.keys.toList();
+
         update(); // Notify GetX listeners
       } else {
         print('monthlyData is empty in fetchPrayerTimes');

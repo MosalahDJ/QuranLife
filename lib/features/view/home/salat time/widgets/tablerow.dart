@@ -50,7 +50,7 @@ class SalawatTableRow {
           () => Row(
             children: [
               Text(
-                "    ${fpfctrl.prayersdays["${DateTime.now().month}"]![day.toString().padLeft(2, '0')]![salattime]}",
+                "    ${fpfctrl.prayersdays[DateTime.now().month.toString()]?[day.toString().padLeft(2, '0')]?[salattime] ?? 'N/A'}",
                 style: TextStyle(
                   fontSize: 18,
 
