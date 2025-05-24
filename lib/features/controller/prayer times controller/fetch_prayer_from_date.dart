@@ -124,6 +124,9 @@ class FetchPrayerFromDate extends GetxController {
         print('monthlyData is empty in fetchPrayerTimes');
       }
     } catch (e, stack) {
+      //the problem is here in this func : Error in fetchPrayerTimes: FormatException: Invalid date format;
+      // Stack trace: #0 DateTime.parse (dart:core-patch/date_time_patch.dart:130:7)
+      // #1 FetchPrayerFromDate.fetchPrayerTimes (package:project/features/controller/prayer times controller/fetch_prayer_from_date.dart:170:31)
       print('Error in fetchPrayerTimes: $e');
       print('Stack trace: $stack');
     }
