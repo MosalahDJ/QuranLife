@@ -23,8 +23,11 @@ class PrayerTimesData {
     String month = date.month.toString();
     if (!monthlyData.containsKey(month)) return null;
     
+    // Use a consistent date format
+    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+    
     return monthlyData[month]?.firstWhere(
-      (day) => day.gregorianDate == DateFormat('dd-MM-yyyy').format(date),
+      (day) => day.gregorianDate == formattedDate,
       orElse: () => DayData(
         timings: Timings(
           fajr: '',
