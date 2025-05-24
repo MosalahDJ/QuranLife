@@ -20,6 +20,7 @@ class SalawatTableRow {
     // required RxBool salatvolum,
     required String day,
   }) {
+     
     return TableRow(
       children: [
         Obx(
@@ -50,7 +51,7 @@ class SalawatTableRow {
           () => Row(
             children: [
               Text(
-                "    ${fpfctrl.prayersdays[DateTime.now().month.toString()]?[day.toString().padLeft(2, '0')]?[salattime] ?? 'N/A'}",
+                "    ${fpfctrl.prayersdays[DateTime.now().month.toString()]?[day]?[salattime] ?? 'N/A'}",
                 style: TextStyle(
                   fontSize: 18,
 

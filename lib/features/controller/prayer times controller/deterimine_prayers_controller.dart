@@ -99,14 +99,10 @@ class DeterminePrayersController extends GetxController {
   //determining current prayer time
   void determineCurrentPrayer() {
     try {
-      print('=== determineCurrentPrayer Start ===');
       var now = DateTime.now();
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
-      print('Current date: ${now.year}-$month-$day');
 
-      print('Checking prayersdays map: ${fpfctrl.prayersdays.length} months');
-      print('Available months: ${fpfctrl.prayersdays.keys.join(', ')}');
 
       if (!fpfctrl.prayersdays.containsKey(month)) {
         print('Month $month not found in prayersdays');
@@ -114,7 +110,6 @@ class DeterminePrayersController extends GetxController {
       }
 
       var monthData = fpfctrl.prayersdays[month]!;
-      print('Days in month $month: ${monthData.keys.join(', ')}');
 
       if (!monthData.containsKey(day)) {
         print('Day $day not found in month $month');
@@ -122,7 +117,6 @@ class DeterminePrayersController extends GetxController {
       }
 
       List salatday(String salat) {
-        print('Getting prayer time for $salat on $day-$month');
         var prayerTime = fpfctrl.prayersdays[month]![day]![salat];
         print('$salat time: $prayerTime');
         return [salat, _parseTime(prayerTime!)]; // The null check happens here
