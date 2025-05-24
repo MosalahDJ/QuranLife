@@ -22,6 +22,24 @@ class FetchPrayerFromDate extends GetxController {
   PrayerTimesData? prayerTimesData;
   final GetResponseBody responsectrl = Get.find();
 
+  DateTime _parseTime(String time) {
+    try {
+      var parts = time.trim().split('-');
+      if (parts.length != 3) {
+        throw FormatException('Invalid time format: $time');
+      }
+      return DateTime(
+        int.parse(parts[2].trim()),
+        int.parse(parts[1].trim()),
+        int.parse(parts[0].trim()),
+      );
+    } catch (e) {
+      print('Error parsing time: $time - Error: $e');
+      // Return a default time in case of error
+      return DateTime(01, 01, DateTime.now().year);
+    }
+  }
+
   Future<void> loadPrayerData() async {
     try {
       List<Map<String, dynamic>>? sqlData = await sqldb.readdata(
@@ -77,14 +95,14 @@ class FetchPrayerFromDate extends GetxController {
 
       // Store the first day's date from the response
       if (prayerTimesData!.monthlyData.isNotEmpty) {
-        firstResponseDate = DateTime.parse(
+        firstResponseDate = _parseTime(
           prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
         );
         print("________________________________________________");
-        print(firstResponseDate);
         print(
-          prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+          "response date :${prayerTimesData!.monthlyData.values.first.first.date.gregorian.date}",
         );
+        print("parssed date :${firstResponseDate}");
         print("________________________________________________");
 
         // Clear previous data
