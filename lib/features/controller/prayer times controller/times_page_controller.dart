@@ -32,17 +32,22 @@ class TimesPageController extends GetxController {
 
     // Calculate the difference in days
     final difference = now.difference(firstDate).inDays;
+    // Format the current date as a key
+    String monthKey = now.month.toString();
 
-    // Check if current date is within our data range
-    // TODO : the problem is here
-    print("________________________________");
-      print('prayersdayskeys is ${fpfctrl.prayersdayskeys.length}');
-      print("________________________________");
-    if (difference >= 0 && difference < fpfctrl.prayersdayskeys.length) {
-      currentday = difference;
-      currentPage = difference.obs;
+    // Check if the month exists in our data
+    if (fpfctrl.prayersdays.containsKey(monthKey)) {
+      // Check if current date is within our data range
+      if (difference >= 0) {
+        currentday = difference;
+        currentPage = difference.obs;
+      } else {
+        // If current date is outside our range, default to first day
+        currentday = 0;
+        currentPage = 0.obs;
+      }
     } else {
-      // If current date is outside our range, default to first day
+      // If month not found, default to first day
       currentday = 0;
       currentPage = 0.obs;
     }
