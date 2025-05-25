@@ -39,16 +39,8 @@ class TimesPageController extends GetxController {
       print('prayersdayskeys is ${fpfctrl.prayersdayskeys.length}');
       print("________________________________");
     if (difference >= 0 && difference < fpfctrl.prayersdayskeys.length) {
-      
       currentday = difference;
-      print("________________________________");
-      print('currentday is $currentday');
-      print("________________________________");
-
       currentPage = difference.obs;
-      print("________________________________");
-      print('currentPage is $currentPage');
-      print("________________________________");
     } else {
       // If current date is outside our range, default to first day
       currentday = 0;
