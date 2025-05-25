@@ -72,13 +72,7 @@ class FetchPrayerFromDate extends GetxController {
       <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
 
-  // func for getting akey from list of keys
-
-
-  // TODO: the problem is in this func I think that I need to build another one 
-  //for aplique the single tone because I use it for getting day in the row of 
-  //table and in another place in times page controller so the key of resolving 
-  //this problem is start from here 
+  // Function to get the date for a given index
   String? getDateByIndex(int index) {
     if (firstResponseDate == null) return null;
 
