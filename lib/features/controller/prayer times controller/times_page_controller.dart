@@ -26,17 +26,29 @@ class TimesPageController extends GetxController {
   //I use it in splashviewController
   void getcurrentpage() {
     if (fpfctrl.firstResponseDate == null) return;
-    
+
     final now = DateTime.now();
     final firstDate = fpfctrl.firstResponseDate!;
-    
+
     // Calculate the difference in days
     final difference = now.difference(firstDate).inDays;
-    
+
     // Check if current date is within our data range
+    // TODO : the problem is here
+    print("________________________________");
+      print('prayersdayskeys is ${fpfctrl.prayersdayskeys.length}');
+      print("________________________________");
     if (difference >= 0 && difference < fpfctrl.prayersdayskeys.length) {
+      
       currentday = difference;
+      print("________________________________");
+      print('currentday is $currentday');
+      print("________________________________");
+
       currentPage = difference.obs;
+      print("________________________________");
+      print('currentPage is $currentPage');
+      print("________________________________");
     } else {
       // If current date is outside our range, default to first day
       currentday = 0;

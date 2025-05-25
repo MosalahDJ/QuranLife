@@ -119,7 +119,7 @@ class DeterminePrayersController extends GetxController {
       List salatday(String salat) {
         //TODO
         var prayerTime = fpfctrl.prayersdays[month]![day]![salat];
-        print('$salat time: $prayerTime');
+        // print('$salat time: $prayerTime');
         return [salat, _parseTime(prayerTime!)]; // The null check happens here
       }
 
