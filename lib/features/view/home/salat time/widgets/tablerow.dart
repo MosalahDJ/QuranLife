@@ -12,6 +12,22 @@ final FCMController notictrl = Get.find();
 final DeterminePrayersController dpcctrl = Get.find();
 final TimesPageController timespagectrl = Get.find();
 
+//in this func I use the first date of the response to calculate the date of the day
+//that I want to display it in the table
+DateTime? firstResponseDate = fpfctrl.parseTime(
+  fpfctrl.prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
+);
+
+String? getDayByIndex(int index) {
+  if (firstResponseDate == null) return null;
+
+  // Calculate the date for the given index
+  final date = firstResponseDate!.add(Duration(days: index));
+
+  // Format the date in the same format as before (YYYY-MM-DD)
+  return date.day.toString().padLeft(2, '0');
+}
+
 class SalawatTableRow {
   //rows of the table
   TableRow myrow({
@@ -20,7 +36,6 @@ class SalawatTableRow {
     // required RxBool salatvolum,
     required String day,
   }) {
-     
     return TableRow(
       children: [
         Obx(
@@ -168,8 +183,8 @@ class SalawatTableRow {
         salatname: "fajr".tr,
         salattime: "Fajr",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -177,8 +192,8 @@ class SalawatTableRow {
         salatname: "sunrise".tr,
         salattime: "Sunrise",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -186,8 +201,8 @@ class SalawatTableRow {
         salatname: "dhuhr".tr,
         salattime: "Dhuhr",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -195,8 +210,8 @@ class SalawatTableRow {
         salatname: "asr".tr,
         salattime: "Asr",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -204,8 +219,8 @@ class SalawatTableRow {
         salatname: "maghrib".tr,
         salattime: "Maghrib",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -213,8 +228,8 @@ class SalawatTableRow {
         salatname: "isha".tr,
         salattime: "Isha",
         day:
-            fpfctrl.getDateByIndex(i) != null
-                ? fpfctrl.getDateByIndex(i)!
+            getDayByIndex(i) != null
+                ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
     ];

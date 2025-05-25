@@ -21,7 +21,8 @@ class FetchPrayerFromDate extends GetxController {
   PrayerTimesData? prayerTimesData;
   final GetResponseBody responsectrl = Get.find();
 
-  DateTime _parseTime(String time) {
+  // Function to parse a time string
+  DateTime parseTime(String time) {
     try {
       var parts = time.trim().split('-');
       if (parts.length != 3) {
@@ -100,7 +101,7 @@ class FetchPrayerFromDate extends GetxController {
 
       // Store the first day's date from the response
       if (prayerTimesData!.monthlyData.isNotEmpty) {
-        firstResponseDate = _parseTime(
+        firstResponseDate = parseTime(
           prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
         );
 
