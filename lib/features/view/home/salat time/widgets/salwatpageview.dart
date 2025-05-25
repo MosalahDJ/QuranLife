@@ -23,7 +23,8 @@ class Salwatpageview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String day = timespagectrl.formatDate(DateTime.now());
+    String day = DateTime.now().day.toString().padLeft(2, '0');
+    String month = DateTime.now().month.toString();
 
     return Material(
       color: Colors.transparent,
@@ -38,7 +39,7 @@ class Salwatpageview extends StatelessWidget {
             elevation: 2,
             //if salat time = curent prayer time use color else use other color
             color:
-                fpfctrl.prayersdays[day]?[salattime]?.toString() ==
+                fpfctrl.prayersdays[month]?[day]?[salattime]?.toString() ==
                         dpcctrl.currentPrayertime.value
                     ? Get.isDarkMode
                         ? kmaincolor3.withValues(alpha: 0.4)
@@ -83,7 +84,7 @@ class Salwatpageview extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    fpfctrl.prayersdays[day]?[salattime]
+                                    fpfctrl.prayersdays[month]?[day]?[salattime]
                                             ?.toString() ??
                                         "-",
                                     textAlign: TextAlign.center,
