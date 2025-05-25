@@ -5,8 +5,6 @@ import 'package:project/core/Utils/constants.dart';
 
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
 import 'package:project/features/view/home/salat%20time/widgets/salwatpageview.dart';
 
@@ -14,8 +12,6 @@ class SalawatPageview extends StatelessWidget {
   SalawatPageview({super.key, required this.morebuttoncolor});
   final MyHomeController homectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
-  final TimesPageController timespagectrl = Get.find();
-  final LanguageController langctrl = Get.find();
   final Color morebuttoncolor;
 
   @override
@@ -58,7 +54,7 @@ class SalawatPageview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "  ${hijri.hDay} - ${'hijri_month_${hijri.longMonthName}'.tr} - ${hijri.hYear}",
+                    "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
                     style: TextStyle(color: morebuttoncolor, fontSize: 18),
                   ),
                   IconButton(

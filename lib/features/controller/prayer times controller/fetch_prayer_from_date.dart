@@ -83,6 +83,15 @@ class FetchPrayerFromDate extends GetxController {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
+  String? secondgetDateByIndex(int index) {
+    if (firstResponseDate == null) return null;
+    // Calculate the date for the given index
+    final date = firstResponseDate!.add(Duration(days: index));
+
+    // Format the date in the same format as before (YYYY-MM-DD)
+    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  }
+
   DateTime? firstResponseDate; // Add this at class level
   List prayersdayskeys = [];
 

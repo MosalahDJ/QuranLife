@@ -8,6 +8,7 @@ class TimesPageController extends GetxController {
   PageController timespagecontroller = PageController();
   late RxInt currentPage = 0.obs;
   int currentday = 0;
+  
 
   //this func maded for making date string as same as date in the url and make sure it's dynamic
   String formatDate(DateTime date) {

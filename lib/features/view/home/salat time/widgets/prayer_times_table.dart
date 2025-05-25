@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/view/home/salat%20time/widgets/tablerow.dart';
 
-class Prayertimestable extends GetView<DeterminePrayersController> {
+class Prayertimestable extends GetView {
   Prayertimestable({super.key});
-  final DeterminePrayersController prayerctrl = Get.find();
-  final FCMController notictrl = Get.find();
-  final DeterminePrayersController dpcctrl = Get.find();
-  final FetchPrayerFromDate fpfctrl = Get.find();
-  final TimesPageController timespagectrl = Get.find();
-  final SalawatTableRow tablerowctrl = Get.find();
+final FetchPrayerFromDate fpfctrl = Get.find();
+
+  
+  final SalawatTableRow salawatTableRow = SalawatTableRow();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +42,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
               color: Colors.transparent,
               elevation: 0,
               //date and table iside this get builder
-              child: GetBuilder<TimesPageController>(
+              child: GetBuilder<FetchPrayerFromDate>(
                 builder:
                     (c) => Column(
                       children: [
@@ -59,12 +54,12 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                             children: [
                               Obx(
                                 () => Text(
-                                  fpfctrl.getDateByIndex(
+                                  fpfctrl.secondgetDateByIndex(
                                             timespagectrl.currentPage.value,
                                           ) ==
                                           null
                                       ? "-"
-                                      : fpfctrl.getDateByIndex(
+                                      : fpfctrl.secondgetDateByIndex(
                                         timespagectrl.currentPage.value,
                                       )!,
                                   style: const TextStyle(
@@ -192,7 +187,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                                       1,
                                     ), // Column of prayer sound
                                   },
-                                  children: tablerowctrl.mytablerows(i),
+                                  children: salawatTableRow.mytablerows(i),
                                 ),
                           ),
                         ),
