@@ -5,12 +5,12 @@ import 'package:project/features/controller/settings%20controllers/theme_control
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageController extends GetxController {
-  final language = 'ar'.obs;
+  final language = 'en'.obs;
   final SharedPreferences prefs;
   ThemeController themeController = Get.find();
 
   LanguageController(this.prefs) {
-    language.value = prefs.getString('language') ?? 'ar';
+    language.value = prefs.getString('language') ?? 'en';
   }
 
   void changeLanguage(String lng) async {
