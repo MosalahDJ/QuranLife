@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
-
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
