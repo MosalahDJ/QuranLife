@@ -33,8 +33,9 @@ class TimesPageController extends GetxController {
 
     // Calculate the difference in days
     final difference = now.difference(firstDate).inDays;
-    // Format the current date as a key
-    String monthKey = now.month.toString();
+    
+    // Format the month key correctly (YYYY-MM format to match the API response)
+    String monthKey = "${now.year}-${now.month.toString().padLeft(2, '0')}";
 
     // Check if the month exists in our data
     if (fpfctrl.prayersdays.containsKey(monthKey)) {
@@ -52,7 +53,7 @@ class TimesPageController extends GetxController {
       currentday = 0;
       currentPage = 0.obs;
     }
-  }
+}
 
   void pagecontroller() {
     //w made the page controller here on init state for lunching whene the page
