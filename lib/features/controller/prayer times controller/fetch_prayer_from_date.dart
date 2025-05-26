@@ -72,18 +72,17 @@ class FetchPrayerFromDate extends GetxController {
       <String, Map<String, Map<String, String>>>{}.obs;
   DateTime currentDate = DateTime.now();
 
+  int daysindata() {
+    int result = 0;
+    for (int i = 1; i <= prayersdays.length; i++) {
+      result += prayersdays["$i"]!.length;
+    }
+    return result;
+  }
+
   // Function to get the date for a given index for check if we are in current
   // date to to display the current slat time with a differnt color
   String? getDateByIndex(int index) {
-    if (firstResponseDate == null) return null;
-    // Calculate the date for the given index
-    final date = firstResponseDate!.add(Duration(days: index));
-
-    // Format the date in the same format as before (YYYY-MM-DD)
-    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-  }
-
-  String? secondgetDateByIndex(int index) {
     if (firstResponseDate == null) return null;
     // Calculate the date for the given index
     final date = firstResponseDate!.add(Duration(days: index));

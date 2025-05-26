@@ -35,7 +35,7 @@ class TimesPageController extends GetxController {
     final difference = now.difference(firstDate).inDays;
     
     // Format the month key correctly (YYYY-MM format to match the API response)
-    String monthKey = "${now.year}-${now.month.toString().padLeft(2, '0')}";
+    String monthKey = "${now.month}";
 
     // Check if the month exists in our data
     if (fpfctrl.prayersdays.containsKey(monthKey)) {

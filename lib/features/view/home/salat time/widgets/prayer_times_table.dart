@@ -6,9 +6,8 @@ import 'package:project/features/view/home/salat%20time/widgets/tablerow.dart';
 
 class Prayertimestable extends GetView {
   Prayertimestable({super.key});
-final FetchPrayerFromDate fpfctrl = Get.find();
+  final FetchPrayerFromDate fpfctrl = Get.find();
 
-  
   final SalawatTableRow salawatTableRow = SalawatTableRow();
 
   @override
@@ -54,12 +53,12 @@ final FetchPrayerFromDate fpfctrl = Get.find();
                             children: [
                               Obx(
                                 () => Text(
-                                  fpfctrl.secondgetDateByIndex(
+                                  fpfctrl.getDateByIndex(
                                             timespagectrl.currentPage.value,
                                           ) ==
                                           null
                                       ? "-"
-                                      : fpfctrl.secondgetDateByIndex(
+                                      : fpfctrl.getDateByIndex(
                                         timespagectrl.currentPage.value,
                                       )!,
                                   style: const TextStyle(
@@ -74,6 +73,19 @@ final FetchPrayerFromDate fpfctrl = Get.find();
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    // IconButton(
+                                    //   iconSize: 30,
+                                    //   onPressed: () {
+                                    //     timespagectrl.timespagecontroller
+                                    //         .jumpToPage(
+                                    //           timespagectrl.currentPage.value +
+                                    //               100,
+                                    //         );
+                                    //   },
+                                    //   icon: const Icon(
+                                    //     Icons.keyboard_double_arrow_down,
+                                    //   ),
+                                    // ),
                                     //return to past page
                                     IconButton(
                                       iconSize: 20,
@@ -99,7 +111,7 @@ final FetchPrayerFromDate fpfctrl = Get.find();
                                                           .value -
                                                       1,
                                                   duration: const Duration(
-                                                    milliseconds: 300,
+                                                    milliseconds: 100,
                                                   ),
                                                   curve: Curves.bounceIn,
                                                 );
@@ -146,7 +158,7 @@ final FetchPrayerFromDate fpfctrl = Get.find();
                                                           .value +
                                                       1,
                                                   duration: const Duration(
-                                                    milliseconds: 300,
+                                                    milliseconds: 100,
                                                   ),
                                                   curve: Curves.bounceIn,
                                                 );
@@ -171,7 +183,8 @@ final FetchPrayerFromDate fpfctrl = Get.find();
                           child: PageView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             controller: timespagectrl.timespagecontroller,
-                            itemCount: fpfctrl.prayersdayskeys.length,
+                            //TODO: here is the problem
+                            itemCount: fpfctrl.daysindata(),
                             itemBuilder:
                                 (context, i) => Table(
                                   defaultVerticalAlignment:
