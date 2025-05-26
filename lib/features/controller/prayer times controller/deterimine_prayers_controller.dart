@@ -102,7 +102,6 @@ class DeterminePrayersController extends GetxController {
       var now = DateTime.now();
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
-      // TODO: Handle the case where month is not found
       if (!fpfctrl.prayersdays.containsKey(month)) {
         print('Month $month not found in prayersdays');
         throw Exception('Month $month not found in prayer times data');
@@ -116,7 +115,6 @@ class DeterminePrayersController extends GetxController {
       }
 
       List salatday(String salat) {
-        //TODO
         var prayerTime = fpfctrl.prayersdays[month]![day]![salat];
         // print('$salat time: $prayerTime');
         return [salat, _parseTime(prayerTime!)]; // The null check happens here

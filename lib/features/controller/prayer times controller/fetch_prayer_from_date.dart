@@ -34,7 +34,7 @@ class FetchPrayerFromDate extends GetxController {
         int.parse(parts[0].trim()),
       );
     } catch (e) {
-      print('Error parsing time: $time - Error: $e');
+      // print('Error parsing time: $time - Error: $e');
       // Return a default time in case of error
       return DateTime(01, 01, DateTime.now().year);
     }
@@ -57,14 +57,14 @@ class FetchPrayerFromDate extends GetxController {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
           await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
         } else {
-          print('No data key in prayer times response');
+          // print('No data key in prayer times response');
         }
       } else {
-        print('No prayer times data found in database');
+        // print('No prayer times data found in database');
       }
-    } catch (e, stack) {
-      print('Error loading prayer data: $e');
-      print('Stack trace: $stack');
+    } catch (e) {
+      // print('Error loading prayer data: $e');
+      // print('Stack trace: $stack');
     }
   }
 
@@ -97,7 +97,7 @@ class FetchPrayerFromDate extends GetxController {
   Future<void> fetchPrayerTimes() async {
     try {
       if (prayerTimesData == null) {
-        print('prayerTimesData is null in fetchPrayerTimes');
+        // print('prayerTimesData is null in fetchPrayerTimes');
         return;
       }
 
@@ -141,7 +141,7 @@ class FetchPrayerFromDate extends GetxController {
           if (daysInMonthMap.isNotEmpty) {
             prayersdays[monthKey] = daysInMonthMap;
           } else {
-            print('No days available for month $monthKey');
+            // print('No days available for month $monthKey');
           }
         });
         // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
@@ -149,16 +149,12 @@ class FetchPrayerFromDate extends GetxController {
 
         update(); // Notify GetX listeners
       } else {
-        print('monthlyData is empty in fetchPrayerTimes');
+        // print('monthlyData is empty in fetchPrayerTimes');
       }
-    } catch (e, stack) {
-      //the problem is here in this func : Error in fetchPrayerTimes: FormatException: Invalid date format;
-      // Stack trace: #0 DateTime.parse (dart:core-patch/date_time_patch.dart:130:7)
-      // #1 FetchPrayerFromDate.fetchPrayerTimes (package:project/features/controller/prayer times controller/fetch_prayer_from_date.dart:170:31)
-      print('Error in fetchPrayerTimes: $e');
-      print('Stack trace: $stack');
+    } catch (e) {
+      // print('Error in fetchPrayerTimes: $e');
+      // print('Stack trace: $stack');
     }
   }
 }
 
-// make a road map for the solution and us ai for doing it

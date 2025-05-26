@@ -183,7 +183,6 @@ class Prayertimestable extends GetView {
                           child: PageView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             controller: timespagectrl.timespagecontroller,
-                            //TODO: here is the problem
                             itemCount: fpfctrl.daysindata(),
                             itemBuilder:
                                 (context, i) => Table(
