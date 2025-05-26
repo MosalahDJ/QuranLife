@@ -28,17 +28,7 @@ class LocationController extends GetxController {
   Future<void> determinePosition() async {
     prefs = await SharedPreferences.getInstance();
     try {
-      bool serviceEnabled;
       LocationPermission permission;
-
-      // check if location services are enabled.
-      serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        Get.snackbar(
-          "location_service_disabled_title".tr,
-          "location_service_disabled_message".tr,
-        );
-      }
 
       // check if location permission are enabled.
       permission = await Geolocator.checkPermission();
