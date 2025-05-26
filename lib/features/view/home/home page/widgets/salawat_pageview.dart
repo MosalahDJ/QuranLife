@@ -82,7 +82,7 @@ class SalawatPageview extends StatelessWidget {
                       )
                       : Text(
                         "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
-                        style: TextStyle(color: morebuttoncolor, fontSize: 18),
+                        style: TextStyle(color: morebuttoncolor, fontSize: 18,),
                       ),
                   IconButton(
                     onPressed: () {
