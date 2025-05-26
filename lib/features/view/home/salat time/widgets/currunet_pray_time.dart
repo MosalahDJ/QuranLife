@@ -7,7 +7,6 @@ import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:project/features/controller/settings%20controllers/language_controller.dart';
@@ -35,7 +34,6 @@ class CurrentPrayTime extends StatelessWidget {
 
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
-  final FetchPrayerFromDate fpfctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
   final SplashViewController initialctrl = Get.find();
   final GetResponseBody grbctrl = Get.find();

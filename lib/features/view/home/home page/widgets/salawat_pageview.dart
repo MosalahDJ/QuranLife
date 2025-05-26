@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:project/core/Utils/constants.dart';
-
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
 import 'package:project/features/view/home/salat%20time/widgets/salwatpageview.dart';
 
@@ -12,6 +12,7 @@ class SalawatPageview extends StatelessWidget {
   SalawatPageview({super.key, required this.morebuttoncolor});
   final MyHomeController homectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
+  final LanguageController langctrl = Get.find();
   final Color morebuttoncolor;
 
   @override
@@ -53,10 +54,36 @@ class SalawatPageview extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
-                    style: TextStyle(color: morebuttoncolor, fontSize: 18),
-                  ),
+                  langctrl.language.value == "ar"
+                      ? Row(
+                        children: [
+                          Text(
+                            "  ${hijri.hDay}",
+                            style: TextStyle(
+                              color: morebuttoncolor,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text(
+                            " - ${hijri.hMonth} - ",
+                            style: TextStyle(
+                              color: morebuttoncolor,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text(
+                            "${hijri.hYear}",
+                            style: TextStyle(
+                              color: morebuttoncolor,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      )
+                      : Text(
+                        "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
+                        style: TextStyle(color: morebuttoncolor, fontSize: 18),
+                      ),
                   IconButton(
                     onPressed: () {
                       homectrl.showShareDialog(context);
