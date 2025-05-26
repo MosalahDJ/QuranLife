@@ -22,7 +22,6 @@ class CurrentPrayTime extends StatelessWidget {
     required this.moreIconVisibility,
     required this.morebuttoncolor,
   });
-
   final Color color;
   final Color morebuttoncolor;
   final Color textcolor;

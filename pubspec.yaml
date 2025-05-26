@@ -163,9 +163,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins-Black
-      fonts:
-        - asset: lib/core/assets/fonts/Poppins-Black.ttf
     - family: Cairo
       fonts:
         - asset: lib/core/assets/fonts/Cairo-Regular.ttf
