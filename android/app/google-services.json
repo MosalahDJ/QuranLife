@@ -20,6 +20,18 @@
             "package_name": "com.MoSalahDJ.quran_life",
             "certificate_hash": "d965b1f33a40433aba460b82aac8f1fe7a779797"
           }
+        },
+        {
+          "client_id": "667982982906-l5u62lapvvimvk3t5ttotso96g5u8lml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MoSalahDJ.quran_life",
+            "certificate_hash": "45172ea4d32856f0ac5bd43f825fd632fabd7a57"
+          }
+        },
+        {
+          "client_id": "667982982906-ah9dn1j63i3io9i6il3r889v13sihtpu.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -29,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667982982906-053ns9m2ua3qv8h2noq5434123sas0j7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
