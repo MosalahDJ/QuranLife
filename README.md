@@ -33,3 +33,28 @@ QuranLife is a comprehensive Islamic mobile application designed to enrich the d
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/QuranLife.git```
+
+2. Install dependencies:
+
+   ```bash
+   flutter pub get```
+
+3. Run the app:
+
+   ```bash
+   flutter run```
+   
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Development Resources
+- Flutter Documentation
+- Flutter Cookbook
+- Flutter Community
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+For support or queries, please open an issue in the repository.
+
+⭐ If you find this project helpful, please consider giving it a star!
