@@ -227,7 +227,7 @@ class Messages extends Translations {
       'internet_required_for_sendmessage':
           'An internet connection is required to send a message.',
       //ai bot page
-      'ai_bot': 'AI Assistant',
+      'ai_bot': 'AI Historian',
       'loading': 'Loading...',
       'error_connection': 'Connection Error',
       'try_again': 'Try Again',
@@ -692,7 +692,7 @@ class Messages extends Translations {
       'internet_required_for_sendmessage':
           'يتطلب إرسال الرسالة اتصالاً بالإنترنت.',
       //ai bot page
-      'ai_bot': 'المساعد الذكي',
+      'ai_bot': 'المؤرخ الذكي',
       'loading': 'جاري التحميل...',
       'error_connection': 'خطأ في الاتصال',
       'try_again': 'حاول مرة أخرى',
@@ -1161,7 +1161,7 @@ class Messages extends Translations {
       'internet_required_for_sendmessage':
           'Une connexion Internet est requise pour envoyer un message.',
       //ai bot page
-      'ai_bot': 'Assistant IA',
+      'ai_bot': 'Historien IA',
       'loading': 'Chargement...',
       'error_connection': 'Erreur de Connexion',
       'try_again': 'Réessayer',
