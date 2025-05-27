@@ -38,7 +38,7 @@ class AccesToken {
 
       return accessCredentials.accessToken.data;
     } catch (e) {
-      print("can't get Access Token: $e");
+      // print("can't get Access Token: $e");
       return "";
     }
   }

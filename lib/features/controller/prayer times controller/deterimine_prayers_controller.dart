@@ -47,7 +47,7 @@ class DeterminePrayersController extends GetxController {
         int.parse(parts[1].trim()),
       );
     } catch (e) {
-      print('Error parsing time: $time - Error: $e');
+      // print('Error parsing time: $time - Error: $e');
       // Return a default time in case of error
       return DateTime.now();
     }
@@ -71,7 +71,7 @@ class DeterminePrayersController extends GetxController {
         int.parse(parts[1].trim()),
       );
     } catch (e) {
-      print('Error parsing next day fajr time: $time - Error: $e');
+      // print('Error parsing next day fajr time: $time - Error: $e');
       // Return a default time in case of error
       return DateTime.now().add(const Duration(days: 1));
     }
@@ -102,14 +102,14 @@ class DeterminePrayersController extends GetxController {
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
       if (!fpfctrl.prayersdays.containsKey(month)) {
-        print('Month $month not found in prayersdays');
+        // print('Month $month not found in prayersdays');
         throw Exception('Month $month not found in prayer times data');
       }
 
       var monthData = fpfctrl.prayersdays[month]!;
 
       if (!monthData.containsKey(day)) {
-        print('Day $day not found in month $month');
+        // print('Day $day not found in month $month');
         throw Exception('Day $day not found in prayer times data');
       }
 

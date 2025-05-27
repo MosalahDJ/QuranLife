@@ -37,7 +37,7 @@ class AnonymouslysignIn extends GetxController {
       Get.offAllNamed("home");
       return userCredential.user;
     } catch (e) {
-      print("خطأ أثناء تسجيل الدخول: $e");
+      // print("خطأ أثناء تسجيل الدخول: $e");
       return null;
     } finally {
       isLoading.value = false;

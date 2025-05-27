@@ -1,4 +1,3 @@
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:geocoding/geocoding.dart';
@@ -74,7 +73,7 @@ class LocationController extends GetxController {
         "location_service_error_message".tr,
       );
     } catch (e) {
-      print(e);
+      // print(e);
     } finally {}
   }
 }

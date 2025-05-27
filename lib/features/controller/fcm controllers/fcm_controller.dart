@@ -41,11 +41,11 @@ class FCMController extends GetxController {
     req.body = json.encode(body);
 
     var res = await req.send();
-    final resBody = await res.stream.bytesToString();
+    // final resBody = await res.stream.bytesToString();
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      print("succes sent :$resBody");
+      // print("succes sent :$resBody");
     } else {
-      print(res.reasonPhrase);
+      // print(res.reasonPhrase);
     }
   }
 
@@ -75,13 +75,13 @@ class FCMController extends GetxController {
   //subscribe to topic
   subscribetotopic(String topicname) async {
     await FirebaseMessaging.instance.subscribeToTopic(topicname);
-    print("subscribed");
+    // print("subscribed");
   }
 
   //unsbscribe frome topic
   unsbscribefrometopic(String topicname) async {
     await FirebaseMessaging.instance.unsubscribeFromTopic(topicname);
-    print("unsubscribed");
+    // print("unsubscribed");
   }
 
   //handle notification on message
