@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 
 import 'dart:async';
 import 'package:flutter/widgets.dart';
@@ -60,7 +59,7 @@ class GetResponseBody extends GetxController {
         int.parse(parts[2].trim()),
       );
     } catch (e) {
-      print('Error parsing time: $date - Error: $e');
+      // print('Error parsing time: $date - Error: $e');
       return DateTime.now();
     }
   }
@@ -94,7 +93,7 @@ class GetResponseBody extends GetxController {
       }
       return false;
     } catch (e) {
-      print('Error checking refresh date: $e');
+      // print('Error checking refresh date: $e');
       return false;
     }
   }
@@ -118,7 +117,7 @@ class GetResponseBody extends GetxController {
 
       return false;
     } catch (e) {
-      print('Error checking data validity: $e');
+      // print('Error checking data validity: $e');
       return true;
     }
   }
@@ -152,9 +151,9 @@ class GetResponseBody extends GetxController {
 
   Future<void> _getCalendarData() async {
     try {
-      print('=== _getCalendarData Start ===');
+      // print('=== _getCalendarData Start ===');
       await locationctrl.determinePosition();
-      print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
+      // print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
 
       final response = await http.get(
         Uri.parse(
@@ -162,20 +161,20 @@ class GetResponseBody extends GetxController {
         ),
       );
 
-      print('API Response Status: ${response.statusCode}');
+      // print('API Response Status: ${response.statusCode}');
       if (response.statusCode == 200) {
         final escapedJson = response.body.replaceAll("'", "@@@");
-        print('Data received and escaped');
+        // print('Data received and escaped');
         await sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
-        print('Data inserted into SQL database');
+        // print('Data inserted into SQL database');
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
-        print('Failed to fetch calendar data: ${response.statusCode}');
+        // print('Failed to fetch calendar data: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error in _getCalendarData: $e');
+      // print('Error in _getCalendarData: $e');
     }
   }
 }
