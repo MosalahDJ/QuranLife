@@ -64,7 +64,7 @@ class GetResponseBody extends GetxController {
   }
 
   Future<void> _defineRefreshingDate() async {
-    final refreshingdate = endDate.subtract(const Duration(days: 3));
+    final refreshingdate = endDate.add(Duration(seconds: 1));
     await sqldb.insertdata(
       "INSERT OR REPLACE INTO prayer_times_meta (key, value) VALUES ('refreshing_date', '${_formatDate(refreshingdate)}')",
     );
@@ -81,7 +81,7 @@ class GetResponseBody extends GetxController {
         return false;
       }
 
-      DateTime refreshingDate = _parseDate(result.first['value']);
+      DateTime refreshingDate = endDate.add(Duration(seconds: 1));
       DateTime now = DateTime.now();
 
       if (now.isAfter(refreshingDate)) {
