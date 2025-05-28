@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -40,7 +39,7 @@ class GetResponseBody extends GetxController {
 
   void _updateDates() {
     mycurrentdate = DateTime.now();
-    endDate = mycurrentdate.add(const Duration(days: 30));
+    endDate = DateTime(DateTime.now().year, 12, 31);
   }
 
   String _formatDate(DateTime date) {
@@ -178,11 +177,3 @@ class GetResponseBody extends GetxController {
     }
   }
 }
-
-/*
-1 location ctrl
-2 get response ctrl
-3 fetch prayer from date ctrl
-4 determine prayer ctrl
-5 times page ctrl
-*/
