@@ -59,16 +59,16 @@ class SplashViewController extends GetxController
     });
   }
 
-  void getdata() async {
+  Future<void> getdata() async {
     bool wasDataRefreshed = await responsectrl.initileresponse();
     isLoading(true);
     // Only fetch prayer times if we didn't just refresh the data
     if (!wasDataRefreshed) {
       await fpfctrl.loadPrayerData();
+      prayerctrl.determineCurrentPrayer();
+      timespagectrl.pagecontroller();
+      timespagectrl.getcurrentpage();
     }
-    prayerctrl.determineCurrentPrayer();
-    timespagectrl.pagecontroller();
-    timespagectrl.getcurrentpage();
     isLoading(false);
   }
 
@@ -84,12 +84,13 @@ class SplashViewController extends GetxController
       end: 1,
     ).animate(animationcontroller!);
     animationcontroller?.repeat(reverse: true);
-    getdata();
+    await getdata();
     tonextpage();
 
     // Start periodic check after initial setup
     Get.find<GetResponseBody>().startPeriodicCheck();
   }
+
   @override
   void onClose() {
     super.onClose();
