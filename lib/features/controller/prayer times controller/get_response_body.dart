@@ -58,7 +58,7 @@ class GetResponseBody extends GetxController {
   //       int.parse(parts[2].trim()),
   //     );
   //   } catch (e) {
-      // print('Error parsing time: $date - Error: $e');
+  // print('Error parsing time: $date - Error: $e');
   //     return DateTime.now();
   //   }
   // }
@@ -133,7 +133,7 @@ class GetResponseBody extends GetxController {
             Get.isDarkMode
                 ? const Color(0xFFFFFFFF)
                 : const Color.fromARGB(255, 0, 0, 0),
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 6),
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         padding: const EdgeInsets.all(20),
       );

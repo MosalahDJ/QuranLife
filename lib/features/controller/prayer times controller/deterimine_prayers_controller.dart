@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -134,6 +133,9 @@ class DeterminePrayersController extends GetxController {
         fpfctrl
             .prayersdays["${now.month}"]!["${now.add(const Duration(days: 1)).day}"]!['Fajr']!,
       );
+      print("________________________________________________");
+      print(nextDayFajr);
+      print("________________________________________________");
 
       //loop of prayers list for checking current and next prayer and time untile next
       //we use "as datetime" and "as string" here beacause these data is requerd to be dynamic
