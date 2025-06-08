@@ -65,10 +65,10 @@ class SplashViewController extends GetxController
     // Only fetch prayer times if we didn't just refresh the data
     if (!wasDataRefreshed) {
       await fpfctrl.loadPrayerData();
+      prayerctrl.determineCurrentPrayer();
+      timespagectrl.pagecontroller();
+      timespagectrl.getcurrentpage();
     }
-    prayerctrl.determineCurrentPrayer();
-    timespagectrl.pagecontroller();
-    timespagectrl.getcurrentpage();
     isLoading(false);
   }
 

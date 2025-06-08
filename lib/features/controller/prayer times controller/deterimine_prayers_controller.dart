@@ -3,13 +3,18 @@ import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 
 class DeterminePrayersController extends GetxController {
+  final FetchPrayerFromDate fpfctrl = Get.find();
+
   @override
   void onInit() {
+    print("________________________________________________");
+    print('DeterminePrayersController onInit called');
+    print("________________________________________________");
+
     super.onInit();
     _startTimer();
   }
 
-  final FetchPrayerFromDate fpfctrl = Get.find();
 
   Timer? _timer;
   RxString currentdate = "".obs;
@@ -100,11 +105,11 @@ class DeterminePrayersController extends GetxController {
     try {
       var now = DateTime.now();
       print('Current time: $now');
-      
+
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
       print('Looking for day: $day, month: $month');
-      
+
       if (!fpfctrl.prayersdays.containsKey(month)) {
         print('ERROR: Month $month not found in prayersdays');
         print('Available months: ${fpfctrl.prayersdays.keys}');
@@ -141,16 +146,17 @@ class DeterminePrayersController extends GetxController {
         salatday('Maghrib'),
         salatday('Isha'),
       ];
-      print('Prayers list built successfully: ${prayers.map((p) => '${p[0]}: ${p[1]}').toList()}');
+      print(
+        'Prayers list built successfully: ${prayers.map((p) => '${p[0]}: ${p[1]}').toList()}',
+      );
 
       // Add next day's Fajr to prayers list
       print('Getting next day Fajr...');
       var nextDay = now.add(const Duration(days: 1));
       print('Next day: ${nextDay.day}');
-      
+
       var nextDayFajr = _parsenextdayfajr(
-        fpfctrl
-            .prayersdays["${now.month}"]!["${nextDay.day}"]!['Fajr']!,
+        fpfctrl.prayersdays["${now.month}"]!["${nextDay.day}"]!['Fajr']!,
       );
       print("________________________________________________");
       print('Next day Fajr: $nextDayFajr');
@@ -161,8 +167,10 @@ class DeterminePrayersController extends GetxController {
       //we use "as datetime" and "as string" here beacause these data is requerd to be dynamic
       //in prayer's list and it requred to be String or Date time here
       for (int i = 0; i < prayers.length - 1; i++) {
-        print('Checking if now ($now) is between ${prayers[i][0]} (${prayers[i][1]}) and ${prayers[i + 1][0]} (${prayers[i + 1][1]})');
-        
+        print(
+          'Checking if now ($now) is between ${prayers[i][0]} (${prayers[i][1]}) and ${prayers[i + 1][0]} (${prayers[i + 1][1]})',
+        );
+
         if (now.isAfter(prayers[i][1] as DateTime) &&
             now.isBefore(prayers[i + 1][1] as DateTime)) {
           print('Found current prayer period!');
@@ -171,7 +179,7 @@ class DeterminePrayersController extends GetxController {
           nextPrayerTime.value = _formatTime(prayers[i + 1][1] as DateTime);
           timeUntilNext.value = _formatTimeUntil(prayers[i + 1][1] as DateTime);
           currentPrayertime.value = _formatTime(prayers[i][1] as DateTime);
-          
+
           print('Set values:');
           print('  currentPrayer: ${currentPrayer.value}');
           print('  nextPrayer: ${nextPrayer.value}');
@@ -183,18 +191,20 @@ class DeterminePrayersController extends GetxController {
       }
 
       print('Not in regular prayer period, checking special cases...');
-      
+
       // If we're after Isha
-      var ishaTime = _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Isha']!);
+      var ishaTime = _parseTime(
+        fpfctrl.prayersdays["${now.month}"]![day]!['Isha']!,
+      );
       print('Checking if after Isha ($ishaTime)...');
-      
+
       if (now.isAfter(ishaTime)) {
         print('After Isha - setting to Isha/Fajr');
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
         nextPrayerTime.value = _formatTime(nextDayFajr);
         timeUntilNext.value = _formatTimeUntil(nextDayFajr);
-        
+
         print('Set values (after Isha):');
         print('  currentPrayer: ${currentPrayer.value}');
         print('  nextPrayer: ${nextPrayer.value}');
@@ -204,16 +214,18 @@ class DeterminePrayersController extends GetxController {
       }
 
       //if we are before Fajr
-      var fajrTime = _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Fajr']!);
+      var fajrTime = _parseTime(
+        fpfctrl.prayersdays["${now.month}"]![day]!['Fajr']!,
+      );
       print('Checking if before Fajr ($fajrTime)...');
-      
+
       if (now.isBefore(fajrTime)) {
         print('Before Fajr - setting to Isha/Fajr');
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
         nextPrayerTime.value = _formatTime(prayers[0][1] as DateTime);
         timeUntilNext.value = _formatTimeUntil(prayers[0][1] as DateTime);
-        
+
         print('Set values (before Fajr):');
         print('  currentPrayer: ${currentPrayer.value}');
         print('  nextPrayer: ${nextPrayer.value}');
@@ -221,9 +233,8 @@ class DeterminePrayersController extends GetxController {
         print('  timeUntilNext: ${timeUntilNext.value}');
         return;
       }
-      
+
       print('No matching condition found - this should not happen!');
-      
     } catch (e) {
       print('=== ERROR CAUGHT ===');
       print('Error determining prayer times: $e');
@@ -231,12 +242,12 @@ class DeterminePrayersController extends GetxController {
       print('Stack trace: ${StackTrace.current}');
       print('Current prayersdays state: ${fpfctrl.prayersdays}');
       print('Setting all values to "-"');
-      
+
       currentPrayer.value = "-";
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
       timeUntilNext.value = "-";
-      
+
       print('=== END ERROR HANDLING ===');
     }
     print('=== End determineCurrentPrayer ===');
