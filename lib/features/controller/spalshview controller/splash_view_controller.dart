@@ -90,6 +90,7 @@ class SplashViewController extends GetxController
     // Start periodic check after initial setup
     Get.find<GetResponseBody>().startPeriodicCheck();
   }
+
   @override
   void onClose() {
     super.onClose();

@@ -96,28 +96,42 @@ class DeterminePrayersController extends GetxController {
 
   //determining current prayer time
   void determineCurrentPrayer() {
+    print('=== Starting determineCurrentPrayer ===');
     try {
       var now = DateTime.now();
+      print('Current time: $now');
+      
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
+      print('Looking for day: $day, month: $month');
+      
       if (!fpfctrl.prayersdays.containsKey(month)) {
-        // print('Month $month not found in prayersdays');
+        print('ERROR: Month $month not found in prayersdays');
+        print('Available months: ${fpfctrl.prayersdays.keys}');
         throw Exception('Month $month not found in prayer times data');
       }
+      print('Month $month found successfully');
 
       var monthData = fpfctrl.prayersdays[month]!;
+      print('Month data keys: ${monthData.keys}');
 
       if (!monthData.containsKey(day)) {
-        // print('Day $day not found in month $month');
+        print('ERROR: Day $day not found in month $month');
+        print('Available days in month $month: ${monthData.keys}');
         throw Exception('Day $day not found in prayer times data');
       }
+      print('Day $day found successfully');
 
       List salatday(String salat) {
+        print('Processing prayer: $salat');
         var prayerTime = fpfctrl.prayersdays[month]![day]![salat];
-        // print('$salat time: $prayerTime');
-        return [salat, _parseTime(prayerTime!)]; // The null check happens here
+        print('Raw prayer time for $salat: $prayerTime');
+        var parsedTime = _parseTime(prayerTime!);
+        print('Parsed time for $salat: $parsedTime');
+        return [salat, parsedTime];
       }
 
+      print('Building prayers list...');
       //we use this list for store iside it list's of prayer name and prayer time
       var prayers = [
         salatday('Fajr'),
@@ -127,61 +141,105 @@ class DeterminePrayersController extends GetxController {
         salatday('Maghrib'),
         salatday('Isha'),
       ];
+      print('Prayers list built successfully: ${prayers.map((p) => '${p[0]}: ${p[1]}').toList()}');
 
       // Add next day's Fajr to prayers list
+      print('Getting next day Fajr...');
+      var nextDay = now.add(const Duration(days: 1));
+      print('Next day: ${nextDay.day}');
+      
       var nextDayFajr = _parsenextdayfajr(
         fpfctrl
-            .prayersdays["${now.month}"]!["${now.add(const Duration(days: 1)).day}"]!['Fajr']!,
+            .prayersdays["${now.month}"]!["${nextDay.day}"]!['Fajr']!,
       );
       print("________________________________________________");
-      print(nextDayFajr);
+      print('Next day Fajr: $nextDayFajr');
       print("________________________________________________");
 
+      print('Starting prayer time comparison loop...');
       //loop of prayers list for checking current and next prayer and time untile next
       //we use "as datetime" and "as string" here beacause these data is requerd to be dynamic
       //in prayer's list and it requred to be String or Date time here
       for (int i = 0; i < prayers.length - 1; i++) {
+        print('Checking if now ($now) is between ${prayers[i][0]} (${prayers[i][1]}) and ${prayers[i + 1][0]} (${prayers[i + 1][1]})');
+        
         if (now.isAfter(prayers[i][1] as DateTime) &&
             now.isBefore(prayers[i + 1][1] as DateTime)) {
+          print('Found current prayer period!');
           currentPrayer.value = prayers[i][0] as String;
           nextPrayer.value = prayers[i + 1][0] as String;
           nextPrayerTime.value = _formatTime(prayers[i + 1][1] as DateTime);
           timeUntilNext.value = _formatTimeUntil(prayers[i + 1][1] as DateTime);
           currentPrayertime.value = _formatTime(prayers[i][1] as DateTime);
+          
+          print('Set values:');
+          print('  currentPrayer: ${currentPrayer.value}');
+          print('  nextPrayer: ${nextPrayer.value}');
+          print('  nextPrayerTime: ${nextPrayerTime.value}');
+          print('  timeUntilNext: ${timeUntilNext.value}');
+          print('  currentPrayertime: ${currentPrayertime.value}');
           return;
         }
       }
 
+      print('Not in regular prayer period, checking special cases...');
+      
       // If we're after Isha
-
-      if (now.isAfter(
-        _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Isha']!),
-        // _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!),
-      )) {
+      var ishaTime = _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Isha']!);
+      print('Checking if after Isha ($ishaTime)...');
+      
+      if (now.isAfter(ishaTime)) {
+        print('After Isha - setting to Isha/Fajr');
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
         nextPrayerTime.value = _formatTime(nextDayFajr);
         timeUntilNext.value = _formatTimeUntil(nextDayFajr);
+        
+        print('Set values (after Isha):');
+        print('  currentPrayer: ${currentPrayer.value}');
+        print('  nextPrayer: ${nextPrayer.value}');
+        print('  nextPrayerTime: ${nextPrayerTime.value}');
+        print('  timeUntilNext: ${timeUntilNext.value}');
+        return;
       }
 
       //if we are before Fajr
-
-      if (now.isBefore(
-        _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Fajr']!),
-      )) {
+      var fajrTime = _parseTime(fpfctrl.prayersdays["${now.month}"]![day]!['Fajr']!);
+      print('Checking if before Fajr ($fajrTime)...');
+      
+      if (now.isBefore(fajrTime)) {
+        print('Before Fajr - setting to Isha/Fajr');
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
         nextPrayerTime.value = _formatTime(prayers[0][1] as DateTime);
         timeUntilNext.value = _formatTimeUntil(prayers[0][1] as DateTime);
+        
+        print('Set values (before Fajr):');
+        print('  currentPrayer: ${currentPrayer.value}');
+        print('  nextPrayer: ${nextPrayer.value}');
+        print('  nextPrayerTime: ${nextPrayerTime.value}');
+        print('  timeUntilNext: ${timeUntilNext.value}');
+        return;
       }
+      
+      print('No matching condition found - this should not happen!');
+      
     } catch (e) {
-      // print('Error determining prayer times: $e');
-      // print('Current prayersdays state: ${fpfctrl.prayersdays}');
+      print('=== ERROR CAUGHT ===');
+      print('Error determining prayer times: $e');
+      print('Error type: ${e.runtimeType}');
+      print('Stack trace: ${StackTrace.current}');
+      print('Current prayersdays state: ${fpfctrl.prayersdays}');
+      print('Setting all values to "-"');
+      
       currentPrayer.value = "-";
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
       timeUntilNext.value = "-";
+      
+      print('=== END ERROR HANDLING ===');
     }
+    print('=== End determineCurrentPrayer ===');
   }
 
   @override
