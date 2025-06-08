@@ -10,7 +10,7 @@ class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
-  resetpassword(context, emailtext) async {
+  Future<void> resetpassword(context, emailtext) async {
     try {
       if (currentUser != null && currentUser!.isAnonymous) {
         AwesomeDialog(

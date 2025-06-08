@@ -51,7 +51,8 @@ class GoogleLogInController extends GetxController {
     }
   }
 
-  Future signInWithGoogle(context) async {
+  Future<void> signInWithGoogle(BuildContext context) async {
+
     try {
       isLoading.value = true;
       // Set default locale
