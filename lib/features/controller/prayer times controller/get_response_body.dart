@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async'; // Add this import
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -19,9 +19,25 @@ class GetResponseBody extends GetxController {
     _updateDates();
     // Add periodic check for data refresh
     ever(_checkRefreshTimer, (_) => _checkAndRefresh());
+    // Check for refresh immediately on startup
+    _checkAndRefreshOnStartup();
+    // Start the periodic timer
+    startPeriodicCheck();
   }
 
   final _checkRefreshTimer = 0.obs;
+
+  // Check for refresh immediately on startup
+  Future<void> _checkAndRefreshOnStartup() async {
+    print('=== Checking for refresh on startup ===');
+    if (await _isAfterRefreshingDate()) {
+      print('Refresh needed on startup');
+      _updateDates();
+      await _getCalendarData();
+    } else {
+      print('No refresh needed on startup');
+    }
+  }
 
   // Start periodic check every hour
   void startPeriodicCheck() {
@@ -31,7 +47,9 @@ class GetResponseBody extends GetxController {
   }
 
   Future<void> _checkAndRefresh() async {
+    print('=== Periodic refresh check ===');
     if (await _isAfterRefreshingDate()) {
+      print('Periodic refresh triggered');
       _updateDates();
       await _getCalendarData();
     }
@@ -39,6 +57,7 @@ class GetResponseBody extends GetxController {
 
   void _updateDates() {
     mycurrentdate = DateTime.now();
+    // Set endDate to December 31st of current year
     endDate = DateTime(DateTime.now().year, 12, 31);
   }
 
@@ -46,22 +65,22 @@ class GetResponseBody extends GetxController {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
-  // DateTime _parseDate(String date) {
-  //   try {
-  //     var parts = date.trim().split('-');
-  //     if (parts.length != 3) {
-  //       throw FormatException('Invalid time format: $date');
-  //     }
-  //     return DateTime(
-  //       int.parse(parts[0].trim()),
-  //       int.parse(parts[1].trim()),
-  //       int.parse(parts[2].trim()),
-  //     );
-  //   } catch (e) {
-  // print('Error parsing time: $date - Error: $e');
-  //     return DateTime.now();
-  //   }
-  // }
+  DateTime _parseDate(String date) {
+    try {
+      var parts = date.trim().split('-');
+      if (parts.length != 3) {
+        throw FormatException('Invalid time format: $date');
+      }
+      return DateTime(
+        int.parse(parts[0].trim()),
+        int.parse(parts[1].trim()),
+        int.parse(parts[2].trim()),
+      );
+    } catch (e) {
+  print('Error parsing time: $date - Error: $e');
+      return DateTime.now();
+    }
+  }
 
   Future<void> _defineRefreshingDate() async {
     final refreshingdate = endDate.add(Duration(seconds: 1));
@@ -75,16 +94,32 @@ class GetResponseBody extends GetxController {
       final result = await sqldb.readdata(
         "SELECT value FROM prayer_times_meta WHERE key = 'refreshing_date'",
       );
-
+  
       if (result.isEmpty) {
         await _defineRefreshingDate();
         return false;
       }
-
-      DateTime refreshingDate = endDate.add(Duration(seconds: 1));
+  
+      // Parse the stored refreshing date from database
+      String storedDateStr = result.first['value'];
+      DateTime storedRefreshingDate = _parseDate(storedDateStr);
       DateTime now = DateTime.now();
-
-      if (now.isAfter(refreshingDate)) {
+  
+      print('Stored refreshing date: $storedDateStr');
+      print('Current date: ${_formatDate(now)}');
+      print('Should refresh: ${now.isAfter(storedRefreshingDate)}');
+  
+      // Check if we've moved to a new year
+      if (now.year > endDate.year) {
+        print('New year detected, forcing refresh');
+        await sqldb.deletedata(
+          "DELETE FROM prayer_times_meta WHERE key = 'refreshing_date'",
+        );
+        return true;
+      }
+  
+      if (now.isAfter(storedRefreshingDate)) {
+        print('After refreshing date, triggering refresh');
         await sqldb.deletedata(
           "DELETE FROM prayer_times_meta WHERE key = 'refreshing_date'",
         );
@@ -121,9 +156,19 @@ class GetResponseBody extends GetxController {
     }
   }
 
-  Future<bool> initileresponse() async {
-    bool needsRefresh = await _shouldRefreshData();
+  // I must read the code step by step and solve the problem
 
+  Future<bool> initileresponse() async {
+    // Check both conditions: data age AND refresh date
+    bool needsRefreshByAge = await _shouldRefreshData();
+    bool needsRefreshByDate = await _isAfterRefreshingDate();
+    
+    bool needsRefresh = needsRefreshByAge || needsRefreshByDate;
+    
+    print('Needs refresh by age: $needsRefreshByAge');
+    print('Needs refresh by date: $needsRefreshByDate');
+    print('Overall needs refresh: $needsRefresh');
+  
     if (needsRefresh) {
       _updateDates();
       Get.snackbar(
@@ -154,9 +199,11 @@ class GetResponseBody extends GetxController {
       await locationctrl.determinePosition();
       print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
 
+      // Use current year instead of hardcoded 2025
+      final currentYear = DateTime.now().year;
       final response = await http.get(
         Uri.parse(
-          "https://api.aladhan.com/v1/calendar/2025?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19&school=0&timezonestring=Africa/Algiers&tune=0,-1,0,0,4,4,0,0,0&midnightMode=0&latitudeAdjustmentMethod=2&calendarMethod=MATHEMATICAL&iso8601=false",
+          "https://api.aladhan.com/v1/calendar/$currentYear?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19&school=0&timezonestring=Africa/Algiers&tune=0,-1,0,0,4,4,0,0,0&midnightMode=0&latitudeAdjustmentMethod=2&calendarMethod=MATHEMATICAL&iso8601=false",
         ),
       );
 
