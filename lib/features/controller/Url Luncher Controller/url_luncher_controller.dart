@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart'; 
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,9 +35,13 @@ class UrlLuncherAndSharingController extends GetxController {
   }
 
   // Add native share method
+  // Update the shareWithAnyApp method to use the newer Share.share() syntax
   Future<void> shareWithAnyApp() async {
     try {
-      await Share.share(shareText);
+      await Share.share(
+        shareText,
+        subject: 'Quran Life App', // Optional: add a subject
+      );
     } catch (e) {
       Get.snackbar(
         'Error',
