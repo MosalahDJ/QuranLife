@@ -51,14 +51,18 @@ class QiblaCompassController extends GetxController {
         permission = await Geolocator.requestPermission();
       }
 
-      hasLocationPermission = permission != LocationPermission.denied &&
+      hasLocationPermission =
+          permission != LocationPermission.denied &&
           permission != LocationPermission.deniedForever;
 
       // Check if location services are enabled
       isLocationEnabled = await Geolocator.isLocationServiceEnabled();
       if (!isLocationEnabled) {
-        Get.snackbar("location_disabled".tr, "location_services_required".tr,
-            colorText: Colors.black87);
+        Get.snackbar(
+          "location_disabled".tr,
+          "location_services_required".tr,
+          colorText: Colors.black87,
+        );
         update();
         return;
       }
@@ -130,7 +134,8 @@ class QiblaCompassController extends GetxController {
       // Calculate Qibla direction
       double longDiff = meccaLong - userLong;
       double y = math.sin(longDiff * (math.pi / 180));
-      double x = math.cos(userLat * (math.pi / 180)) *
+      double x =
+          math.cos(userLat * (math.pi / 180)) *
               math.tan(meccaLat * (math.pi / 180)) -
           math.sin(userLat * (math.pi / 180)) *
               math.cos(longDiff * (math.pi / 180));
@@ -138,7 +143,7 @@ class QiblaCompassController extends GetxController {
       double qibla = math.atan2(y, x) * (180 / math.pi);
       qiblaDirection.value = qibla;
     } catch (e) {
-      // print(e);
+      // // print(e);
     }
   }
 

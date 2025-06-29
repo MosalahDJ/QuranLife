@@ -73,7 +73,7 @@ class LocationController extends GetxController {
         "location_service_error_message".tr,
       );
     } catch (e) {
-      // print(e);
+      // // print(e);
     } finally {}
   }
 }

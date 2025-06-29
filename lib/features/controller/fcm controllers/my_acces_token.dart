@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +11,9 @@ class AccesToken {
       final String serviceaccountJsonString = dotenv.env['serviceaccountjson']!;
 
       //convert string to map
-      final Map<String, dynamic> serviceaccountJson =
-          jsonDecode(serviceaccountJsonString);
+      final Map<String, dynamic> serviceaccountJson = jsonDecode(
+        serviceaccountJsonString,
+      );
 
       List<String> scopes = [
         // "https://www.googleapis.com/auth/userinfo.email",
@@ -22,23 +22,29 @@ class AccesToken {
       ];
 
       //getting ServiceAccountCredentials
-      final credentials =
-          myauth.ServiceAccountCredentials.fromJson(serviceaccountJson);
+      final credentials = myauth.ServiceAccountCredentials.fromJson(
+        serviceaccountJson,
+      );
 
       //define client
-      http.Client client =
-          await myauth.clientViaServiceAccount(credentials, scopes);
+      http.Client client = await myauth.clientViaServiceAccount(
+        credentials,
+        scopes,
+      );
 
       //define access credential
-      myauth.AccessCredentials accessCredentials =
-          await myauth.obtainAccessCredentialsViaServiceAccount(
-              credentials, scopes, client);
+      myauth.AccessCredentials accessCredentials = await myauth
+          .obtainAccessCredentialsViaServiceAccount(
+            credentials,
+            scopes,
+            client,
+          );
 
       client.close();
 
       return accessCredentials.accessToken.data;
     } catch (e) {
-      // print("can't get Access Token: $e");
+      // // print("can't get Access Token: $e");
       return "";
     }
   }

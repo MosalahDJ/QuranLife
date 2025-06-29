@@ -29,7 +29,7 @@ class SqlDb {
     }
 
     // ignore: avoid_print
-    print("-----------------onupgrade-----------------");
+    // print("-----------------onupgrade-----------------");
   }
 
   _oncreate(Database db, int version) async {
@@ -44,7 +44,7 @@ class SqlDb {
 
     await batch.commit();
     // ignore: avoid_print
-    print("-----------------created-----------------");
+    // print("-----------------created-----------------");
   }
 
   readdata(String sql) async {

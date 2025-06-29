@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -7,8 +6,10 @@ import 'package:project/features/controller/Auth%20controller/user_state_control
 class AnonymouslysignIn extends GetxController {
   final RxBool isLoading = false.obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final _userstatectrl =
-      Get.put<UserStateController>(UserStateController(), permanent: true);
+  final _userstatectrl = Get.put<UserStateController>(
+    UserStateController(),
+    permanent: true,
+  );
 
   Future<void> _saveAnonymousUserDataToFirestore(User user) async {
     await _firestore.collection('users').doc(user.uid).set({
@@ -37,7 +38,7 @@ class AnonymouslysignIn extends GetxController {
       Get.offAllNamed("home");
       return userCredential.user;
     } catch (e) {
-      // print("خطأ أثناء تسجيل الدخول: $e");
+      // // print("خطأ أثناء تسجيل الدخول: $e");
       return null;
     } finally {
       isLoading.value = false;

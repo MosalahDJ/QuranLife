@@ -31,16 +31,17 @@ class AudioplayerController extends GetxController {
       await player.play(UrlSource(ayahaudio));
     } catch (e) {
       // ignore: avoid_print
-      print('error $e');
+      // print('error $e');
     }
   }
 
   playerstatechanges() {
     // Listen to player state changes
     player.onPlayerStateChanged.listen((state) {
-      playerState.value = state == PlayerState.playing
-          ? PlayerState.playing
-          : PlayerState.stopped;
+      playerState.value =
+          state == PlayerState.playing
+              ? PlayerState.playing
+              : PlayerState.stopped;
       if (state == PlayerState.stopped || state == PlayerState.completed) {
         currentPlayingAyah.value = -1;
       }

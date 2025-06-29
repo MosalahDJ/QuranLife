@@ -13,14 +13,13 @@ class GetResponseBody extends GetxController {
   SqlDb sqldb = SqlDb();
   late DateTime endDate;
 
-  // في onInit - استبدل _checkAndRefreshOnStartup
   @override
   void onInit() {
     super.onInit();
     _updateDates();
     ever(_checkRefreshTimer, (_) => _checkAndRefresh());
 
-    // فحص فوري عند بدء التطبيق
+    // initial check in start up
     _checkAndRefreshOnStartup();
   }
 
@@ -28,13 +27,13 @@ class GetResponseBody extends GetxController {
 
   // Check for refresh immediately on startup
   Future<void> _checkAndRefreshOnStartup() async {
-    print('=== Checking for refresh on startup ===');
+    // print('=== Checking for refresh on startup ===');
     if (await _shouldRefreshForNewYear()) {
-      print('Refresh needed on startup');
+      // print('Refresh needed on startup');
       _updateDates();
       await _getCalendarData();
     } else {
-      print('No refresh needed on startup');
+      // print('No refresh needed on startup');
     }
   }
 
@@ -44,9 +43,6 @@ class GetResponseBody extends GetxController {
       _checkRefreshTimer.value = DateTime.now().millisecondsSinceEpoch;
     });
   }
-
-  // Remove refreshing_date related variables and methods
-  // Keep only endDate for reference
 
   void _updateDates() {
     mycurrentdate = DateTime.now();
@@ -69,26 +65,26 @@ class GetResponseBody extends GetxController {
 
       // Check if we're in a new year compared to last update
       if (currentDate.year > lastUpdated.year) {
-        print('New year detected: ${currentDate.year} > ${lastUpdated.year}');
+        // print('New year detected: ${currentDate.year} > ${lastUpdated.year}');
         return true;
       }
 
       // Check if data is older than 360 days (backup check)
       if (currentDate.difference(lastUpdated).inDays > 360) {
-        print('Data is older than 360 days');
+        // print('Data is older than 360 days');
         return true;
       }
 
       return false;
     } catch (e) {
-      print('Error checking refresh need: $e');
+      // print('Error checking refresh need: $e');
       return true;
     }
   }
 
   Future<void> _checkAndRefresh() async {
     if (await _shouldRefreshForNewYear()) {
-      print('Refresh triggered for new year or old data');
+      // print('Refresh triggered for new year or old data');
       _updateDates();
       await _getCalendarData();
     }
@@ -97,7 +93,7 @@ class GetResponseBody extends GetxController {
   Future<bool> initileresponse() async {
     bool needsRefresh = await _shouldRefreshForNewYear();
 
-    print('Needs refresh: $needsRefresh');
+    // print('Needs refresh: $needsRefresh');
 
     if (needsRefresh) {
       _updateDates();
@@ -121,21 +117,21 @@ class GetResponseBody extends GetxController {
   // Add this method for manual data refresh
   Future<void> demendeNewResponse() async {
     try {
-      print('=== Manual data refresh requested ===');
+      // print('=== Manual data refresh requested ===');
       _updateDates();
       await _getCalendarData();
-      print('Manual refresh completed successfully');
+      // print('Manual refresh completed successfully');
     } catch (e) {
-      print('Error in manual refresh: $e');
+      // print('Error in manual refresh: $e');
       rethrow; // Re-throw to let the UI handle the error
     }
   }
 
   Future<void> _getCalendarData() async {
     try {
-      print('=== _getCalendarData Start ===');
+      // print('=== _getCalendarData Start ===');
       await locationctrl.determinePosition();
-      print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
+      // print('Location: ${locationctrl.latitude}, ${locationctrl.longtude}');
 
       // Use current year instead of hardcoded 2025
       final currentYear = DateTime.now().year;
@@ -145,20 +141,20 @@ class GetResponseBody extends GetxController {
         ),
       );
 
-      print('API Response Status: ${response.statusCode}');
+      // print('API Response Status: ${response.statusCode}');
       if (response.statusCode == 200) {
         final escapedJson = response.body.replaceAll("'", "@@@");
-        print('Data received and escaped');
+        // print('Data received and escaped');
         await sqldb.insertdata(
           "INSERT INTO prayer_times (response_data, last_updated) VALUES ('$escapedJson', '${DateTime.now().toIso8601String()}')",
         );
-        print('Data inserted into SQL database');
+        // print('Data inserted into SQL database');
         Get.find<FetchPrayerFromDate>().loadPrayerData();
       } else {
-        print('Failed to fetch calendar data: ${response.statusCode}');
+        // print('Failed to fetch calendar data: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error in _getCalendarData: $e');
+      // print('Error in _getCalendarData: $e');
     }
   }
 }

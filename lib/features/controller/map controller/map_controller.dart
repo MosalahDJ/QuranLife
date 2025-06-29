@@ -86,10 +86,7 @@ class MapController extends GetxController {
             title: Text('location_service_disabled'.tr),
             content: Text('enable_gps_message'.tr),
             actions: [
-              TextButton(
-                child: Text('cancel'.tr),
-                onPressed: () => Get.back(),
-              ),
+              TextButton(child: Text('cancel'.tr), onPressed: () => Get.back()),
               TextButton(
                 child: Text('open_settings'.tr),
                 onPressed: () async {
@@ -124,10 +121,7 @@ class MapController extends GetxController {
             title: Text('permission_denied_permanently'.tr),
             content: Text('enable_permission_settings'.tr),
             actions: [
-              TextButton(
-                child: Text('ok'.tr),
-                onPressed: () => Get.back(),
-              ),
+              TextButton(child: Text('ok'.tr), onPressed: () => Get.back()),
               TextButton(
                 child: Text('open_settings'.tr),
                 onPressed: () async {
@@ -158,13 +152,14 @@ class MapController extends GetxController {
         ),
       );
     } catch (e) {
-      // print('Error getting location: $e');
+      // // print('Error getting location: $e');
     } finally {
       if (!_disposed) {
         isLoading.value = false;
       }
     }
   }
+
   Future<void> clearLocationCache() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(latkey);

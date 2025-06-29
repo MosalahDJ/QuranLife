@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
@@ -26,14 +25,15 @@ class FCMController extends GetxController {
     };
 
     var url = Uri.parse(
-        "https://fcm.googleapis.com/v1/projects/quraanlife-50941/messages:send");
+      "https://fcm.googleapis.com/v1/projects/quraanlife-50941/messages:send",
+    );
 
     var body = {
       "message": {
         "topic": topicname,
         "notification": {"title": mytitle, "body": mybody},
-        "data": {"type": mytype}
-      }
+        "data": {"type": mytype},
+      },
     };
 
     var req = http.Request('POST', url);
@@ -43,9 +43,9 @@ class FCMController extends GetxController {
     var res = await req.send();
     // final resBody = await res.stream.bytesToString();
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      // print("succes sent :$resBody");
+      // // print("succes sent :$resBody");
     } else {
-      // print(res.reasonPhrase);
+      // // print(res.reasonPhrase);
     }
   }
 
@@ -75,19 +75,19 @@ class FCMController extends GetxController {
   //subscribe to topic
   subscribetotopic(String topicname) async {
     await FirebaseMessaging.instance.subscribeToTopic(topicname);
-    // print("subscribed");
+    // // print("subscribed");
   }
 
   //unsbscribe frome topic
   unsbscribefrometopic(String topicname) async {
     await FirebaseMessaging.instance.unsubscribeFromTopic(topicname);
-    // print("unsubscribed");
+    // // print("unsubscribed");
   }
 
   //handle notification on message
   onmessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        Get.snackbar(message.notification!.title!, message.notification!.body!);
+      Get.snackbar(message.notification!.title!, message.notification!.body!);
     });
   }
 
@@ -97,7 +97,7 @@ class FCMController extends GetxController {
         await FirebaseMessaging.instance.getInitialMessage();
 
     void handleMessage(RemoteMessage message) {
-        Get.toNamed("/chat");
+      Get.toNamed("/chat");
     }
 
     // If the message also contains a data property with a "type" of "adhan",
