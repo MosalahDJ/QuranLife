@@ -1,11 +1,12 @@
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlLuncherAndSharingController extends GetxController {
   // Add share text constants
-  final String shareText = "Check out Quran Life App! 🌟\n\n"
+  final String shareText =
+      "Check out Quran Life App! 🌟\n\n"
       "Download this amazing Islamic app that helps you with prayer times, "
       "Quran reading, and more spiritual features.\n\n"
       "Download now from: https://play.google.com/store/apps/yourapplink";
@@ -38,9 +39,8 @@ class UrlLuncherAndSharingController extends GetxController {
   // Update the shareWithAnyApp method to use the newer Share.share() syntax
   Future<void> shareWithAnyApp() async {
     try {
-      await Share.share(
-        shareText,
-        subject: 'Quran Life App', // Optional: add a subject
+      await SharePlus.instance.share(
+        ShareParams(text: shareText, subject: 'Quran Life App'),
       );
     } catch (e) {
       Get.snackbar(
@@ -55,10 +55,7 @@ class UrlLuncherAndSharingController extends GetxController {
     final uri = Uri.parse(url);
 
     try {
-      if (!await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      )) {
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
         throw 'Could not launch Site';
       }
     } catch (e) {
