@@ -13,16 +13,15 @@ class GetResponseBody extends GetxController {
   SqlDb sqldb = SqlDb();
   late DateTime endDate;
 
+  // في onInit - استبدل _checkAndRefreshOnStartup
   @override
   void onInit() {
     super.onInit();
     _updateDates();
-    // Add periodic check for data refresh
     ever(_checkRefreshTimer, (_) => _checkAndRefresh());
-    // Check for refresh immediately on startup
+
+    // فحص فوري عند بدء التطبيق
     _checkAndRefreshOnStartup();
-    // Start the periodic timer
-    startPeriodicCheck();
   }
 
   final _checkRefreshTimer = 0.obs;
@@ -30,7 +29,7 @@ class GetResponseBody extends GetxController {
   // Check for refresh immediately on startup
   Future<void> _checkAndRefreshOnStartup() async {
     print('=== Checking for refresh on startup ===');
-    if (await _isAfterRefreshingDate()) {
+    if (await _shouldRefreshForNewYear()) {
       print('Refresh needed on startup');
       _updateDates();
       await _getCalendarData();
@@ -46,14 +45,8 @@ class GetResponseBody extends GetxController {
     });
   }
 
-  Future<void> _checkAndRefresh() async {
-    print('=== Periodic refresh check ===');
-    if (await _isAfterRefreshingDate()) {
-      print('Periodic refresh triggered');
-      _updateDates();
-      await _getCalendarData();
-    }
-  }
+  // Remove refreshing_date related variables and methods
+  // Keep only endDate for reference
 
   void _updateDates() {
     mycurrentdate = DateTime.now();
@@ -61,78 +54,8 @@ class GetResponseBody extends GetxController {
     endDate = DateTime(DateTime.now().year, 12, 31);
   }
 
-  String _formatDate(DateTime date) {
-    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-  }
-
-  DateTime _parseDate(String date) {
-    try {
-      var parts = date.trim().split('-');
-      if (parts.length != 3) {
-        throw FormatException('Invalid time format: $date');
-      }
-      return DateTime(
-        int.parse(parts[0].trim()),
-        int.parse(parts[1].trim()),
-        int.parse(parts[2].trim()),
-      );
-    } catch (e) {
-  print('Error parsing time: $date - Error: $e');
-      return DateTime.now();
-    }
-  }
-
-  Future<void> _defineRefreshingDate() async {
-    final refreshingdate = endDate.add(Duration(seconds: 1));
-    await sqldb.insertdata(
-      "INSERT OR REPLACE INTO prayer_times_meta (key, value) VALUES ('refreshing_date', '${_formatDate(refreshingdate)}')",
-    );
-  }
-
-  Future<bool> _isAfterRefreshingDate() async {
-    try {
-      final result = await sqldb.readdata(
-        "SELECT value FROM prayer_times_meta WHERE key = 'refreshing_date'",
-      );
-  
-      if (result.isEmpty) {
-        await _defineRefreshingDate();
-        return false;
-      }
-  
-      // Parse the stored refreshing date from database
-      String storedDateStr = result.first['value'];
-      DateTime storedRefreshingDate = _parseDate(storedDateStr);
-      DateTime now = DateTime.now();
-  
-      print('Stored refreshing date: $storedDateStr');
-      print('Current date: ${_formatDate(now)}');
-      print('Should refresh: ${now.isAfter(storedRefreshingDate)}');
-  
-      // Check if we've moved to a new year
-      if (now.year > endDate.year) {
-        print('New year detected, forcing refresh');
-        await sqldb.deletedata(
-          "DELETE FROM prayer_times_meta WHERE key = 'refreshing_date'",
-        );
-        return true;
-      }
-  
-      if (now.isAfter(storedRefreshingDate)) {
-        print('After refreshing date, triggering refresh');
-        await sqldb.deletedata(
-          "DELETE FROM prayer_times_meta WHERE key = 'refreshing_date'",
-        );
-        return true;
-      }
-      return false;
-    } catch (e) {
-      print('Error checking refresh date: $e');
-      return false;
-    }
-  }
-
-  Future<bool> _shouldRefreshData() async {
+  // Simplified refresh check based only on year change
+  Future<bool> _shouldRefreshForNewYear() async {
     try {
       final result = await sqldb.readdata(
         "SELECT response_data, last_updated FROM prayer_times ORDER BY last_updated DESC LIMIT 1",
@@ -144,31 +67,38 @@ class GetResponseBody extends GetxController {
       final lastUpdated = DateTime.parse(data['last_updated']);
       final currentDate = DateTime.now();
 
-      // Check if data is older than 30 days
+      // Check if we're in a new year compared to last update
+      if (currentDate.year > lastUpdated.year) {
+        print('New year detected: ${currentDate.year} > ${lastUpdated.year}');
+        return true;
+      }
+
+      // Check if data is older than 360 days (backup check)
       if (currentDate.difference(lastUpdated).inDays > 360) {
+        print('Data is older than 360 days');
         return true;
       }
 
       return false;
     } catch (e) {
-      print('Error checking data validity: $e');
+      print('Error checking refresh need: $e');
       return true;
     }
   }
 
-  // I must read the code step by step and solve the problem
+  Future<void> _checkAndRefresh() async {
+    if (await _shouldRefreshForNewYear()) {
+      print('Refresh triggered for new year or old data');
+      _updateDates();
+      await _getCalendarData();
+    }
+  }
 
   Future<bool> initileresponse() async {
-    // Check both conditions: data age AND refresh date
-    bool needsRefreshByAge = await _shouldRefreshData();
-    bool needsRefreshByDate = await _isAfterRefreshingDate();
-    
-    bool needsRefresh = needsRefreshByAge || needsRefreshByDate;
-    
-    print('Needs refresh by age: $needsRefreshByAge');
-    print('Needs refresh by date: $needsRefreshByDate');
-    print('Overall needs refresh: $needsRefresh');
-  
+    bool needsRefresh = await _shouldRefreshForNewYear();
+
+    print('Needs refresh: $needsRefresh');
+
     if (needsRefresh) {
       _updateDates();
       Get.snackbar(
@@ -188,9 +118,17 @@ class GetResponseBody extends GetxController {
     return false;
   }
 
+  // Add this method for manual data refresh
   Future<void> demendeNewResponse() async {
-    _updateDates();
-    await _getCalendarData();
+    try {
+      print('=== Manual data refresh requested ===');
+      _updateDates();
+      await _getCalendarData();
+      print('Manual refresh completed successfully');
+    } catch (e) {
+      print('Error in manual refresh: $e');
+      rethrow; // Re-throw to let the UI handle the error
+    }
   }
 
   Future<void> _getCalendarData() async {
