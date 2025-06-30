@@ -16,7 +16,6 @@ class DeterminePrayersController extends GetxController {
     _startTimer();
   }
 
-
   Timer? _timer;
   RxString currentdate = "".obs;
   RxString currentPrayer = "".obs;
@@ -244,7 +243,7 @@ class DeterminePrayersController extends GetxController {
       log('Current prayersdays state: ${fpfctrl.prayersdays}');
       print('Setting all values to "-"');
 
-      // TODO: I have a null err in 6:30:2025 it show me this err 
+      // TODO: I have a null err in 6:30:2025 it show me this err
       currentPrayer.value = "-";
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
@@ -261,3 +260,6 @@ class DeterminePrayersController extends GetxController {
     super.onClose();
   }
 }
+
+  //TODO: also I have a problem in the salawat table I think times is returnig
+  //TODO: false times or the loop isn't corect 
