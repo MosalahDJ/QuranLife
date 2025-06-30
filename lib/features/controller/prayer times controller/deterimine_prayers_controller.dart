@@ -243,8 +243,8 @@ class DeterminePrayersController extends GetxController {
       print('Stack trace: ${StackTrace.current}');
       log('Current prayersdays state: ${fpfctrl.prayersdays}');
       print('Setting all values to "-"');
-// TODO: I have a null err in 6:30:2025 it show me this err 
 
+      // TODO: I have a null err in 6:30:2025 it show me this err 
       currentPrayer.value = "-";
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
