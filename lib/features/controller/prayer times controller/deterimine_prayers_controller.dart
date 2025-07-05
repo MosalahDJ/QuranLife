@@ -260,6 +260,5 @@ class DeterminePrayersController extends GetxController {
     super.onClose();
   }
 }
-// wee need to do something for find a solution for this problem
   //TODO: also I have a problem in the salawat table I think times is returnig
   //TODO: false times or the loop isn't corect 
