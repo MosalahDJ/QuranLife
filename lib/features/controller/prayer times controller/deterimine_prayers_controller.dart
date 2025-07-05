@@ -260,6 +260,6 @@ class DeterminePrayersController extends GetxController {
     super.onClose();
   }
 }
-
+//new commit
   //TODO: also I have a problem in the salawat table I think times is returnig
   //TODO: false times or the loop isn't corect 
