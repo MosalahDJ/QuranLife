@@ -52,9 +52,12 @@ class FetchPrayerFromDate extends GetxController {
             .replaceAll("@@@", "'");
 
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
+        print("new data : all data is here $newData");
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
+        print("prayer times data newData['data']: $newData");
+
           await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
         } else {
           // // print('No data key in prayer times response');
