@@ -34,7 +34,7 @@ class FetchPrayerFromDate extends GetxController {
         int.parse(parts[0].trim()),
       );
     } catch (e) {
-      // // print('Error parsing time: $time - Error: $e');
+      print('Error parsing time: $time - Error: $e');
       // Return a default time in case of error
       return DateTime(01, 01, DateTime.now().year);
     }
@@ -52,22 +52,22 @@ class FetchPrayerFromDate extends GetxController {
             .replaceAll("@@@", "'");
 
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        // print("new data : all data is here $newData");
+        print("new data : all data is here $newData");
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
-        // print("prayer times data newData['data']: $newData");
+        print("prayer times data newData['data']: $newData");
 
           await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
         } else {
-          // // print('No data key in prayer times response');
+          print('No data key in prayer times response');
         }
       } else {
-        // // print('No prayer times data found in database');
+        print('No prayer times data found in database');
       }
     } catch (e) {
-      // // print('Error loading prayer data: $e');
-      // // print('Stack trace: $stack');
+      print('Error loading prayer data: $e');
+      // print('Stack trace: $stack');
     }
   }
 
@@ -100,7 +100,7 @@ class FetchPrayerFromDate extends GetxController {
   Future<void> fetchPrayerTimes() async {
     try {
       if (prayerTimesData == null) {
-        // // print('prayerTimesData is null in fetchPrayerTimes');
+        print('prayerTimesData is null in fetchPrayerTimes');
         return;
       }
 
@@ -144,7 +144,7 @@ class FetchPrayerFromDate extends GetxController {
           if (daysInMonthMap.isNotEmpty) {
             prayersdays[monthKey] = daysInMonthMap;
           } else {
-            // // print('No days available for month $monthKey');
+            print('No days available for month $monthKey');
           }
         });
         // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
@@ -152,11 +152,11 @@ class FetchPrayerFromDate extends GetxController {
 
         update(); // Notify GetX listeners
       } else {
-        // // print('monthlyData is empty in fetchPrayerTimes');
+        print('monthlyData is empty in fetchPrayerTimes');
       }
     } catch (e) {
-      // // print('Error in fetchPrayerTimes: $e');
-      // // print('Stack trace: $stack');
+      print('Error in fetchPrayerTimes: $e');
+      // print('Stack trace: $stack');
     }
   }
 }
