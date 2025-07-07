@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 // import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -51,10 +52,10 @@ class DeterminePrayersController extends GetxController {
         int.parse(parts[1].trim()),
       );
     } catch (e) {
-    print("________________________________________________");
+      print("________________________________________________");
 
       print('Error parsing time: $time - Error: $e');
-    print("________________________________________________");
+      print("________________________________________________");
 
       // Return a default time in case of error
       return DateTime.now();
@@ -111,12 +112,18 @@ class DeterminePrayersController extends GetxController {
     try {
       var now = DateTime.now();
       print('Current time: $now');
+      RxMap<String, Map<String, Map<String, String>>> prayersdays =
+          fpfctrl.prayersdays;
+
+      print("________________________________________________");
+      log("prayersdays IN DPC CONTROLLER: ${fpfctrl.prayersdays.toString()}");
+      print("________________________________________________");
 
       String day = now.day.toString().padLeft(2, '0');
       String month = now.month.toString();
       print('Looking for day: $day, month: $month');
 
-      if (!fpfctrl.prayersdays.containsKey(month)) {
+      if (!prayersdays.containsKey(month)) {
         print('ERROR: Month $month not found in prayersdays');
         print('Available months: ${fpfctrl.prayersdays.keys}');
         throw Exception('Month $month not found in prayer times data');
@@ -241,10 +248,9 @@ class DeterminePrayersController extends GetxController {
       }
 
       print('No matching condition found - this should not happen!');
-    print("________________________________________________");
-
+      print("________________________________________________");
     } catch (e) {
-    print("________________________________________________");
+      print("________________________________________________");
 
       print('=== ERROR CAUGHT ===');
       print('Error determining prayer times: $e');
@@ -260,12 +266,10 @@ class DeterminePrayersController extends GetxController {
       timeUntilNext.value = "-";
 
       print('=== END ERROR HANDLING ===');
-    print("________________________________________________");
-
+      print("________________________________________________");
     }
     print('=== End determineCurrentPrayer ===');
     print("________________________________________________");
-
   }
 
   @override

@@ -161,9 +161,9 @@ class FetchPrayerFromDate extends GetxController {
           if (daysInMonthMap.isNotEmpty) {
             prayersdays[monthKey] = daysInMonthMap;
             
-            // print("=========================================================");
-            // print('RxMap<String, Map<String, Map<String, String>>> get prayersdays: $prayersdays');
-            // print("=========================================================");
+            print("=========================================================");
+            print('prayersdays IN FETCH CONTROLLER: $prayersdays');
+            print("=========================================================");
           } else {
             // print("=========================================================");
             // print('No days available for month $monthKey');
