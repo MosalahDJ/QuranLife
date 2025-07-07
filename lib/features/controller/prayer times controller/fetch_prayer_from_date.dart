@@ -34,9 +34,9 @@ class FetchPrayerFromDate extends GetxController {
         int.parse(parts[0].trim()),
       );
     } catch (e) {
-      print("=========================================================");
-      print('Error parsing time: $time - Error: $e');
-      print("=========================================================");
+      // print("=========================================================");
+      // print('Error parsing time: $time - Error: $e');
+      // print("=========================================================");
 
       // Return a default time in case of error
       return DateTime(01, 01, DateTime.now().year);
@@ -55,31 +55,31 @@ class FetchPrayerFromDate extends GetxController {
             .replaceAll("@@@", "'");
 
         Map<String, dynamic> newData = jsonDecode(prayerDataStr);
-        print("=========================================================");
-        print("new data : all data is here $newData");
-        print("=========================================================");
+        // print("=========================================================");
+        // print("new data : all data is here $newData");
+        // print("=========================================================");
 
         if (newData.containsKey('data')) {
           prayerTimesData = PrayerTimesData.fromJson(newData['data']);
-          print("=========================================================");
-          print("prayer times data newData['data']: $newData");
-          print("=========================================================");
+          // print("=========================================================");
+          // print("prayer times data newData['data']: $newData");
+          // print("=========================================================");
 
           await fetchPrayerTimes(); // Call fetchPrayerTimes after data is loaded
         } else {
-          print("=========================================================");
-          print('No data key in prayer times response');
-          print("=========================================================");
+          // print("=========================================================");
+          // print('No data key in prayer times response');
+          // print("=========================================================");
         }
       } else {
-        print("=========================================================");
-        print('No prayer times data found in database');
-        print("=========================================================");
+        // print("=========================================================");
+        // print('No prayer times data found in database');
+        // print("=========================================================");
       }
     } catch (e) {
-      print("=========================================================");
-      print('Error loading prayer data: $e');
-      print("=========================================================");
+      // print("=========================================================");
+      // print('Error loading prayer data: $e');
+      // print("=========================================================");
 
       // print('Stack trace: $stack');
     }
@@ -114,9 +114,9 @@ class FetchPrayerFromDate extends GetxController {
   Future<void> fetchPrayerTimes() async {
     try {
       if (prayerTimesData == null) {
-        print("=========================================================");
-        print('prayerTimesData is null in fetchPrayerTimes');
-        print("=========================================================");
+        // print("=========================================================");
+        // print('prayerTimesData is null in fetchPrayerTimes');
+        // print("=========================================================");
 
         return;
       }
@@ -160,10 +160,14 @@ class FetchPrayerFromDate extends GetxController {
 
           if (daysInMonthMap.isNotEmpty) {
             prayersdays[monthKey] = daysInMonthMap;
+            
+            // print("=========================================================");
+            // print('RxMap<String, Map<String, Map<String, String>>> get prayersdays: $prayersdays');
+            // print("=========================================================");
           } else {
-            print("=========================================================");
-            print('No days available for month $monthKey');
-            print("=========================================================");
+            // print("=========================================================");
+            // print('No days available for month $monthKey');
+            // print("=========================================================");
           }
         });
         // Update prayersdayskeys if you still use it, e.g., for displaying month tabs
@@ -171,14 +175,14 @@ class FetchPrayerFromDate extends GetxController {
 
         update(); // Notify GetX listeners
       } else {
-        print("=========================================================");
-        print('monthlyData is empty in fetchPrayerTimes');
-        print("=========================================================");
+        // print("=========================================================");
+        // print('monthlyData is empty in fetchPrayerTimes');
+        // print("=========================================================");
       }
     } catch (e) {
-      print("=========================================================");
-      print('Error in fetchPrayerTimes: $e');
-      print("=========================================================");
+      // print("=========================================================");
+      // print('Error in fetchPrayerTimes: $e');
+      // print("=========================================================");
 
       // print('Stack trace: $stack');
     }
