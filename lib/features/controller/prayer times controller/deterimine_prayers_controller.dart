@@ -165,11 +165,15 @@ class DeterminePrayersController extends GetxController {
 
       // Add next day's Fajr to prayers list
       print('Getting next day Fajr...');
-      var nextDay = now.add(const Duration(days: 1));
-      print('Next day: ${nextDay.day}');
+      var nextDay = now
+          .add(const Duration(days: 1))
+          .day
+          .toString()
+          .padLeft(2, '0');
+      print('Next day: $nextDay');
 
       var nextDayFajr = _parsenextdayfajr(
-        fpfctrl.prayersdays["${now.month}"]!["${nextDay.day}"]!['Fajr']!,
+        fpfctrl.prayersdays[month]![nextDay]!['Fajr']!,
       );
       print("________________________________________________");
       print('Next day Fajr: $nextDayFajr');
@@ -259,7 +263,6 @@ class DeterminePrayersController extends GetxController {
       // log('Current prayersdays state: ${fpfctrl.prayersdays}');
       print('Setting all values to "-"');
 
-      // TODO: I have a null err in 6:30:2025 it show me this err
       currentPrayer.value = "-";
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
