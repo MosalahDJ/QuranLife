@@ -34,7 +34,7 @@ String? getMonthByIndex(int index) {
   final date = firstResponseDate!.add(Duration(days: index));
 
   // Format the date in the same format as before (YYYY-MM-DD)
-  return date.month.toString().padLeft(2, '0');
+  return date.month.toString();
 }
 
 class SalawatTableRow {
@@ -75,11 +75,8 @@ class SalawatTableRow {
         Obx(
           () => Row(
             children: [
-              //TODO: the problem is here in the month value it allwayse use the
-              //current month but I need to add a dynamic month data for every
-              //month in data list
               Text(
-                "    ${fpfctrl.prayersdays[month]?[day]?[salattime] ?? 'No DATA'}",
+                "    ${fpfctrl.prayersdays[month]?[day]?[salattime] ?? '-'}",
                 style: TextStyle(
                   fontSize: 18,
 

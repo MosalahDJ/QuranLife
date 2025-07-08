@@ -116,7 +116,7 @@ class DeterminePrayersController extends GetxController {
           fpfctrl.prayersdays;
 
       //print("________________________________________________");
-      log("prayersdays IN DPC CONTROLLER: ${fpfctrl.prayersdays.toString()}");
+      // log("prayersdays IN DPC CONTROLLER: ${fpfctrl.prayersdays.toString()}");
       //print("________________________________________________");
 
       String day = now.day.toString().padLeft(2, '0');
