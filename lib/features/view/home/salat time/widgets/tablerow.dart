@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
-
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
@@ -28,6 +27,16 @@ String? getDayByIndex(int index) {
   return date.day.toString().padLeft(2, '0');
 }
 
+String? getMonthByIndex(int index) {
+  if (firstResponseDate == null) return null;
+
+  // Calculate the date for the given index
+  final date = firstResponseDate!.add(Duration(days: index));
+
+  // Format the date in the same format as before (YYYY-MM-DD)
+  return date.month.toString().padLeft(2, '0');
+}
+
 class SalawatTableRow {
   //rows of the table
   TableRow myrow({
@@ -35,6 +44,7 @@ class SalawatTableRow {
     required String salattime,
     // required RxBool salatvolum,
     required String day,
+    required String month,
   }) {
     return TableRow(
       children: [
@@ -65,8 +75,11 @@ class SalawatTableRow {
         Obx(
           () => Row(
             children: [
+              //TODO: the problem is here in the month value it allwayse use the
+              //current month but I need to add a dynamic month data for every
+              //month in data list
               Text(
-                "    ${fpfctrl.prayersdays[DateTime.now().month.toString()]?[day]?[salattime] ?? 'No DATA'}",
+                "    ${fpfctrl.prayersdays[month]?[day]?[salattime] ?? 'No DATA'}",
                 style: TextStyle(
                   fontSize: 18,
 
@@ -186,6 +199,10 @@ class SalawatTableRow {
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
       myrow(
@@ -194,6 +211,10 @@ class SalawatTableRow {
         day:
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -204,6 +225,10 @@ class SalawatTableRow {
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
       myrow(
@@ -212,6 +237,10 @@ class SalawatTableRow {
         day:
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
@@ -222,6 +251,10 @@ class SalawatTableRow {
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
       myspace(),
       myrow(
@@ -230,6 +263,10 @@ class SalawatTableRow {
         day:
             getDayByIndex(i) != null
                 ? getDayByIndex(i)!
+                : timespagectrl.formatDate(fpfctrl.currentDate),
+        month:
+            getMonthByIndex(i) != null
+                ? getMonthByIndex(i)!
                 : timespagectrl.formatDate(fpfctrl.currentDate),
       ),
     ];
