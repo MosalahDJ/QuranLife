@@ -103,7 +103,7 @@ flutter_native_splash:
   image_dark: lib/core/assets/images/app_logo/pnglogo1.png
   branding: lib/core/assets/images/splash_view_image/branding_text_brune.png
   branding_dark: lib/core/assets/images/splash_view_image/branding_text_gold.png
-  branding_bottom_padding: 50
+  branding_bottom_padding: 75
   android_gravity: center
   android: true
   ios: true
@@ -114,7 +114,7 @@ flutter_native_splash:
     icon_background_color_dark: "#005B41"
     branding: lib/core/assets/images/splash_view_image/branding_text_brune.png
     branding_dark: lib/core/assets/images/splash_view_image/branding_text_gold.png
-    branding_bottom_padding: 50
+    branding_bottom_padding: 75
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
