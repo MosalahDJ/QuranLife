@@ -17,21 +17,25 @@ DateTime? firstResponseDate = fpfctrl.parseTime(
   fpfctrl.prayerTimesData!.monthlyData.values.first.first.date.gregorian.date,
 );
 
+// Remove the global firstResponseDate initialization
+
+// Update the getDayByIndex function
 String? getDayByIndex(int index) {
-  if (firstResponseDate == null) return null;
+  if (fpfctrl.firstResponseDate == null) return null;
 
   // Calculate the date for the given index
-  final date = firstResponseDate!.add(Duration(days: index));
+  final date = fpfctrl.firstResponseDate!.add(Duration(days: index));
 
   // Format the date in the same format as before (YYYY-MM-DD)
   return date.day.toString().padLeft(2, '0');
 }
 
+// Update the getMonthByIndex function
 String? getMonthByIndex(int index) {
-  if (firstResponseDate == null) return null;
+  if (fpfctrl.firstResponseDate == null) return null;
 
   // Calculate the date for the given index
-  final date = firstResponseDate!.add(Duration(days: index));
+  final date = fpfctrl.firstResponseDate!.add(Duration(days: index));
 
   // Format the date in the same format as before (YYYY-MM-DD)
   return date.month.toString();

@@ -8,7 +8,6 @@ class TimesPageController extends GetxController {
   PageController timespagecontroller = PageController();
   late RxInt currentPage = 0.obs;
   int currentday = 0;
-  
 
   //this func maded for making date string as same as date in the url and make sure it's dynamic
   String formatDate(DateTime date) {
@@ -33,7 +32,7 @@ class TimesPageController extends GetxController {
 
     // Calculate the difference in days
     final difference = now.difference(firstDate).inDays;
-    
+
     // Format the month key correctly (YYYY-MM format to match the API response)
     String monthKey = "${now.month}";
 
@@ -41,19 +40,30 @@ class TimesPageController extends GetxController {
     if (fpfctrl.prayersdays.containsKey(monthKey)) {
       // Check if current date is within our data range
       if (difference >= 0) {
+        //print("==================================");
+        //print("current date = $currentday");
+        //print("current Page = $currentPage");
+        //print("==================================");
         currentday = difference;
         currentPage = difference.obs;
       } else {
         // If current date is outside our range, default to first day
+        // //print("==================================");
+        // //print("current date is outside our range");
+        // //print("==================================");
         currentday = 0;
         currentPage = 0.obs;
       }
     } else {
       // If month not found, default to first day
+      // //print("==================================");
+      // //print("month not found");
+      // //print("==================================");
+
       currentday = 0;
       currentPage = 0.obs;
     }
-}
+  }
 
   void pagecontroller() {
     //w made the page controller here on init state for lunching whene the page

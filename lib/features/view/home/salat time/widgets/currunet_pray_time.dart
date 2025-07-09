@@ -86,6 +86,13 @@ class CurrentPrayTime extends StatelessWidget {
                 onTap: () {
                   timespagectrl.getcurrentpage();
                   Get.toNamed("salattime");
+                  // jump to current page sawat times
+                  Future.delayed(
+                    Duration(milliseconds: 50),
+                    () => timespagectrl.timespagecontroller.jumpToPage(
+                      timespagectrl.currentday,
+                    ),
+                  );
                 },
                 child: Ink(
                   child: Card(
@@ -188,6 +195,7 @@ class CurrentPrayTime extends StatelessWidget {
           ),
           //get position button
           Positioned(
+            //TODO: I have a problem here this text is hiden under the card in some phones 
             bottom:
                 Sizeconfig.screenheight! < 768
                     ? Sizeconfig.screenheight! / 50
@@ -322,6 +330,13 @@ class CurrentPrayTime extends StatelessWidget {
                   onTap: () {
                     timespagectrl.getcurrentpage();
                     Get.toNamed("salattime");
+                    // jump to current page sawat times
+                    Future.delayed(
+                      Duration(milliseconds: 50),
+                      () => timespagectrl.timespagecontroller.jumpToPage(
+                        timespagectrl.currentday,
+                      ),
+                    );
                   },
                   child: Ink(
                     child: Image.asset(

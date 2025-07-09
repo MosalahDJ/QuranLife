@@ -33,6 +33,13 @@ class Salwatpageview extends StatelessWidget {
         onTap: () {
           timespagectrl.getcurrentpage();
           Get.toNamed("salattime");
+          // jump to current page sawat times
+          Future.delayed(
+            Duration(milliseconds: 50),
+            () => timespagectrl.timespagecontroller.jumpToPage(
+              timespagectrl.currentday,
+            ),
+          );
         },
         child: Ink(
           child: Card(

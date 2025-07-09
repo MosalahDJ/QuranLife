@@ -241,6 +241,12 @@ class CategoriesPage extends StatelessWidget {
                                   () {
                                     timespagectrl.getcurrentpage();
                                     Get.toNamed("salattime");
+                                    // jump to current page sawat times
+                                    Future.delayed(
+                                      Duration(milliseconds: 50),
+                                      () => timespagectrl.timespagecontroller
+                                          .jumpToPage(timespagectrl.currentday),
+                                    );
                                   },
                                   Icons.access_time_filled_sharp,
                                   'mawaqit'.tr,

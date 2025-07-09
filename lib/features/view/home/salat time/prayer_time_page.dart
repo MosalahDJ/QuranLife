@@ -10,6 +10,9 @@ import 'package:project/features/view/home/salat%20time/widgets/prayer_times_tab
 class PrayerTimesPage extends StatelessWidget {
   const PrayerTimesPage({super.key});
 
+  final String prayerTimesAyah =
+      "\uFD3F  إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \uFD3E \nصَدَقَ اللهُ العَظِيم";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,9 +101,8 @@ class PrayerTimesPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: const ShimmerText(
-                              text:
-                                  "\uFD3F  إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \uFD3E \nصَدَقَ اللهُ العَظِيم",
+                            child: ShimmerText(
+                              text: prayerTimesAyah,
                               textalign: TextAlign.center,
                               textdirection: TextDirection.rtl,
                               begin: 2,
