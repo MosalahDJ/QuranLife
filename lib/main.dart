@@ -25,6 +25,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
+  //just a commit
 
   // Force portrait
   SystemChrome.setPreferredOrientations([
