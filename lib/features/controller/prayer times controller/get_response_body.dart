@@ -5,6 +5,7 @@ import 'package:project/features/controller/prayer%20times%20controller/fetch_pr
 import 'package:http/http.dart' as http;
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:project/features/model/sql_db.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 DateTime mycurrentdate = DateTime.now();
 
@@ -12,6 +13,8 @@ class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
   SqlDb sqldb = SqlDb();
   late DateTime endDate;
+  late SharedPreferences prefs;
+
 
   @override
   void onInit() {
@@ -160,6 +163,15 @@ class GetResponseBody extends GetxController {
       } else {
         //print('Failed to fetch calendar data: ${response.statusCode}');
       }
+
+    prefs = await SharedPreferences.getInstance();
+
+      locationctrl.location =
+          prefs.getString("city") == null
+              ? "get_location".tr
+              : prefs.getString("city")!;
+      locationctrl.sublocation =
+          prefs.getString("street") == null ? "" : prefs.getString("street")!;
     } catch (e) {
       //print('Error in _getCalendarData: $e');
     }
