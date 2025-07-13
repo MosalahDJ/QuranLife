@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
+// import 'package:project/core/Utils/size_config.dart';
 import 'package:project/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 class SplashViewBody extends StatelessWidget {
