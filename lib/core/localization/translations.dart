@@ -370,7 +370,7 @@ class Messages extends Translations {
       'about_us': 'About Us',
       'settings': 'Settings',
       'help_feedback': 'Help & Feedback',
-      'app_version': 'QuranLife v1.0.0',
+      'app_version': 'QuranLife v1.0.3',
 
       // Settings
       'theme_mode': 'Display Theme',
@@ -833,7 +833,7 @@ class Messages extends Translations {
       'about_us': 'من نحن',
       'settings': 'الإعدادات',
       'help_feedback': 'المساعدة والتعليقات',
-      'app_version': ' قرآن لايف نسخة ١.٠.٠',
+      'app_version': ' قرآن لايف نسخة ١.٠.٣',
 
       // Settings
       'theme_mode': 'نمط العرض',
@@ -1313,7 +1313,7 @@ class Messages extends Translations {
       'about_us': 'À Propos de Nous',
       'settings': 'Paramètres',
       'help_feedback': 'Aide et Commentaires',
-      'app_version': 'QuranLife v1.0.0',
+      'app_version': 'QuranLife v1.0.3',
 
       // Settings
       'theme_mode': 'Thème d\'affichage',
