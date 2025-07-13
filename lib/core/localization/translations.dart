@@ -160,8 +160,7 @@ class Messages extends Translations {
       'community_subtitle':
           'Quran Life helps you locate nearby mosques and connects you with your brothers and sisters in faith.',
       'downloading_data': 'Downloading Data...',
-      'please_be_patient':
-          'Please be patient, it takes a while the first time.',
+      'please_be_patient': 'Please be patient.',
 
       // Home Page Navigation
       'home': 'Home',
@@ -629,8 +628,7 @@ class Messages extends Translations {
       'community_subtitle':
           'يساعدك تطبيق قرآن لايف في العثور على المساجد القريبة ويربطك بإخوانك وأخواتك في الإيمان.',
       'downloading_data': 'جاري تنزيل البيانات',
-      'please_be_patient':
-          'نرجو التحلي بالصبر، قد يستغرق الأمر بعض الوقت في المرة الأولى',
+      'please_be_patient': '.نرجو التحلي بالصبر',
 
       // Home Page Navigation
       'home': 'الرئيسية',
@@ -1103,8 +1101,7 @@ class Messages extends Translations {
       'community_subtitle':
           'Quran Life vous aide à localiser les mosquées à proximité et vous connecte avec vos frères et sœurs dans la foi.',
       'downloading_data': 'Téléchargement des données...',
-      'please_be_patient':
-          'Merci de patienter, cela peut prendre un peu de temps la première fois.',
+      'please_be_patient': 'Merci de patienter.',
 
       // Home Page Navigation
       'home': 'Accueil',
