@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:project/core/Utils/constants.dart';
 import 'package:project/core/Utils/size_config.dart';
 import 'package:project/core/widgets/cusstom_indicator.dart';
+import 'package:project/core/widgets/drop_down_button.dart';
 import 'package:project/core/widgets/gradient_background.dart';
 import 'package:project/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -289,6 +290,8 @@ class HomePageBody extends StatelessWidget {
     BuildContext context,
     String title,
     VoidCallback moreIconOnpressed,
+    VoidCallback moreIconOnpressed2,
+
   ) {
     return Material(
       color: Colors.transparent,
@@ -330,15 +333,25 @@ class HomePageBody extends StatelessWidget {
                 elevation: 0,
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
-                child: IconButton(
-                  alignment: Alignment.center,
-                  onPressed: moreIconOnpressed,
-                  icon: Icon(
-                    Icons.more_horiz,
-                    size: 30,
-                    color: Get.isDarkMode ? Colors.white : Colors.black,
-                  ),
+                child: DropDownButton(
+                  ontap: moreIconOnpressed,
+                  buttontext: "more",
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                  icon: Icons.category_rounded,
+                  buttontext2: "share",
+                  color2: Get.isDarkMode ? Colors.white : Colors.black,
+                  icon2: Icons.share,
+                  ontap2: () {},
                 ),
+                // IconButton(
+                //   alignment: Alignment.center,
+                //   onPressed: moreIconOnpressed,
+                //   icon: Icon(
+                //     Icons.more_horiz,
+                //     size: 30,
+                //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                //   ),
+                // ),
               ),
             ),
           ],
