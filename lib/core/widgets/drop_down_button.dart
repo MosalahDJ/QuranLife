@@ -48,7 +48,7 @@ class DropDownButton extends StatelessWidget {
                     ],
                   ),
                 )
-                : const PopupMenuItem<String>(child: SizedBox.shrink()),
+                : PopupMenuItem<String>(height: 0, child: SizedBox.shrink()),
           ],
     );
   }

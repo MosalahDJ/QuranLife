@@ -258,7 +258,8 @@ class HomePageBody extends StatelessWidget {
                             Get.isDarkMode ? Colors.white : Colors.black,
 
                             () {
-                              homectrl.showShareDialog(context);
+                              homectrl.selected = 4;
+                              homectrl.update();
                             },
                             () {
                               homectrl.showShareDialog(context);
