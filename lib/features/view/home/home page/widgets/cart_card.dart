@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/size_config.dart';
+import 'package:project/core/widgets/drop_down_button.dart';
 import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -201,16 +202,17 @@ class CartCard extends StatelessWidget {
                 langctrl.language.value == "ar"
                     ? Sizeconfig.screenwidth! / 1.25
                     : 0,
-            child: IconButton(
-              alignment: Alignment.center,
-              onPressed: () {
+            child: DropDownButton(
+              ontap: () {
                 homectrl.showShareDialog(context);
               },
-              icon: Icon(
-                Icons.more_horiz,
-                size: 30,
-                color: Get.isDarkMode ? Colors.white : Colors.black,
-              ),
+              buttontext: "share".tr,
+              color: Colors.white,
+              icon: Icons.share,
+              // buttontext2: title2,
+              // color2: color,
+              // icon2: icondata2,
+              // ontap2: moreOnpressed2,
             ),
           ),
         ],

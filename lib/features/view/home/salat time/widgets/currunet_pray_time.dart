@@ -343,7 +343,7 @@ class CurrentPrayTime extends StatelessWidget {
                   onTap: () {
                     timespagectrl.getcurrentpage();
                     Get.toNamed("salattime");
-                    // jump to current page sawat times
+                    // jump to current page salwat times
                     Future.delayed(
                       Duration(milliseconds: 50),
                       () => timespagectrl.timespagecontroller.jumpToPage(

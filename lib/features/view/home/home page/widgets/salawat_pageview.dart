@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:project/core/Utils/constants.dart';
 import 'package:project/core/Utils/size_config.dart';
+import 'package:project/core/widgets/drop_down_button.dart';
 import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 import 'package:project/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
@@ -86,15 +87,17 @@ class SalawatPageview extends StatelessWidget {
                         "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
                         style: TextStyle(color: morebuttoncolor, fontSize: 18),
                       ),
-                  IconButton(
-                    onPressed: () {
+                  DropDownButton(
+                    ontap: () {
                       homectrl.showShareDialog(context);
                     },
-                    icon: Icon(
-                      Icons.more_horiz,
-                      size: 30,
-                      color: morebuttoncolor,
-                    ),
+                    buttontext: "share".tr,
+                    color: Colors.white,
+                    icon: Icons.share,
+                    // buttontext2: title2,
+                    // color2: color,
+                    // icon2: icondata2,
+                    // ontap2: moreOnpressed2,
                   ),
                 ],
               ),
