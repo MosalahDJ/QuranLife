@@ -146,7 +146,6 @@ class HomePageBody extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: _sectionSpacing / 2),
-
                         // Categories Section
                         FadeInRight(
                           key: fadectrl.rebuildKey2.value,
@@ -155,10 +154,18 @@ class HomePageBody extends StatelessWidget {
                           child: _buildSectionHeader(
                             context,
                             "category".tr,
+                            "more".tr,
+                            "share".tr,
+                            Get.isDarkMode ? Colors.white : Colors.black,
                             () {
                               homectrl.selected = 1;
                               homectrl.update();
                             },
+                            () {
+                              homectrl.showShareDialog(context);
+                            },
+                            Icons.more_horiz,
+                            Icons.share,
                           ),
                         ),
                         FadeInRight(
@@ -246,9 +253,18 @@ class HomePageBody extends StatelessWidget {
                           child: _buildSectionHeader(
                             context,
                             "daily_wird".tr,
+                            "more".tr,
+                            "share".tr,
+                            Get.isDarkMode ? Colors.white : Colors.black,
+
                             () {
                               homectrl.showShareDialog(context);
                             },
+                            () {
+                              homectrl.showShareDialog(context);
+                            },
+                            Icons.more_horiz,
+                            Icons.share,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -288,10 +304,14 @@ class HomePageBody extends StatelessWidget {
 
   Widget _buildSectionHeader(
     BuildContext context,
-    String title,
-    VoidCallback moreIconOnpressed,
-    VoidCallback moreIconOnpressed2,
-
+    String headerTitle,
+    String title1,
+    String title2,
+    Color color,
+    VoidCallback moreOnpressed1,
+    VoidCallback moreOnpressed2,
+    IconData icondata,
+    IconData icondata2,
   ) {
     return Material(
       color: Colors.transparent,
@@ -312,7 +332,7 @@ class HomePageBody extends StatelessWidget {
                       ? 0
                       : Sizeconfig.screenwidth! / 2.5,
               child: Text(
-                title,
+                headerTitle,
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -334,24 +354,15 @@ class HomePageBody extends StatelessWidget {
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
                 child: DropDownButton(
-                  ontap: moreIconOnpressed,
-                  buttontext: "more",
-                  color: Get.isDarkMode ? Colors.white : Colors.black,
-                  icon: Icons.category_rounded,
-                  buttontext2: "share",
-                  color2: Get.isDarkMode ? Colors.white : Colors.black,
-                  icon2: Icons.share,
-                  ontap2: () {},
+                  ontap: moreOnpressed1,
+                  buttontext: title1,
+                  color: color,
+                  icon: icondata,
+                  buttontext2: title2,
+                  color2: color,
+                  icon2: icondata2,
+                  ontap2: moreOnpressed2,
                 ),
-                // IconButton(
-                //   alignment: Alignment.center,
-                //   onPressed: moreIconOnpressed,
-                //   icon: Icon(
-                //     Icons.more_horiz,
-                //     size: 30,
-                //     color: Get.isDarkMode ? Colors.white : Colors.black,
-                //   ),
-                // ),
               ),
             ),
           ],
