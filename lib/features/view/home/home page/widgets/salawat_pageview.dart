@@ -30,12 +30,15 @@ class SalawatPageview extends StatelessWidget {
         children: [
           //salat time
           CurrentPrayTime(
+            iconcolor: Colors.white,
             morebuttoncolor: morebuttoncolor,
-            moreIconVisibility: true,
-            onpressed: () {
+            moreOnpressed1: () {
               homectrl.showShareDialog(context);
             },
-            textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
+            title1: "share".tr,
+            icondata: Icons.share,
+            moreIconVisibility: true,
+            textcolor2: Get.isDarkMode ? const Color(0xFFFFFFFF) : Colors.black,
             textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
             elevation: 2,
             color:
@@ -43,7 +46,6 @@ class SalawatPageview extends StatelessWidget {
                     ? kmaincolor2dark.withValues(alpha: 0.5)
                     : Colors.white.withValues(alpha: 0.7),
           ),
-
           //Salawattime
           Column(
             mainAxisSize: MainAxisSize.max,
@@ -82,7 +84,7 @@ class SalawatPageview extends StatelessWidget {
                       )
                       : Text(
                         "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}",
-                        style: TextStyle(color: morebuttoncolor, fontSize: 18,),
+                        style: TextStyle(color: morebuttoncolor, fontSize: 18),
                       ),
                   IconButton(
                     onPressed: () {

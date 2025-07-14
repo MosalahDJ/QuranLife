@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
 import 'package:project/core/Utils/size_config.dart';
+import 'package:project/core/widgets/drop_down_button.dart';
 import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -18,17 +19,29 @@ class CurrentPrayTime extends StatelessWidget {
     required this.elevation,
     required this.textcolor,
     required this.textcolor2,
-    required this.onpressed,
     required this.moreIconVisibility,
-    required this.morebuttoncolor,
+    required this.title1,
+    this.title2,
+    required this.moreOnpressed1,
+    this.moreOnpressed2,
+    required this.icondata,
+    this.icondata2, required this.morebuttoncolor, required this.iconcolor,
   });
+
+  final String title1;
+  final String? title2;
+  final VoidCallback moreOnpressed1;
+  final VoidCallback? moreOnpressed2;
+  final IconData icondata;
+  final IconData? icondata2;
+  final Color iconcolor;
   final Color color;
   final Color morebuttoncolor;
   final Color textcolor;
   final Color textcolor2;
   final double elevation;
   final bool moreIconVisibility;
-  final VoidCallback onpressed;
+  // final VoidCallback onpressed;
 
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
@@ -195,7 +208,7 @@ class CurrentPrayTime extends StatelessWidget {
           ),
           //get position button
           Positioned(
-            //TODO: I have a problem here this text is hiden under the card in some phones 
+            //TODO: I have a problem here this text is hiden under the card in some phones
             bottom:
                 Sizeconfig.screenheight! < 768
                     ? Sizeconfig.screenheight! / 50
@@ -368,14 +381,24 @@ class CurrentPrayTime extends StatelessWidget {
               elevation: 0,
               child: Visibility(
                 visible: moreIconVisibility,
-                child: IconButton(
-                  onPressed: onpressed,
-                  icon: Icon(
-                    Icons.more_horiz,
-                    size: 30,
-                    color: morebuttoncolor,
-                  ),
+                child: DropDownButton(
+                  ontap: moreOnpressed1,
+                  buttontext: title1,
+                  color: iconcolor,
+                  icon: icondata,
+                  buttontext2: title2,
+                  color2: color,
+                  icon2: icondata2,
+                  ontap2: moreOnpressed2,
                 ),
+                // IconButton(
+                //   onPressed: onpressed,
+                //   icon: Icon(
+                //     Icons.more_horiz,
+                //     size: 30,
+                //     color: morebuttoncolor,
+                //   ),
+                // ),
               ),
             ),
           ),
