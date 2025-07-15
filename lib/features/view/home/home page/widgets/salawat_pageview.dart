@@ -31,7 +31,8 @@ class SalawatPageview extends StatelessWidget {
         children: [
           //salat time
           CurrentPrayTime(
-            iconcolor: Colors.white,
+            iconcolor: 
+                            Get.isDarkMode ? Colors.white : Colors.black,
             morebuttoncolor: morebuttoncolor,
             moreOnpressed1: () {
               homectrl.showShareDialog(context);
@@ -92,7 +93,9 @@ class SalawatPageview extends StatelessWidget {
                       homectrl.showShareDialog(context);
                     },
                     buttontext: "share".tr,
-                    color: Colors.white,
+                    color: 
+                            Get.isDarkMode ? Colors.white : Colors.black,
+                    
                     icon: Icons.share,
                     // buttontext2: title2,
                     // color2: color,

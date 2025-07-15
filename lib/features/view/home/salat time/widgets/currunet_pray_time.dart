@@ -387,18 +387,9 @@ class CurrentPrayTime extends StatelessWidget {
                   color: iconcolor,
                   icon: icondata,
                   buttontext2: title2,
-                  color2: color,
                   icon2: icondata2,
                   ontap2: moreOnpressed2,
                 ),
-                // IconButton(
-                //   onPressed: onpressed,
-                //   icon: Icon(
-                //     Icons.more_horiz,
-                //     size: 30,
-                //     color: morebuttoncolor,
-                //   ),
-                // ),
               ),
             ),
           ),

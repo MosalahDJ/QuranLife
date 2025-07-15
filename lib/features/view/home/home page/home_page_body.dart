@@ -351,7 +351,6 @@ class HomePageBody extends StatelessWidget {
                       ? Sizeconfig.screenwidth! / 1.25
                       : 0,
               child: Material(
-                
                 elevation: 0,
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
@@ -361,7 +360,6 @@ class HomePageBody extends StatelessWidget {
                   color: color,
                   icon: icondata,
                   buttontext2: title2,
-                  color2: color,
                   icon2: icondata2,
                   ontap2: moreOnpressed2,
                 ),

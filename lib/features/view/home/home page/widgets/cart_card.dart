@@ -207,7 +207,8 @@ class CartCard extends StatelessWidget {
                 homectrl.showShareDialog(context);
               },
               buttontext: "share".tr,
-              color: Colors.white,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
+
               icon: Icons.share,
               // buttontext2: title2,
               // color2: color,

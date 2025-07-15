@@ -123,11 +123,10 @@ class PrayerTimesPage extends StatelessWidget {
 
                         // Current Prayer Time Card
                         CurrentPrayTime(
-                          iconcolor: Colors.white,
+                          iconcolor: kmaincolor4,
                           morebuttoncolor: Colors.white,
                           moreOnpressed1: () {},
                           title1: "share".tr,
-
                           icondata: Icons.share,
                           moreIconVisibility: false,
                           textcolor2: Colors.white,
