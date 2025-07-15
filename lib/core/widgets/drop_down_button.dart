@@ -42,7 +42,7 @@ class DropDownButton extends StatelessWidget {
                   onTap: ontap2,
                   child: Row(
                     children: [
-                      Icon(icon2, color: color2),
+                      Icon(icon2, color: color2, size: 20),
                       const SizedBox(width: 8),
                       Text(buttontext2!),
                     ],
