@@ -12,7 +12,6 @@ class DropDownButton extends StatefulWidget {
     required this.icon,
     this.ontap2,
     this.buttontext2,
-    // this.color2,
     this.icon2,
     this.scrollController,
   });
@@ -23,7 +22,6 @@ class DropDownButton extends StatefulWidget {
   final IconData icon;
   final VoidCallback? ontap2;
   final String? buttontext2;
-  // final Color? color2;
   final IconData? icon2;
 
   // Optional scroll controller for auto-dismiss on scroll
@@ -83,6 +81,7 @@ class _DropDownButtonState extends State<DropDownButton> {
 
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             InkWell(
                               onTap: () {
@@ -92,14 +91,18 @@ class _DropDownButtonState extends State<DropDownButton> {
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+
                                   children: [
                                     Icon(
                                       widget.icon,
                                       size: 20,
                                       color: widget.color,
                                     ),
-                                    const SizedBox(width: 8),
+                                    const SizedBox(width: 8, height: 20),
                                     Text(widget.buttontext),
                                   ],
                                 ),
@@ -114,6 +117,10 @@ class _DropDownButtonState extends State<DropDownButton> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
@@ -121,7 +128,7 @@ class _DropDownButtonState extends State<DropDownButton> {
                                         size: 20,
                                         color: widget.color,
                                       ),
-                                      const SizedBox(width: 8),
+                                      const SizedBox(width: 8, height: 20),
                                       Text(widget.buttontext2!),
                                     ],
                                   ),
