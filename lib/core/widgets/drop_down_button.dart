@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
+import 'package:project/features/controller/settings%20controllers/language_controller.dart';
 
 class DropDownButton extends StatefulWidget {
   const DropDownButton({
@@ -48,6 +49,7 @@ class _DropDownButtonState extends State<DropDownButton> {
     final RenderBox renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
+    final LanguageController langctrl = Get.find();
 
     _overlayEntry = OverlayEntry(
       builder:
@@ -62,7 +64,10 @@ class _DropDownButtonState extends State<DropDownButton> {
                   child: CompositedTransformFollower(
                     link: _layerLink,
                     showWhenUnlinked: false,
-                    offset: Offset(-50, 10),
+                    offset:
+                        langctrl.language.value == "ar"
+                            ? Offset(10, 10)
+                            : Offset(-50, 10),
                     child: Material(
                       color: Colors.transparent,
                       elevation: 10,
