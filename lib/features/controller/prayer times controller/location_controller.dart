@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:geocoding/geocoding.dart';
@@ -46,6 +47,17 @@ class LocationController extends GetxController {
           "location_permission_denied_forever_title".tr,
           "location_permission_denied_forever_message".tr,
         );
+      }
+
+      List<ConnectivityResult> conectivity =
+          await Connectivity().checkConnectivity();
+      if (conectivity.contains(ConnectivityResult.none)) {
+        Get.snackbar(
+          'no_internet'.tr,
+          'check_internet_connection'.tr,
+          duration: Duration(seconds: 15),
+        );
+        return;
       }
 
       if (permission == LocationPermission.whileInUse) {

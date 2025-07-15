@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +14,6 @@ class GetResponseBody extends GetxController {
   SqlDb sqldb = SqlDb();
   late DateTime endDate;
   late SharedPreferences prefs;
-
 
   @override
   void onInit() {
@@ -164,7 +163,7 @@ class GetResponseBody extends GetxController {
         //print('Failed to fetch calendar data: ${response.statusCode}');
       }
 
-    prefs = await SharedPreferences.getInstance();
+      prefs = await SharedPreferences.getInstance();
 
       locationctrl.location =
           prefs.getString("city") == null
