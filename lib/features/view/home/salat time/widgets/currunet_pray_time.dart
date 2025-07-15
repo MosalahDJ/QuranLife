@@ -25,7 +25,9 @@ class CurrentPrayTime extends StatelessWidget {
     required this.moreOnpressed1,
     this.moreOnpressed2,
     required this.icondata,
-    this.icondata2, required this.morebuttoncolor, required this.iconcolor,
+    this.icondata2,
+    required this.morebuttoncolor,
+    required this.iconcolor,
   });
 
   final String title1;
@@ -209,9 +211,12 @@ class CurrentPrayTime extends StatelessWidget {
           //get position button
           Positioned(
             //TODO: I have a problem here this text is hiden under the card in some phones
+            // I add a new dimenssion check and after I will see the diffrence in mouad's phone
             bottom:
                 Sizeconfig.screenheight! < 768
                     ? Sizeconfig.screenheight! / 50
+                    : Sizeconfig.screenheight! < 920
+                    ? Sizeconfig.screenheight! / 75
                     : Sizeconfig.screenheight! / 100,
             right:
                 langctrl.language.value == "ar"
