@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/features/model/ahadith_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../model/ahadith_data.dart';
 
 class AhadithController extends GetxController {
   List<AhadithData> ahadith = [];

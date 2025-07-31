@@ -2,11 +2,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/core/widgets/skeletonizer.dart';
-import 'package:project/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
+import '../../../../../core/widgets/shimmer_text.dart';
+import '../../../../../core/widgets/skeletonizer.dart';
+import '../../../../controller/qibla%20compass%20controller/qibla_compass_controller.dart';
 
 class QiblaDirection extends StatelessWidget {
   QiblaDirection({super.key});

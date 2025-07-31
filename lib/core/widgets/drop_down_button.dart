@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
+import '../Utils/constants.dart';
+import '../../features/controller/settings%20controllers/language_controller.dart';
 
 class DropDownButton extends StatefulWidget {
   const DropDownButton({

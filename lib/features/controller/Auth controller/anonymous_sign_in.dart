@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/Auth%20controller/user_state_controller.dart';
+import '../Auth%20controller/user_state_controller.dart';
 
 class AnonymouslysignIn extends GetxController {
   final RxBool isLoading = false.obs;

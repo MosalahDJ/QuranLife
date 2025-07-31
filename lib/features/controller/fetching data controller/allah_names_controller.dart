@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/features/model/allahnames.dart';
+import '../../model/allahnames.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AllahNamesController extends GetxController {

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:project/features/model/prayer_times_model.dart';
-import 'package:project/features/model/sql_db.dart';
+import '../prayer%20times%20controller/get_response_body.dart';
+import '../../model/prayer_times_model.dart';
+import '../../model/sql_db.dart';
 
 SqlDb sqldb = SqlDb();
 

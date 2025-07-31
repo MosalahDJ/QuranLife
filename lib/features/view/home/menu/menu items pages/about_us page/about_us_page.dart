@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
+import '../../../../../../core/Utils/size_config.dart';
+import '../../../../../controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 
 class AboutUsPage extends StatelessWidget {
   AboutUsPage({super.key});

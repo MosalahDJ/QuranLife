@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/features/view/home/menu/menu_page_body.dart';
+import 'menu_page_body.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});

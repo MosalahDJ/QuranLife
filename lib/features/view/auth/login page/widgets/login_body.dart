@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/information_form.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/controller/Auth%20controller/anonymous_sign_in.dart';
-import 'package:project/features/controller/Auth%20controller/googlelogincontroller.dart';
-import 'package:project/features/controller/Auth%20controller/logincontroller.dart';
-import 'package:project/features/controller/Auth%20controller/passwordresset.dart';
-import 'package:project/features/controller/Auth%20controller/textvalidatecontroller.dart';
+import '../../../../../core/Utils/constants.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../../core/widgets/information_form.dart';
+import '../../../../../core/widgets/shimmer_text.dart';
+import '../../../../controller/Auth%20controller/anonymous_sign_in.dart';
+import '../../../../controller/Auth%20controller/googlelogincontroller.dart';
+import '../../../../controller/Auth%20controller/logincontroller.dart';
+import '../../../../controller/Auth%20controller/passwordresset.dart';
+import '../../../../controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:project/features/view/auth/signin%20page/signin_page.dart';
+import '../../signin%20page/signin_page.dart';
 
 class LoginBody extends StatelessWidget {
   LoginBody({super.key});

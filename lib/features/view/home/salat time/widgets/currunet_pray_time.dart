@@ -1,16 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/drop_down_button.dart';
-import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
-import 'package:project/features/controller/spalshview%20controller/splash_view_controller.dart';
+import '../../../../../core/Utils/constants.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../../core/widgets/drop_down_button.dart';
+import '../../../../controller/floating_animation_controllers/floating_animation_controller.dart';
+import '../../../../controller/prayer%20times%20controller/get_response_body.dart';
+import '../../../../controller/prayer%20times%20controller/location_controller.dart';
+import '../../../../controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
+import '../../../../controller/prayer%20times%20controller/times_page_controller.dart';
+import '../../../../controller/settings%20controllers/language_controller.dart';
+import '../../../../controller/spalshview%20controller/splash_view_controller.dart';
 
 class CurrentPrayTime extends StatelessWidget {
   CurrentPrayTime({

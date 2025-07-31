@@ -2,12 +2,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/Auth%20controller/user_state_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import '../Auth%20controller/user_state_controller.dart';
+import '../prayer%20times%20controller/fetch_prayer_from_date.dart';
+import '../prayer%20times%20controller/get_response_body.dart';
+import '../prayer%20times%20controller/location_controller.dart';
+import '../prayer%20times%20controller/deterimine_prayers_controller.dart';
+import '../prayer%20times%20controller/times_page_controller.dart';
 
 class SplashViewController extends GetxController
     with GetSingleTickerProviderStateMixin {

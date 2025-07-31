@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/features/controller/map%20controller/map_controller.dart';
+import '../../../../core/Utils/constants.dart';
+import '../../../controller/map%20controller/map_controller.dart';
 
 
 class MapSample extends StatelessWidget {

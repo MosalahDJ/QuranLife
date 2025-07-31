@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/view/home/salat%20time/widgets/tablerow.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import '../../salat%20time/widgets/tablerow.dart';
 
 class Prayertimestable extends GetView {
   Prayertimestable({super.key});

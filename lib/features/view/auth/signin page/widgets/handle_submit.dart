@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/Auth%20controller/signncontroller.dart';
-import 'package:project/features/controller/Auth%20controller/textvalidatecontroller.dart';
+import '../../../../controller/Auth%20controller/signncontroller.dart';
+import '../../../../controller/Auth%20controller/textvalidatecontroller.dart';
 
 class SignInSubmitHandler {
   final SignInController signinctrl = Get.put<SignInController>(

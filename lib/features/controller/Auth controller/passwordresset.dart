@@ -2,9 +2,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../core/Utils/constants.dart';
 
-import 'package:project/features/controller/Auth%20controller/logincontroller.dart';
+import '../Auth%20controller/logincontroller.dart';
 
 class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();

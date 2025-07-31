@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/widgets/information_form.dart';
-import 'package:project/features/controller/Auth%20controller/signncontroller.dart';
+import '../../../../../core/widgets/information_form.dart';
+import '../../../../controller/Auth%20controller/signncontroller.dart';
 
 // Helper class for sign-in form widgets
 class SignInFormHelpers {

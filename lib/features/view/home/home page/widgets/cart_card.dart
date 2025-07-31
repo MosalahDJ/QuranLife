@@ -2,14 +2,14 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/drop_down_button.dart';
-import 'package:project/features/controller/floating_animation_controllers/floating_animation_controller.dart';
-import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
-import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
-import 'package:project/features/view/home/map%20page/map_page.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../../core/widgets/drop_down_button.dart';
+import '../../../../controller/floating_animation_controllers/floating_animation_controller.dart';
+import '../../../../controller/home%20controller/myhomecontroller.dart';
+import '../../../../controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import '../../../../controller/prayer%20times%20controller/location_controller.dart';
+import '../../../../controller/settings%20controllers/language_controller.dart';
+import '../../map%20page/map_page.dart';
 
 class CartCard extends StatelessWidget {
   CartCard({super.key, required this.color, required this.elevation});

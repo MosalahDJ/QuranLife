@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/features/model/islamic_teaching.dart';
+import '../../model/islamic_teaching.dart';
 
 class OmraController extends GetxController {
   List<IslamicTeachingModel> omradata = [];

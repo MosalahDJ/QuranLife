@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import '../prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:http/http.dart' as http;
-import 'package:project/features/controller/prayer%20times%20controller/location_controller.dart';
-import 'package:project/features/model/sql_db.dart';
+import '../prayer%20times%20controller/location_controller.dart';
+import '../../model/sql_db.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 DateTime mycurrentdate = DateTime.now();

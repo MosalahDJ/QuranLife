@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/features/controller/spalshview%20controller/splash_view_controller.dart';
+import '../../../../core/Utils/constants.dart';
+import '../../../controller/spalshview%20controller/splash_view_controller.dart';
 
 class SplashViewBody extends StatelessWidget {
   SplashViewBody({super.key});

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/features/controller/quraan%20controller/favorite_controller.dart';
-import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
-import 'package:project/features/view/home/quraan%20page/surah_page.dart';
-import 'package:project/features/view/home/quraan%20page/widgets/ayah_widget.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/gradient_background.dart';
+import '../../../controller/quraan%20controller/favorite_controller.dart';
+import '../../../controller/quraan%20controller/quraan_controller.dart';
+import '../quraan%20page/surah_page.dart';
+import '../quraan%20page/widgets/ayah_widget.dart';
 
 class Favorite extends StatelessWidget {
   Favorite({super.key});

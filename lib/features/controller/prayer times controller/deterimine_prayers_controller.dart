@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:project/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import '../prayer%20times%20controller/fetch_prayer_from_date.dart';
 
 class DeterminePrayersController extends GetxController {
   final FetchPrayerFromDate fpfctrl = Get.find();

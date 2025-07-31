@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/theme/thems.dart';
+import '../../../core/theme/thems.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppTheme {

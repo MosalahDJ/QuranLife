@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/cusstom_indicator.dart';
-import 'package:project/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
-import 'package:project/features/view/auth/login%20page/loginpage.dart';
-import 'package:project/features/view/onboarding%20pages/widgets/cusstom_page_view.dart';
-import 'package:project/features/view/onboarding%20pages/widgets/page_view_buttons.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/cusstom_indicator.dart';
+import '../../../controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
+import '../../auth/login%20page/loginpage.dart';
+import '../../onboarding%20pages/widgets/cusstom_page_view.dart';
+import '../../onboarding%20pages/widgets/page_view_buttons.dart';
 
 class OnboardingBody extends StatelessWidget {
   OnboardingBody({super.key});

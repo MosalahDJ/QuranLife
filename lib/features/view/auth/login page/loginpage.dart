@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/features/controller/Auth%20controller/logincontroller.dart';
-import 'package:project/features/controller/Auth%20controller/passwordresset.dart';
-import 'package:project/features/controller/Auth%20controller/textvalidatecontroller.dart';
-import 'package:project/features/view/auth/login%20page/widgets/login_body.dart';
+import '../../../../core/Utils/constants.dart';
+import '../../../controller/Auth%20controller/logincontroller.dart';
+import '../../../controller/Auth%20controller/passwordresset.dart';
+import '../../../controller/Auth%20controller/textvalidatecontroller.dart';
+import '../login%20page/widgets/login_body.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});

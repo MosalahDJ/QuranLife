@@ -2,18 +2,18 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/controller/home%20controller/fade_animation_controller.dart';
-import 'package:project/features/controller/quraan%20controller/juzua_controller.dart';
-import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
-import 'package:project/features/view/home/quraan%20page/favorite.dart';
-import 'package:project/features/view/home/quraan%20page/saved_ayahs.dart';
-import 'package:project/features/view/home/quraan%20page/surah_page.dart';
-import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/gradient_background.dart';
+import '../../../../core/widgets/shimmer_text.dart';
+import '../../../controller/home%20controller/fade_animation_controller.dart';
+import '../../../controller/quraan%20controller/juzua_controller.dart';
+import '../../../controller/quraan%20controller/quraan_controller.dart';
+import '../quraan%20page/favorite.dart';
+import '../quraan%20page/saved_ayahs.dart';
+import '../quraan%20page/surah_page.dart';
+import '../../../controller/home%20controller/myhomecontroller.dart';
 
 class QuraanPage extends StatelessWidget {
   QuraanPage({super.key});

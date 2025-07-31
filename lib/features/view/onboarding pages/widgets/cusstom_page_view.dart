@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/view/onboarding%20pages/widgets/mypageview.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../onboarding%20pages/widgets/mypageview.dart';
 
 class CusstomPageView extends StatelessWidget {
   const CusstomPageView({super.key, required this.pagecontroller});

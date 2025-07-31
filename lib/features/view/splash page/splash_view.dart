@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:project/features/view/splash%20page/widgets/splash_view_body.dart';
+import '../../../core/Utils/size_config.dart';
+import '../../controller/settings%20controllers/theme_controller.dart';
+import '../splash%20page/widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});

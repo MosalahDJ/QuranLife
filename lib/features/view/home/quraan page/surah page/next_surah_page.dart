@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/model/qurandata.dart';
-import 'package:project/features/view/home/quraan%20page/widgets/ayah_widget.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../model/qurandata.dart';
+import '../../quraan%20page/widgets/ayah_widget.dart';
 
 class NextSurahPage extends StatefulWidget {
   final Surah surah;

@@ -1,14 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/controller/adkar%20controller/adkar_categories_controller.dart';
-import 'package:project/features/controller/home%20controller/fade_animation_controller.dart';
-import 'package:project/features/view/home/adkar%20page/widgets/duaa_page.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/gradient_background.dart';
+import '../../../../core/widgets/shimmer_text.dart';
+import '../../../controller/adkar%20controller/adkar_categories_controller.dart';
+import '../../../controller/home%20controller/fade_animation_controller.dart';
+import '../adkar%20page/widgets/duaa_page.dart';
 
 class AdkarPage extends StatelessWidget {
   AdkarPage({super.key});

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
+import '../settings%20controllers/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageController extends GetxController {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../../core/Utils/constants.dart';
 
 import 'package:get/get.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
+import '../../../../../../core/Utils/size_config.dart';
+import '../../../../../../core/widgets/gradient_background.dart';
+import '../../../../../../core/widgets/shimmer_text.dart';
+import '../../../../../controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 
 class RefferalPage extends StatelessWidget {
   RefferalPage({super.key});

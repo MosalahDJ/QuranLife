@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
-import 'package:project/features/view/home/salat%20time/widgets/prayer_times_table.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/shimmer_text.dart';
+import '../salat%20time/widgets/currunet_pray_time.dart';
+import '../salat%20time/widgets/prayer_times_table.dart';
 
 class PrayerTimesPage extends StatelessWidget {
   const PrayerTimesPage({super.key});

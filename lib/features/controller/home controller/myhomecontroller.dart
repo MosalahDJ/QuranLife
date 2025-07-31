@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../core/Utils/constants.dart';
 
-import 'package:project/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
-import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
+import '../Url%20Luncher%20Controller/url_luncher_controller.dart';
+import '../settings%20controllers/language_controller.dart';
+import '../settings%20controllers/theme_controller.dart';
 
 class MyHomeController extends GetxController {
   int selected = 2;

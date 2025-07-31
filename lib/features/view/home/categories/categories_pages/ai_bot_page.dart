@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/core/widgets/skeletonizer.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../../core/widgets/gradient_background.dart';
+import '../../../../../core/widgets/shimmer_text.dart';
+import '../../../../../core/widgets/skeletonizer.dart';
 import '../../../../../features/controller/ai chat controller/ai_chat_controller.dart';
 
 class AiBotPage extends StatelessWidget {

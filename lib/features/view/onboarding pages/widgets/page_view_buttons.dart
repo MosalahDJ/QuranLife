@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 
 class PageViewbutton extends StatelessWidget {
   PageViewbutton({super.key});

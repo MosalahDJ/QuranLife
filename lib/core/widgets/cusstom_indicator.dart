@@ -1,7 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
+import '../../features/controller/home%20controller/myhomecontroller.dart';
 
 class CustomIndicator extends StatelessWidget {
   const CustomIndicator({

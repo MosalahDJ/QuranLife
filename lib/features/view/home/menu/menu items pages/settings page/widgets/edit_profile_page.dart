@@ -1,14 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/controller/Auth%20controller/delet_account.dart';
-import 'package:project/features/controller/Auth%20controller/logincontroller.dart';
-import 'package:project/features/controller/Auth%20controller/passwordresset.dart';
-import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
+import '../../../../../../../core/Utils/size_config.dart';
+import '../../../../../../../core/widgets/shimmer_text.dart';
+import '../../../../../../controller/Auth%20controller/delet_account.dart';
+import '../../../../../../controller/Auth%20controller/logincontroller.dart';
+import '../../../../../../controller/Auth%20controller/passwordresset.dart';
+import '../../../../../../controller/settings%20controllers/theme_controller.dart';
 
 class EditProfilePage extends StatelessWidget {
   EditProfilePage({super.key});

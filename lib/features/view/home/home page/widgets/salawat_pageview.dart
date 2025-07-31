@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:project/core/Utils/constants.dart';
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/drop_down_button.dart';
-import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:project/features/controller/settings%20controllers/language_controller.dart';
-import 'package:project/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
-import 'package:project/features/view/home/salat%20time/widgets/salwatpageview.dart';
+import '../../../../../core/Utils/constants.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../../core/widgets/drop_down_button.dart';
+import '../../../../controller/home%20controller/myhomecontroller.dart';
+import '../../../../controller/settings%20controllers/language_controller.dart';
+import '../../salat%20time/widgets/currunet_pray_time.dart';
+import '../../salat%20time/widgets/salwatpageview.dart';
 
 class SalawatPageview extends StatelessWidget {
   SalawatPageview({super.key, required this.morebuttoncolor});

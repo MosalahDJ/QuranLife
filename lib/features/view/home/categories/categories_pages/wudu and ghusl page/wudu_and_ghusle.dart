@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/shimmer_text.dart';
-import 'package:project/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/ghusl.dart';
-import 'package:project/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/wudu.dart';
+import '../../../../../../core/Utils/size_config.dart';
+import '../../../../../../core/widgets/gradient_background.dart';
+import '../../../../../../core/widgets/shimmer_text.dart';
+import '../wudu%20and%20ghusl%20page/ghusl.dart';
+import '../wudu%20and%20ghusl%20page/wudu.dart';
 
 class WuduAndGhusle extends StatefulWidget {
   const WuduAndGhusle({super.key});

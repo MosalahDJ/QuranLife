@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/features/model/adkar_type_data.dart';
+import '../../model/adkar_type_data.dart';
 
 class AdkarCategoriesController extends GetxController {
   List<AdkarTypes> adkartype = [];

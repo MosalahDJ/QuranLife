@@ -3,18 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/core/widgets/gradient_background.dart';
-import 'package:project/core/widgets/skeletonizer.dart';
-import 'package:project/features/controller/Auth%20controller/delet_account.dart';
-import 'package:project/features/controller/Auth%20controller/logincontroller.dart';
-import 'package:project/features/controller/home%20controller/fade_animation_controller.dart';
-import 'package:project/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:project/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:project/features/view/home/quraan%20page/favorite.dart';
-import 'package:project/features/view/home/quraan%20page/saved_ayahs.dart';
+import '../../../../core/Utils/size_config.dart';
+import '../../../../core/widgets/gradient_background.dart';
+import '../../../../core/widgets/skeletonizer.dart';
+import '../../../controller/Auth%20controller/delet_account.dart';
+import '../../../controller/Auth%20controller/logincontroller.dart';
+import '../../../controller/home%20controller/fade_animation_controller.dart';
+import '../../../controller/home%20controller/myhomecontroller.dart';
+import '../../../controller/settings%20controllers/theme_controller.dart';
+import '../quraan%20page/favorite.dart';
+import '../quraan%20page/saved_ayahs.dart';
 
 class MenuPageBody extends StatelessWidget {
   MenuPageBody({super.key});

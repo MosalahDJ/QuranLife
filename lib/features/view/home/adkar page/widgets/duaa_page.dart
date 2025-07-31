@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/adkar%20controller/adkar_controller.dart';
-import 'package:project/features/controller/statistics%20controller/statistics_controller.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../controller/adkar%20controller/adkar_controller.dart';
+import '../../../../controller/statistics%20controller/statistics_controller.dart';
 
 class DuaaPage extends StatefulWidget {
   const DuaaPage({

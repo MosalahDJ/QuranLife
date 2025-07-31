@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:project/features/model/qurandata.dart';
-import 'package:project/features/view/home/quraan%20page/surah_page.dart';
+import '../../model/qurandata.dart';
+import '../../view/home/quraan%20page/surah_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Controller class for managing Quran data and navigation using GetX state management

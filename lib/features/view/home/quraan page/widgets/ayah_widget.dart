@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/quraan%20controller/audioplayer_controller.dart';
-import 'package:project/features/controller/quraan%20controller/favorite_controller.dart';
-import 'package:project/features/controller/quraan%20controller/quraan_controller.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../controller/quraan%20controller/audioplayer_controller.dart';
+import '../../../../controller/quraan%20controller/favorite_controller.dart';
+import '../../../../controller/quraan%20controller/quraan_controller.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:project/features/controller/quraan%20controller/saving_controller.dart';
-import 'package:project/features/controller/statistics%20controller/statistics_controller.dart';
+import '../../../../controller/quraan%20controller/saving_controller.dart';
+import '../../../../controller/statistics%20controller/statistics_controller.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class AyahWidget extends StatelessWidget {

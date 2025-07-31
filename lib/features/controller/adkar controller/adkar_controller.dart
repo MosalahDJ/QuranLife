@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:project/features/model/adhkardata.dart';
+import '../../model/adhkardata.dart';
 
 class AdkarController extends GetxController {
   List<Adkar> adkar = [];

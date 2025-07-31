@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:project/features/controller/fcm%20controllers/my_acces_token.dart';
+import '../fcm%20controllers/my_acces_token.dart';
 
 class FCMController extends GetxController {
   @override

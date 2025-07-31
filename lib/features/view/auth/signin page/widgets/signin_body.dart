@@ -1,13 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/core/Utils/constants.dart';
+import '../../../../../core/Utils/constants.dart';
 
-import 'package:project/core/Utils/size_config.dart';
-import 'package:project/features/controller/Auth%20controller/signncontroller.dart';
-import 'package:project/features/controller/Auth%20controller/textvalidatecontroller.dart';
-import 'package:project/features/view/auth/signin%20page/widgets/handle_submit.dart';
-import 'package:project/features/view/auth/signin%20page/widgets/signin_form_helper.dart';
+import '../../../../../core/Utils/size_config.dart';
+import '../../../../controller/Auth%20controller/signncontroller.dart';
+import '../../../../controller/Auth%20controller/textvalidatecontroller.dart';
+import '../../signin%20page/widgets/handle_submit.dart';
+import '../../signin%20page/widgets/signin_form_helper.dart';
 
 class SigneinPageBody extends StatelessWidget {
   SigneinPageBody({super.key});
