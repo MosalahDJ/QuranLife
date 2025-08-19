@@ -171,7 +171,11 @@ class _DropDownButtonState extends State<DropDownButton> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: IconButton(
-        icon: const Icon(Icons.more_horiz, color: Colors.white, size: 30),
+        icon: Icon(
+          Icons.more_horiz,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
+          size: 30,
+        ),
         onPressed: _toggleOverlay,
       ),
     );

@@ -359,7 +359,6 @@ class HomePageBody extends StatelessWidget {
                   buttontext: title1,
                   color: color,
                   icon: icondata,
-                  
                   buttontext2: title2,
                   icon2: icondata2,
                   ontap2: moreOnpressed2,
