@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         applicationId = "com.MoSalahDJ.quran_life"
-        minSdkVersion(21)
+        minSdkVersion(23)
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
