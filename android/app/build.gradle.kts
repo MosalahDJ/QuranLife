@@ -36,7 +36,6 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        
         manifestPlaceholders["mapsApiKey"] = project.properties["MAPS_API_KEY"] as? String ?: ""
     }
 
