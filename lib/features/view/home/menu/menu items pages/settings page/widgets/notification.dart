@@ -140,7 +140,7 @@ class NotificationSettings extends StatelessWidget {
                 () => Switch(
                   value: switchvalue,
                   onChanged: onchanged,
-                  activeColor: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                  activeThumbColor: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
                 ),
               ),
             ],
