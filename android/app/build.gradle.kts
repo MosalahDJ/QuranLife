@@ -18,7 +18,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.MoSalahDJ.quran_life"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -32,11 +32,25 @@ android {
 
     defaultConfig {
         applicationId = "com.MoSalahDJ.quran_life"
-        minSdkVersion (24)
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        minSdkVersion(24)
+        targetSdkVersion(35)
+        versionCode = 5
+        versionName = "1.0.4"
         manifestPlaceholders["mapsApiKey"] = project.properties["MAPS_API_KEY"] as? String ?: ""
+
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
+        }
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     signingConfigs {
