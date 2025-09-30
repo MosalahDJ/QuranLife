@@ -149,14 +149,17 @@ class DisplayThemePage extends StatelessWidget {
                       ),
                     ),
                     Obx(
-                      () => Radio<AppTheme>(
-                        value: theme,
+                      () => RadioGroup<AppTheme>(
                         groupValue: themeCtrl.selectedTheme.value,
                         onChanged: (value) {
                           _applyThemeChange(themeCtrl, langCtrl, value!);
                         },
-                        activeColor:
+                        child: Radio<AppTheme>(
+                          value: theme,
+                          fillColor: WidgetStateProperty.all(
                             themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                          ),
+                        ),
                       ),
                     ),
                   ],

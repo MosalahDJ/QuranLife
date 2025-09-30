@@ -147,13 +147,17 @@ class LanguagePage extends StatelessWidget {
                 ),
               ),
               Obx(
-                () => Radio<String>(
-                  value: lang,
+                () => RadioGroup<String>(
                   groupValue: langCtrl.language.value,
                   onChanged: (value) {
                     _applyLanguageChange(themeCtrl, langCtrl, value!);
                   },
-                  activeColor: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                  child: Radio<String>(
+                    value: lang,
+                    fillColor: WidgetStateProperty.all(
+                      themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                    ),
+                  ),
                 ),
               ),
             ],
