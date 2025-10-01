@@ -199,7 +199,6 @@ class HomePageBody extends StatelessWidget {
                                             title: 'welcome_message'.tr,
                                             body: Text('ai_disclaimer'.tr),
                                             btnConfirmText: 'ok'.tr,
-                                            onConfirm: () {},
                                           );
                                         },
                                         MdiIcons.robot,

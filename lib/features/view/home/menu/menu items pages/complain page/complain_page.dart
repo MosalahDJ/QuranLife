@@ -64,12 +64,11 @@ class ComplainPage extends StatelessWidget {
                           title: 'direct_message'.tr,
                           icon: Icons.message_rounded,
                           onTap: () {
-                            () {
-                              if (_isanonymous(context)) {
-                                return;
-                              }
+                            if (_isanonymous(context)) {
+                              return;
+                            } else {
                               Get.to(() => const MessagingPage());
-                            };
+                            }
                           },
                         ),
                         _buildContactOption(

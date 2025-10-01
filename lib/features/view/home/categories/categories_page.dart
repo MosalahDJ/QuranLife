@@ -101,21 +101,6 @@ class CategoriesPage extends StatelessWidget {
                                 mycategory(
                                   () {
                                     if (_isanonymous(context)) {
-                                      return;
-                                    }
-                                    Get.to(() => const AiBotPage());
-                                    showCustomDialog(
-                                      context: context,
-                                      title: 'welcome_message'.tr,
-                                      message: 'ai_disclaimer'.tr,
-                                    );
-                                  },
-                                  MdiIcons.robot,
-                                  'ai_bot'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    if (_isanonymous(context)) {
                                       showCustomDialog(
                                         context: context,
                                         title: 'guest_login_warning'.tr,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
@@ -146,6 +145,7 @@ class EditProfilePage extends StatelessWidget {
   }
 
   // Add this method to the EditProfilePage class
+  //TODO: I have some trouble here because the link isn't sent when we press button
   Widget _buildChangePasswordButton(BuildContext context) {
     return GetBuilder<ThemeController>(
       builder: (themeController) {
@@ -160,14 +160,14 @@ class EditProfilePage extends StatelessWidget {
             onPressed: () {
               showCustomDialogWithActions(
                 context: context,
-                title: 'reset_password'.tr,
+                title: 'password_reset'.tr,
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
-                    mainAxisAlignment:MainAxisAlignment.center ,
-                    mainAxisSize: MainAxisSize.min ,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('reset_password_desc'.tr),
+                      Text('please_enter_email'.tr),
                       const SizedBox(height: 20),
                       TextField(
                         controller: changpassemailController,

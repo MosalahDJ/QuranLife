@@ -236,10 +236,12 @@ class CurrentPrayTime extends StatelessWidget {
                 onTap: () {
                   showCustomDialogWithActions(
                     context: context,
+                    isDismissible: true,
                     title: "get_new_data".tr,
                     body: Text("get_location_desc".tr),
                     onConfirm: () async {
                       initialctrl.isLoading(true);
+                      Get.back();
                       await locationctrl.determinePosition();
                       await grbctrl.demendeNewResponse();
                       await fpfctrl.fetchPrayerTimes();

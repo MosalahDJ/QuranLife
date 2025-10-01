@@ -71,6 +71,7 @@ class DeletAccount extends GetxController {
           title: 'no_internet'.tr,
           body: Text('check_internet_connection'.tr),
           isError: true,
+          
         );
         return;
       }
