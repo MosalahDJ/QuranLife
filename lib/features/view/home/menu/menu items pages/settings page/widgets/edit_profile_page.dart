@@ -161,34 +161,40 @@ class EditProfilePage extends StatelessWidget {
               showCustomDialogWithActions(
                 context: context,
                 title: 'reset_password'.tr,
-                message: 'reset_password_desc'.tr,
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: changpassemailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: 'enter_email'.tr,
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                        color: accentColor,
+                  child: Column(
+                    mainAxisAlignment:MainAxisAlignment.center ,
+                    mainAxisSize: MainAxisSize.min ,
+                    children: [
+                      Text('reset_password_desc'.tr),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: changpassemailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          hintText: 'enter_email'.tr,
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: accentColor,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
                 btnCancelText: 'cancel'.tr,
-                btnOkText: 'send'.tr,
-                btnCancelOnPress: () {},
-                btnOkOnPress: () {
+                btnConfirmText: 'send'.tr,
+                onConfirm: () {
                   passCtrl.resetpassword(
                     context,
                     changpassemailController.text,
                   );
                 },
-              ).show();
+              );
             },
             icon: Icon(Icons.lock_outline, color: accentColor),
             label: Text(

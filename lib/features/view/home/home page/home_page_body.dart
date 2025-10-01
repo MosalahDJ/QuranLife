@@ -197,8 +197,8 @@ class HomePageBody extends StatelessWidget {
                                             // ignore: use_build_context_synchronously
                                             context: context,
                                             title: 'welcome_message'.tr,
-                                            message: 'ai_disclaimer'.tr,
-                                            //TODO: btnOkText: 'ok'.tr,
+                                            body: Text('ai_disclaimer'.tr),
+                                            btnConfirmText: 'ok'.tr,
                                             onConfirm: () {},
                                           );
                                         },

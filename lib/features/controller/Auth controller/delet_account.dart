@@ -69,7 +69,7 @@ class DeletAccount extends GetxController {
         await showCustomDialogWithActions(
           context: context,
           title: 'no_internet'.tr,
-          message: 'check_internet_connection'.tr,
+          body: Text('check_internet_connection'.tr),
           isError: true,
         );
         return;
@@ -122,7 +122,7 @@ class DeletAccount extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'success'.tr,
-        message: 'account_deleted_successfully'.tr,
+        body: Text('account_deleted_successfully'.tr),
         isSuccess: true,
         isDismissible: false,
         onConfirm: () => Get.offAllNamed('login'),
@@ -136,14 +136,14 @@ class DeletAccount extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: errorMessage,
+        body: Text(errorMessage),
         isError: true,
       );
     } catch (e) {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: 'unknown_error'.tr,
+        body: Text('unknown_error'.tr),
         isError: true,
       );
     } finally {
@@ -159,7 +159,7 @@ class DeletAccount extends GetxController {
         await showCustomDialogWithActions(
           context: context,
           title: 'no_internet'.tr,
-          message: 'check_internet_connection'.tr,
+          body: Text('check_internet_connection'.tr),
           isError: true,
         );
         return;
@@ -195,14 +195,14 @@ class DeletAccount extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: errorMessage,
+        body: Text(errorMessage),
         isError: true,
       );
     } catch (e) {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: 'unknown_error'.tr,
+        body: Text('unknown_error'.tr),
         isError: true,
       );
     } finally {
@@ -218,7 +218,7 @@ class DeletAccount extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'no_internet'.tr,
-        message: 'internet_required_for_signout'.tr,
+        body: Text('internet_required_for_signout'.tr),
         isError: true,
       );
       return;
@@ -245,7 +245,7 @@ class DeletAccount extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: e.message ?? 'unknown_error'.tr,
+        body: Text(e.message ?? 'unknown_error'.tr),
         isError: true,
       );
     } finally {

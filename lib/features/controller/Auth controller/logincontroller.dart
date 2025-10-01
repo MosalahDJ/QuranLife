@@ -64,7 +64,7 @@ class LogInController extends GetxController {
         await showCustomDialogWithActions(
           context: context,
           title: 'verify_email_title'.tr,
-          message: 'verify_email_desc'.tr,
+          body: Text('verify_email_desc'.tr),
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -82,7 +82,7 @@ class LogInController extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'no_internet'.tr,
-        message: 'internet_required_for_signout'.tr,
+        body: Text('internet_required_for_signout'.tr),
         isError: true,
       );
       return;
@@ -109,7 +109,7 @@ class LogInController extends GetxController {
       showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: e.message ?? 'unknown_error'.tr,
+        body: Text(e.message ?? 'unknown_error'.tr),
         isError: true,
       );
     } finally {
@@ -128,7 +128,7 @@ class LogInController extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: 'all_fields_required'.tr,
+        body: Text('all_fields_required'.tr),
         isError: true,
       );
       return;
@@ -139,7 +139,7 @@ class LogInController extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'no_internet'.tr,
-        message: 'check_internet_connection'.tr,
+        body: Text('check_internet_connection'.tr),
         isError: true,
       );
       return;
@@ -150,7 +150,7 @@ class LogInController extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'anonymous_user'.tr,
-        message: 'guest_login_warning'.tr,
+        body: Text('guest_login_warning'.tr),
         isError: true,
       );
       return;
@@ -169,14 +169,14 @@ class LogInController extends GetxController {
       await showCustomDialogWithActions(
         context: context,
         title: 'success'.tr,
-        message: 'profile_updated_successfully'.tr,
+        body: Text('profile_updated_successfully'.tr),
         isSuccess: true,
       );
     } on FirebaseAuthException catch (e) {
       await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        message: e.message ?? 'unknown_error'.tr,
+        body: Text(e.message ?? 'unknown_error'.tr),
         isError: true,
       );
     } finally {
@@ -193,7 +193,7 @@ class LogInController extends GetxController {
     showCustomDialogWithActions(
       context: context,
       title: 'error'.tr,
-      message: errorMessage,
+      body: Text(errorMessage),
       isError: true,
     );
   }

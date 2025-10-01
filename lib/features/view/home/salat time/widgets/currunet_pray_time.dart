@@ -237,7 +237,7 @@ class CurrentPrayTime extends StatelessWidget {
                   showCustomDialogWithActions(
                     context: context,
                     title: "get_new_data".tr,
-                    message: "get_location_desc".tr,
+                    body: Text("get_location_desc".tr),
                     onConfirm: () async {
                       initialctrl.isLoading(true);
                       await locationctrl.determinePosition();
@@ -247,8 +247,8 @@ class CurrentPrayTime extends StatelessWidget {
                       timespagectrl.pagecontroller();
                       initialctrl.isLoading(false);
                     },
-                    //TODO: btnCancelText: "Cancel",
-                    //TODO: btnOkText: "OK",
+                    btnCancelText: 'cancel'.tr,
+                    btnConfirmText: 'ok'.tr,
                   );
                 },
                 child: SizedBox(

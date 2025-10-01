@@ -127,9 +127,8 @@ class SignInController extends GetxController {
       isDismissible: false,
       context: context,
       title: 'email_verification'.tr,
-      message: 'verification_sent'.tr,
-      //TODO:
-      // btnOkText: 'email_verified'.tr,
+      body: Text('verification_sent'.tr),
+      btnConfirmText: 'email_verified'.tr,
       onConfirm: () => _handleEmailVerificationResponse(),
     );
   }
