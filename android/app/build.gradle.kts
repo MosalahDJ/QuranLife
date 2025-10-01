@@ -34,8 +34,8 @@ android {
         applicationId = "com.MoSalahDJ.quran_life"
         minSdkVersion(24)
         targetSdkVersion(35)
-        versionCode = 6
-        versionName = "1.0.5"
+        versionCode = 7
+        versionName = "1.0.6"
         manifestPlaceholders["mapsApiKey"] = project.properties["MAPS_API_KEY"] as? String ?: ""
 
         ndk {
