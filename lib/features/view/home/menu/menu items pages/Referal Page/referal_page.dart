@@ -119,6 +119,7 @@ class RefferalPage extends StatelessWidget {
         child: Column(
           children: [
             Text(
+              // TODO: Replace with actual referral link
               'your_referral_link'.tr,
               style: TextStyle(
                 color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
