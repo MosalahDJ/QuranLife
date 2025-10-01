@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import 'package:project/features/controller/Auth%20controller/user_state_controller.dart';
 
 class LogInController extends GetxController {
@@ -61,11 +61,10 @@ class LogInController extends GetxController {
         passwordController.clear();
         Get.offAllNamed("home");
       } else {
-        _showDialog(
-          context,
-          'verify_email_title'.tr,
-          'verify_email_desc'.tr,
-          DialogType.info,
+        await showCustomDialogWithActions(
+          context: context,
+          title: 'verify_email_title'.tr,
+          message: 'verify_email_desc'.tr,
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -80,11 +79,11 @@ class LogInController extends GetxController {
     List<ConnectivityResult> conectivity =
         await Connectivity().checkConnectivity();
     if (conectivity.contains(ConnectivityResult.none)) {
-      _showDialog(
-        context,
-        'no_internet'.tr,
-        'internet_required_for_signout'.tr,
-        DialogType.warning,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'no_internet'.tr,
+        message: 'internet_required_for_signout'.tr,
+        isError: true,
       );
       return;
     }
@@ -107,11 +106,11 @@ class LogInController extends GetxController {
       }
       Get.offAllNamed("login");
     } on FirebaseAuthException catch (e) {
-      _showDialog(
-        context,
-        'error'.tr,
-        e.message ?? 'unknown_error'.tr,
-        DialogType.error,
+      showCustomDialogWithActions(
+        context: context,
+        title: 'error'.tr,
+        message: e.message ?? 'unknown_error'.tr,
+        isError: true,
       );
     } finally {
       isLoading.value = false;
@@ -126,33 +125,33 @@ class LogInController extends GetxController {
     required bool isMale,
   }) async {
     if (firstName.trim().isEmpty || lastName.trim().isEmpty) {
-      _showDialog(
-        context,
-        'error'.tr,
-        'all_fields_required'.tr,
-        DialogType.error,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'error'.tr,
+        message: 'all_fields_required'.tr,
+        isError: true,
       );
       return;
     }
     List<ConnectivityResult> conectivity =
         await Connectivity().checkConnectivity();
     if (conectivity.contains(ConnectivityResult.none)) {
-      _showDialog(
-        context,
-        'no_internet'.tr,
-        'check_internet_connection'.tr,
-        DialogType.error,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'no_internet'.tr,
+        message: 'check_internet_connection'.tr,
+        isError: true,
       );
       return;
     }
 
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null || currentUser.isAnonymous) {
-      _showDialog(
-        context,
-        'anonymous_user'.tr,
-        'guest_login_warning'.tr,
-        DialogType.error,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'anonymous_user'.tr,
+        message: 'guest_login_warning'.tr,
+        isError: true,
       );
       return;
     }
@@ -167,18 +166,18 @@ class LogInController extends GetxController {
         'updatedAt': FieldValue.serverTimestamp(),
         'displayName': '$firstName $lastName',
       });
-      _showDialog(
-        context,
-        'success'.tr,
-        'profile_updated_successfully'.tr,
-        DialogType.success,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'success'.tr,
+        message: 'profile_updated_successfully'.tr,
+        isSuccess: true,
       );
     } on FirebaseAuthException catch (e) {
-      _showDialog(
-        context,
-        'error'.tr,
-        e.message ?? 'unknown_error'.tr,
-        DialogType.error,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'error'.tr,
+        message: e.message ?? 'unknown_error'.tr,
+        isError: true,
       );
     } finally {
       isLoading.value = false;
@@ -191,22 +190,12 @@ class LogInController extends GetxController {
         e.code == 'invalid-credential'
             ? 'wrong_credentials'.tr
             : e.message ?? 'unknown_error'.tr;
-    _showDialog(context, 'error'.tr, errorMessage, DialogType.error);
-  }
-
-  // Show a dialog using AwesomeDialog
-  void _showDialog(
-    BuildContext context,
-    String title,
-    String desc,
-    DialogType type,
-  ) {
-    AwesomeDialog(
+    showCustomDialogWithActions(
       context: context,
-      title: title,
-      desc: desc,
-      dialogType: type,
-    ).show();
+      title: 'error'.tr,
+      message: errorMessage,
+      isError: true,
+    );
   }
 
   @override

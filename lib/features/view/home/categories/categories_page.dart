@@ -1,13 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
 import '../../../../core/Utils/constants.dart';
-
 import '../../../../core/Utils/size_config.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../../../core/widgets/shimmer_text.dart';
@@ -105,15 +104,32 @@ class CategoriesPage extends StatelessWidget {
                                       return;
                                     }
                                     Get.to(() => const AiBotPage());
-                                    AwesomeDialog(
-                                      // ignore: use_build_context_synchronously
+                                    showCustomDialog(
                                       context: context,
-                                      dialogType: DialogType.info,
                                       title: 'welcome_message'.tr,
-                                      desc: 'ai_disclaimer'.tr,
-                                      btnOkText: 'ok'.tr,
-                                      btnOkOnPress: () {},
-                                    ).show();
+                                      message: 'ai_disclaimer'.tr,
+                                    );
+                                  },
+                                  MdiIcons.robot,
+                                  'ai_bot'.tr,
+                                ),
+                                mycategory(
+                                  () {
+                                    if (_isanonymous(context)) {
+                                      showCustomDialog(
+                                        context: context,
+                                        title: 'guest_login_warning'.tr,
+                                        message: 'guest_login_warning'.tr,
+                                        isError: true,
+                                      );
+                                      return;
+                                    }
+                                    Get.to(() => const AiBotPage());
+                                    showCustomDialog(
+                                      context: context,
+                                      title: 'welcome_message'.tr,
+                                      message: 'ai_disclaimer'.tr,
+                                    );
                                   },
                                   MdiIcons.robot,
                                   'ai_bot'.tr,
@@ -274,12 +290,12 @@ bool _isanonymous(context) {
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
   if (currentUser == null || currentUser.isAnonymous) {
-    AwesomeDialog(
+    showCustomDialog(
       context: context,
       title: 'anonymous_user'.tr,
-      desc: 'guest_login_warning'.tr,
-      dialogType: DialogType.error,
-    ).show();
+      message: 'guest_login_warning'.tr,
+      isError: true,
+    );
     return true;
   }
   return false;

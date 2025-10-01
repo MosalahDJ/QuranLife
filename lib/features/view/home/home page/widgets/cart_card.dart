@@ -1,7 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
 import '../../../../../core/Utils/size_config.dart';
 import '../../../../../core/widgets/drop_down_button.dart';
 import '../../../../controller/floating_animation_controllers/floating_animation_controller.dart';
@@ -226,12 +226,11 @@ bool _isanonymous(context) {
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
   if (currentUser == null || currentUser.isAnonymous) {
-    AwesomeDialog(
+    showCustomDialog(
       context: context,
       title: 'anonymous_user'.tr,
-      desc: 'guest_login_warning'.tr,
-      dialogType: DialogType.error,
-    ).show();
+      message: 'guest_login_warning'.tr,
+    );
     return true;
   }
   return false;

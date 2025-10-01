@@ -1,27 +1,27 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
 import '../../../core/Utils/constants.dart';
-
 import '../Auth%20controller/logincontroller.dart';
 
 class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
-  Future<void> resetpassword(context, emailtext) async {
+  Future<void> resetpassword(BuildContext context, String emailtext) async {
     try {
       if (currentUser != null && currentUser!.isAnonymous) {
-        AwesomeDialog(
+        await showCustomDialog(
           context: context,
           title: 'anonymous_user'.tr,
-          desc: 'guest_login_warning'.tr,
-          dialogType: DialogType.error,
-        ).show();
+          message: 'guest_login_warning'.tr,
+          isError: true,
+        );
         return;
       }
-      if (emailtext == "") {
+
+      if (emailtext.isEmpty) {
         GetSnackBar(
           duration: const Duration(seconds: 10),
           backgroundColor: kmaincolor,
@@ -42,24 +42,19 @@ class PasswordresetController extends GetxController {
         ).show();
       } else {
         await FirebaseAuth.instance.sendPasswordResetEmail(email: emailtext);
-        AwesomeDialog(
+        await showCustomDialog(
           context: context,
-          alignment: Alignment.center,
-          animType: AnimType.scale,
           title: 'password_reset'.tr,
-          // desc: "Password Reset",
-          dialogType: DialogType.success,
-          body: Text(
-            "${'reset_link_sent'.tr} $emailtext",
-            textAlign: TextAlign.center,
-          ),
-        ).show();
+          message: "${'reset_link_sent'.tr} $emailtext",
+          isSuccess: true,
+        );
       }
     } on FirebaseAuthException catch (e) {
-      AwesomeDialog(
+      await showCustomDialog(
         context: context,
         title: 'error'.tr,
-        body: Text(e.message!),
+        message: e.message ?? 'unknown_error'.tr,
+        isError: true,
       );
     }
   }

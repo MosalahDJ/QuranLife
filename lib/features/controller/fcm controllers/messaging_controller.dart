@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -87,19 +86,38 @@ class MessagingController extends GetxController {
     }
   }
 
-  // Show a dialog using AwesomeDialog
-  void _showDialog(
-    BuildContext context,
-    String title,
-    String desc,
-    DialogType type,
-  ) {
-    AwesomeDialog(
+  // Add custom dialog function
+  Future<void> _showCustomDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    bool isError = false,
+    bool isSuccess = false,
+    bool isDismissible = true,
+  }) {
+    return showDialog(
       context: context,
-      title: title,
-      desc: desc,
-      dialogType: type,
-    ).show();
+      barrierDismissible: isDismissible,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: TextStyle(
+              color:
+                  isError
+                      ? Colors.red
+                      : isSuccess
+                      ? Colors.green
+                      : Theme.of(context).textTheme.titleLarge?.color,
+            ),
+          ),
+          content: Text(message, textAlign: TextAlign.center),
+          actions: [
+            TextButton(onPressed: () => Get.back(), child: Text('ok'.tr)),
+          ],
+        );
+      },
+    );
   }
 
   // Stream للرسائل
@@ -115,12 +133,11 @@ class MessagingController extends GetxController {
     List<ConnectivityResult> conectivity =
         await Connectivity().checkConnectivity();
     if (conectivity.contains(ConnectivityResult.none)) {
-      _showDialog(
-        // ignore: use_build_context_synchronously
-        context,
-        'no_internet'.tr,
-        'internet_required_for_sendmessage'.tr,
-        DialogType.warning,
+      _showCustomDialog(
+        context: context,
+        title: 'no_internet'.tr,
+        message: 'internet_required_for_sendmessage'.tr,
+        isError: true,
       );
       return;
     }

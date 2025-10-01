@@ -1,12 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import 'package:project/features/controller/Auth%20controller/user_state_controller.dart';
 
 class DeletAccount extends GetxController {
@@ -17,17 +15,63 @@ class DeletAccount extends GetxController {
     permanent: true,
   );
 
+  // // Custom dialog function
+  // Future<void> showCustomDialogWithActions({
+  //   required BuildContext context,
+  //   required String title,
+  //   required String message,
+  //   bool isError = false,
+  //   bool isSuccess = false,
+  //   VoidCallback? onConfirm,
+  //   bool isDismissible = true,
+  // }) {
+  //   return showDialog(
+  //     context: context,
+  //     barrierDismissible: isDismissible,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text(
+  //           title,
+  //           style: TextStyle(
+  //             color:
+  //                 isError
+  //                     ? Colors.red
+  //                     : isSuccess
+  //                     ? Colors.green
+  //                     : Theme.of(context).textTheme.titleLarge?.color,
+  //           ),
+  //         ),
+  //         content: Text(message),
+  //         actions: [
+  //           if (onConfirm != null) ...[
+  //             TextButton(onPressed: () => Get.back(), child: Text('cancel'.tr)),
+  //             ElevatedButton(
+  //               onPressed: onConfirm,
+  //               style: ElevatedButton.styleFrom(
+  //                 backgroundColor: isError ? Colors.red : Colors.blue,
+  //               ),
+  //               child: Text('confirm'.tr),
+  //             ),
+  //           ] else
+  //             TextButton(onPressed: () => Get.back(), child: Text('ok'.tr)),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  // Update the deleteUserAccount method
   Future<void> deleteUserAccount(BuildContext context) async {
     try {
       // Check internet connectivity
       final connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult.contains(ConnectivityResult.none)) {
-        AwesomeDialog(
+        await showCustomDialogWithActions(
           context: context,
           title: 'no_internet'.tr,
-          desc: 'check_internet_connection'.tr,
-          dialogType: DialogType.error,
-        ).show();
+          message: 'check_internet_connection'.tr,
+          isError: true,
+        );
         return;
       }
 
@@ -38,25 +82,32 @@ class DeletAccount extends GetxController {
       }
 
       // Show confirmation dialog
-      bool confirmDelete = await Get.dialog(
-        AlertDialog(
-          title: Text('delete_account'.tr),
-          content: Text('delete_account_confirmation'.tr),
-          actions: [
-            TextButton(
-              onPressed: () => Get.back(result: false),
-              child: Text('cancel'.tr),
+      bool? confirmDelete = await showDialog<bool>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'delete_account'.tr,
+              style: const TextStyle(color: Colors.red),
             ),
-            ElevatedButton(
-              onPressed: () => Get.back(result: true),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: Text('delete'.tr),
-            ),
-          ],
-        ),
+            content: Text('delete_account_confirmation'.tr),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('cancel'.tr),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                child: Text('confirm'.tr),
+              ),
+            ],
+          );
+        },
       );
 
-      if (!confirmDelete) return;
+      if (confirmDelete != true) return;
 
       // Start loading state
       isLoading.value = true;
@@ -68,41 +119,33 @@ class DeletAccount extends GetxController {
       await currentUser.delete();
       await _userstatectrl.saveUserState(UserState.noUser);
 
-      // Show success message and navigate to login
-      AwesomeDialog(
+      await showCustomDialogWithActions(
         context: context,
         title: 'success'.tr,
-        desc: 'account_deleted_successfully'.tr,
-        dialogType: DialogType.success,
-        dismissOnTouchOutside: false,
-        dismissOnBackKeyPress: false,
-        btnOkOnPress: () {
-          Get.offAllNamed('login');
-        },
-      ).show();
+        message: 'account_deleted_successfully'.tr,
+        isSuccess: true,
+        isDismissible: false,
+        onConfirm: () => Get.offAllNamed('login'),
+      );
     } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'ERROR_SESSION_EXPIRED':
-          errorMessage = 'please_login_again_to_delete'.tr;
-          break;
-        default:
-          errorMessage = e.message ?? 'unknown_error'.tr;
-      }
+      String errorMessage =
+          e.code == 'ERROR_SESSION_EXPIRED'
+              ? 'please_login_again_to_delete'.tr
+              : e.message ?? 'unknown_error'.tr;
 
-      AwesomeDialog(
+      await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        desc: errorMessage,
-        dialogType: DialogType.error,
-      ).show();
+        message: errorMessage,
+        isError: true,
+      );
     } catch (e) {
-      AwesomeDialog(
+      await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        desc: 'unknown_error'.tr,
-        dialogType: DialogType.error,
-      ).show();
+        message: 'unknown_error'.tr,
+        isError: true,
+      );
     } finally {
       isLoading.value = false;
     }
@@ -113,12 +156,12 @@ class DeletAccount extends GetxController {
       // Check internet connectivity
       final connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult.contains(ConnectivityResult.none)) {
-        AwesomeDialog(
+        await showCustomDialogWithActions(
           context: context,
           title: 'no_internet'.tr,
-          desc: 'check_internet_connection'.tr,
-          dialogType: DialogType.error,
-        ).show();
+          message: 'check_internet_connection'.tr,
+          isError: true,
+        );
         return;
       }
 
@@ -149,19 +192,19 @@ class DeletAccount extends GetxController {
           errorMessage = e.message ?? 'unknown_error'.tr;
       }
 
-      AwesomeDialog(
+      await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        desc: errorMessage,
-        dialogType: DialogType.error,
-      ).show();
+        message: errorMessage,
+        isError: true,
+      );
     } catch (e) {
-      AwesomeDialog(
+      await showCustomDialogWithActions(
         context: context,
         title: 'error'.tr,
-        desc: 'unknown_error'.tr,
-        dialogType: DialogType.error,
-      ).show();
+        message: 'unknown_error'.tr,
+        isError: true,
+      );
     } finally {
       isLoading.value = false;
     }
@@ -172,11 +215,11 @@ class DeletAccount extends GetxController {
     List<ConnectivityResult> conectivity =
         await Connectivity().checkConnectivity();
     if (conectivity.contains(ConnectivityResult.none)) {
-      _showDialog(
-        context,
-        'no_internet'.tr,
-        'internet_required_for_signout'.tr,
-        DialogType.warning,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'no_internet'.tr,
+        message: 'internet_required_for_signout'.tr,
+        isError: true,
       );
       return;
     }
@@ -199,29 +242,14 @@ class DeletAccount extends GetxController {
       }
       Get.offAllNamed("login");
     } on FirebaseAuthException catch (e) {
-      _showDialog(
-        context,
-        'error'.tr,
-        e.message ?? 'unknown_error'.tr,
-        DialogType.error,
+      await showCustomDialogWithActions(
+        context: context,
+        title: 'error'.tr,
+        message: e.message ?? 'unknown_error'.tr,
+        isError: true,
       );
     } finally {
       isLoading.value = false;
     }
-  }
-
-  // Show a dialog using AwesomeDialog
-  void _showDialog(
-    BuildContext context,
-    String title,
-    String desc,
-    DialogType type,
-  ) {
-    AwesomeDialog(
-      context: context,
-      title: title,
-      desc: desc,
-      dialogType: type,
-    ).show();
   }
 }

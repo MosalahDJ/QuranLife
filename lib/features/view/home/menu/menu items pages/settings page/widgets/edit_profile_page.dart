@@ -1,6 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import '../../../../../../../core/Utils/constants.dart';
 
 import '../../../../../../../core/Utils/size_config.dart';
@@ -157,12 +158,10 @@ class EditProfilePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextButton.icon(
             onPressed: () {
-              AwesomeDialog(
+              showCustomDialogWithActions(
                 context: context,
-                dialogType: DialogType.info,
-                animType: AnimType.scale,
                 title: 'reset_password'.tr,
-                desc: 'reset_password_desc'.tr,
+                message: 'reset_password_desc'.tr,
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(

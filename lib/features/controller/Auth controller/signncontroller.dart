@@ -1,10 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/core/Utils/constants.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import 'package:project/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:project/features/controller/Auth%20controller/user_state_controller.dart';
 import 'package:project/features/view/auth/login%20page/loginpage.dart';
@@ -82,12 +83,12 @@ class SignInController extends GetxController {
       await _createNewAccount(context);
     } catch (e) {
       debugPrint('Error in signin: $e');
-      AwesomeDialog(
+      showCustomDialog(
         context: context,
-        dialogType: DialogType.error,
         title: 'error'.tr,
-        body: Text('registration_error'.tr),
-      ).show();
+        message: 'registration_error'.tr,
+        isError: true,
+      );
     } finally {
       isLoading = false;
       update();
@@ -122,16 +123,15 @@ class SignInController extends GetxController {
   Future<void> _sendEmailVerification(BuildContext context) async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
-    AwesomeDialog(
-      dialogType: DialogType.success,
-      dismissOnBackKeyPress: false,
-      dismissOnTouchOutside: false,
+    showCustomDialogWithActions(
+      isDismissible: false,
       context: context,
       title: 'email_verification'.tr,
-      body: Text('verification_sent'.tr),
-      btnOkText: 'email_verified'.tr,
-      btnOkOnPress: () => _handleEmailVerificationResponse(),
-    ).show();
+      message: 'verification_sent'.tr,
+      //TODO:
+      // btnOkText: 'email_verified'.tr,
+      onConfirm: () => _handleEmailVerificationResponse(),
+    );
   }
 
   // Handle email verification response
@@ -170,12 +170,16 @@ class SignInController extends GetxController {
       'email-already-in-use' => 'email_exists'.tr,
       _ => "${'registration_error'.tr}: \n${e.code}",
     };
-    AwesomeDialog(
+    showCustomDialog(
       context: context,
       title: 'error'.tr,
-      body: Text(errorMessage),
-    ).show();
+      message: errorMessage,
+      isError: true,
+    );
   }
+
+ 
+
 
   // Clean up resources
   @override

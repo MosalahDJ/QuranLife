@@ -1,6 +1,6 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import '../../../../../core/Utils/constants.dart';
 import '../../../../../core/Utils/size_config.dart';
 import '../../../../../core/widgets/drop_down_button.dart';
@@ -234,11 +234,11 @@ class CurrentPrayTime extends StatelessWidget {
               child: InkWell(
                 borderRadius: const BorderRadius.all(Radius.circular(11)),
                 onTap: () {
-                  AwesomeDialog(
+                  showCustomDialogWithActions(
                     context: context,
                     title: "get_new_data".tr,
-                    desc: "get_location_desc".tr,
-                    btnOkOnPress: () async {
+                    message: "get_location_desc".tr,
+                    onConfirm: () async {
                       initialctrl.isLoading(true);
                       await locationctrl.determinePosition();
                       await grbctrl.demendeNewResponse();
@@ -247,10 +247,9 @@ class CurrentPrayTime extends StatelessWidget {
                       timespagectrl.pagecontroller();
                       initialctrl.isLoading(false);
                     },
-                    btnCancelOnPress: () {},
-                    btnCancelText: "Cancel",
-                    btnOkText: "OK",
-                  ).show();
+                    //TODO: btnCancelText: "Cancel",
+                    //TODO: btnOkText: "OK",
+                  );
                 },
                 child: SizedBox(
                   height:

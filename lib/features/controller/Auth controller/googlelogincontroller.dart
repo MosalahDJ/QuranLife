@@ -1,10 +1,10 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
 import '../Auth%20controller/user_state_controller.dart';
 
 class GoogleLogInController extends GetxController {
@@ -52,7 +52,6 @@ class GoogleLogInController extends GetxController {
   }
 
   Future<void> signInWithGoogle(BuildContext context) async {
-
     try {
       isLoading.value = true;
       // Set default locale
@@ -97,27 +96,27 @@ class GoogleLogInController extends GetxController {
         rethrow;
       }
     } on FirebaseAuthException catch (e) {
-      AwesomeDialog(
+      await showCustomDialog(
         context: context,
-        title: "Authentication Error".tr,
-        body: Text(e.message ?? "Authentication failed".tr),
-        dialogType: DialogType.error,
-      ).show();
+        title: 'authentication_error'.tr,
+        message: e.message ?? 'authentication_failed'.tr,
+        isError: true,
+      );
     } catch (e) {
       if (e.toString().contains("network_error")) {
-        AwesomeDialog(
+        await showCustomDialog(
           context: context,
-          title: "Network Error".tr,
-          body: Text("verify_internet".tr),
-          dialogType: DialogType.error,
-        ).show();
+          title: 'network_error'.tr,
+          message: 'verify_internet'.tr,
+          isError: true,
+        );
       } else {
-        AwesomeDialog(
+        await showCustomDialog(
           context: context,
-          title: "Error".tr,
-          body: Text("${"google_signin_error".tr} \n$e"),
-          dialogType: DialogType.error,
-        ).show();
+          title: 'error'.tr,
+          message: "${'google_signin_error'.tr}\n$e",
+          isError: true,
+        );
       }
     } finally {
       isLoading.value = false;

@@ -1,10 +1,11 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:project/core/widgets/cusstom_dialogue.dart';
+import 'package:project/core/widgets/cusstom_dialogue_with_buttons.dart';
 import '../../../../core/Utils/constants.dart';
 import '../../../../core/Utils/size_config.dart';
 import '../../../../core/widgets/cusstom_indicator.dart';
@@ -192,15 +193,14 @@ class HomePageBody extends StatelessWidget {
                                             return;
                                           }
                                           Get.to(() => const AiBotPage());
-                                          AwesomeDialog(
+                                          showCustomDialogWithActions(
                                             // ignore: use_build_context_synchronously
                                             context: context,
-                                            dialogType: DialogType.info,
                                             title: 'welcome_message'.tr,
-                                            desc: 'ai_disclaimer'.tr,
-                                            btnOkText: 'ok'.tr,
-                                            btnOkOnPress: () {},
-                                          ).show();
+                                            message: 'ai_disclaimer'.tr,
+                                            //TODO: btnOkText: 'ok'.tr,
+                                            onConfirm: () {},
+                                          );
                                         },
                                         MdiIcons.robot,
                                         'ai_bot'.tr,
@@ -292,12 +292,11 @@ class HomePageBody extends StatelessWidget {
     final User? currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser == null || currentUser.isAnonymous) {
-      AwesomeDialog(
+      showCustomDialog(
         context: context,
         title: 'anonymous_user'.tr,
-        desc: 'guest_login_warning'.tr,
-        dialogType: DialogType.error,
-      ).show();
+        message: 'guest_login_warning'.tr,
+      );
       return true;
     }
     return false;
