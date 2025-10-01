@@ -210,10 +210,11 @@ class CurrentPrayTime extends StatelessWidget {
           ),
           //get position button
           Positioned(
-            //TODO: I have a problem here this text is hiden under the card in
-            //TODO: some phones
-            //TODO: I add a new dimenssion check and after I will see the 
-            //TODO: diffrence in mouad's phone
+            /*TODO:
+            I have a problem here this text is hiden under the card in
+            some phones I add a new dimenssion check and after I will see the 
+            diffrence in mouad's phone
+            */
             bottom:
                 Sizeconfig.screenheight! < 768
                     ? Sizeconfig.screenheight! / 50
