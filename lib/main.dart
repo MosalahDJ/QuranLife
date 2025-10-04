@@ -84,16 +84,3 @@ class QuranLifeApp extends StatelessWidget {
     );
   }
 }
-
-
-
-// I make an appeale for my fucking google play account  because it's banned by 
-//the fucking google play team anyway fuck them bacause they'r all bitches 
-// if they think this fucking move will make me disapointment , so they just a 
-//fucking dankeys I'am here befor and I'm here now and also I'll be here tomorow
-//because I belive in my god and I belive with my work and you will can't ever 
-//ever , never stop me go to the hell all of you I will upgrade myself and I 
-//will find a solotion for every problem you apeare it to me and I'll be one of 
-//the best in one day because simply I'am instopable , I have a dream and of 
-//caurse I will find my dream I will folow them in the last of the world , fuck 
-//all bitches and no thanks no zabi
