@@ -113,13 +113,13 @@ class AiChatController extends GetxController {
           "Content-Type": "application/json; charset=UTF-8",
         },
         body: jsonEncode({
-          "model": "deepseek/deepseek-r1:free",
+          "model": "tngtech/deepseek-r1t2-chimera:free",
           "messages": [
             {"role": "system", "content": _systemPrompt},
             {"role": "user", "content": userMessage},
           ],
           "temperature": 0.3,
-          "max_tokens": 600,
+          "max_tokens": 5000,
           "frequency_penalty": 0.7,
         }),
       );
