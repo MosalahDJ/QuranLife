@@ -189,9 +189,9 @@ class HomePageBody extends StatelessWidget {
                                     children: [
                                       mycategory(
                                         () {
-                                          // if (_isanonymous(context)) {
-                                          //   return;
-                                          // }
+                                          if (_isanonymous(context)) {
+                                            return;
+                                          }
                                           Get.to(() => const AiBotPage());
                                           showCustomDialogWithActions(
                                             // ignore: use_build_context_synchronously
