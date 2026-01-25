@@ -20,6 +20,7 @@ class AiBotPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: ShimmerText(
