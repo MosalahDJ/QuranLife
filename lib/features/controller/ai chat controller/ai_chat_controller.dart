@@ -113,7 +113,7 @@ class AiChatController extends GetxController {
           "Content-Type": "application/json; charset=UTF-8",
         },
         body: jsonEncode({
-          "model": "meta-llama/llama-3.3-70b-instruct:free",
+          "model": "tngtech/deepseek-r1t2-chimera:free",
           "messages": [
             {"role": "system", "content": _systemPrompt},
             {"role": "user", "content": userMessage},
