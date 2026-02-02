@@ -115,6 +115,7 @@ class AiChatController extends GetxController {
         body: jsonEncode({
           "model": "tngtech/deepseek-r1t2-chimera:free",
           "messages": [
+            
             {"role": "system", "content": _systemPrompt},
             {"role": "user", "content": userMessage},
           ],
